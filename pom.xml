@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>sh.calaba</groupId>
+	<artifactId>calabash-driver</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Calabash Driver</name>
+	<modules>
+		<module>calabash-driver-common</module>
+		<module>calabash-driver-client</module>
+		<module>calabash-driver-server</module>
+	</modules>
+
+	<developers>
+		<developer>
+			<id>ddary</id>
+			<name>Dominik Dary</name>
+			<email>ddary@ebay.com</email>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+
+</project>
