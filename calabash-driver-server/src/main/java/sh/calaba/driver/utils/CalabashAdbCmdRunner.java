@@ -29,7 +29,13 @@ public class CalabashAdbCmdRunner {
 		}
 		commandLineFwd.add("shell");
 		commandLineFwd.add("setprop");
-		commandLineFwd.add("log.tag.eBayQAServerSwitch");
+		// USE THIS for prior 1.8
+		//commandLineFwd.add("log.tag.eBayQAServerSwitch");
+		
+		//Use this for post 1.8 releases
+		commandLineFwd.add("log.tag.fwUseQaServers");
+		
+		
 		commandLineFwd.add("DEBUG");
 
 		adbConnection.runProcess(commandLineFwd, "Switching to eBay QA Env",
