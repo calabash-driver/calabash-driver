@@ -11,6 +11,10 @@ public interface ViewSupport {
 
 	public void waitFor();
 
+	public void pressL10nElement();
+
+	public void waitForL10nElement();
+
 	@Deprecated
 	public File takeScreenshot(String path);
 }

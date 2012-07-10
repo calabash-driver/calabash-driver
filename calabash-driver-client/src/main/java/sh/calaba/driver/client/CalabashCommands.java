@@ -17,6 +17,8 @@ public enum CalabashCommands {
 	LONG_PRESS_ON_VIEW_BY_ID("long_press_on_view_by_id","",WebDriverLikeCommand.VIEW),
 	WAIT_FOR_VIEW_BY_ID("wait_for_view_by_id","",WebDriverLikeCommand.VIEW),
 	PRESS("press","Press an ui view",WebDriverLikeCommand.VIEW),
+	WAIT_FOR_L10N_ELEMENT("wait_for_l10n_element","",WebDriverLikeCommand.VIEW),
+	PRESS_L10N_ELEMENT("press_l10n_element","",WebDriverLikeCommand.VIEW),
 
 	TAKE_SCREENSHOT("take_screenshot_robotium","",WebDriverLikeCommand.VIEW),
 	

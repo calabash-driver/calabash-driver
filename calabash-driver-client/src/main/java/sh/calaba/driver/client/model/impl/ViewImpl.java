@@ -20,11 +20,13 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 	}
 
 	public void click() {
-		executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID, id.getIndentifier());
+		executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID,
+				id.getIndentifier());
 	}
 
 	public void longPress() {
-		executeCalabashCommand(CalabashCommands.LONG_PRESS_ON_VIEW_BY_ID, id.getIndentifier());
+		executeCalabashCommand(CalabashCommands.LONG_PRESS_ON_VIEW_BY_ID,
+				id.getIndentifier());
 	}
 
 	public void press() {
@@ -32,7 +34,18 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 	}
 
 	public void waitFor() {
-		executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_ID, id.getIndentifier());
+		executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_ID,
+				id.getIndentifier());
+	}
+
+	public void pressL10nElement() {
+		executeCalabashCommand(CalabashCommands.PRESS_L10N_ELEMENT,
+				id.getIndentifier());
+	}
+
+	public void waitForL10nElement() {
+		executeCalabashCommand(CalabashCommands.WAIT_FOR_L10N_ELEMENT,
+				id.getIndentifier());
 	}
 
 	@Override
