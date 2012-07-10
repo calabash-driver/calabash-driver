@@ -8,30 +8,31 @@ import org.json.JSONObject;
 
 import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
+import sh.calaba.driver.model.By;
 import sh.calaba.driver.model.ViewSupport;
 
 public class ViewImpl extends RemoteObject implements ViewSupport {
-	private String id = null;
+	private By.Id id = null;
 
-	public ViewImpl(RemoteCalabashAndroidDriver driver, String id) {
+	public ViewImpl(RemoteCalabashAndroidDriver driver, By.Id id) {
 		super(driver);
 		this.id = id;
 	}
 
-	public void clickOnViewById() {
-		executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID, id);
+	public void click() {
+		executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID, id.getIndentifier());
 	}
 
-	public void longPressOnViewById() {
-		executeCalabashCommand(CalabashCommands.LONG_PRESS_ON_VIEW_BY_ID, id);
+	public void longPress() {
+		executeCalabashCommand(CalabashCommands.LONG_PRESS_ON_VIEW_BY_ID, id.getIndentifier());
 	}
 
 	public void press() {
-		executeCalabashCommand(CalabashCommands.PRESS, id);
+		executeCalabashCommand(CalabashCommands.PRESS, id.getIndentifier());
 	}
 
-	public void waitForViewById() {
-		executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_ID, id);
+	public void waitFor() {
+		executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_ID, id.getIndentifier());
 	}
 
 	@Override

@@ -2,15 +2,15 @@ package sh.calaba.driver.model;
 
 import java.io.File;
 
-
 public interface ViewSupport {
-	public void clickOnViewById();
+	public void click();
 
-	public void longPressOnViewById() ;
+	public void longPress();
 
-	public void press() ;
+	public void press();
 
-	public void waitForViewById();
-	
+	public void waitFor();
+
+	@Deprecated
 	public File takeScreenshot(String path);
 }

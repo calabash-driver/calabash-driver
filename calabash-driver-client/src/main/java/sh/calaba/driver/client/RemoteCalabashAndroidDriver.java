@@ -14,6 +14,7 @@ import sh.calaba.driver.model.By;
 import sh.calaba.driver.model.CalabashAndroidDriver;
 import sh.calaba.driver.model.ListItemSupport;
 import sh.calaba.driver.model.TextFieldSupport;
+import sh.calaba.driver.model.ViewSupport;
 import sh.calaba.driver.model.WaitingSupport;
 
 public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
@@ -45,7 +46,17 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
 		return new WaitingSupportImpl(this);
 	}
 
+	public ViewSupport view(By id) {
+		if (id instanceof By.Id) {
+			return new ViewImpl(this, (By.Id) id);
+		} else {
+			throw new IllegalArgumentException(
+					"Only By.Id is supported for views.");
+		}
+	}
+
 	public File takeScreenshot(String path) {
-		return new ViewImpl(this, "").takeScreenshot(path);
+		// TODO fix this
+		return new ViewImpl(this, null).takeScreenshot(path);
 	}
 }
