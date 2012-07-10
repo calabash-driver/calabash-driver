@@ -1,5 +1,6 @@
 package sh.calaba.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class AdbConnection {
 		boolean isWindows = System.getProperty("os.name").toLowerCase()
 				.indexOf("win") >= 0;
 		String executableSuffix = isWindows ? ".exe" : "";
-		this.pathToAdb = androidHome + "/platform-tools/adb" + executableSuffix;
+		this.pathToAdb = androidHome + File.separator+"platform-tools"+File.separator+"adb" + executableSuffix;
 	}
 
 	/**
