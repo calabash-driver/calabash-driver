@@ -10,6 +10,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 import org.json.JSONObject;
 
+import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.net.Helper;
 import sh.calaba.driver.net.HttpClientFactory;
 import sh.calaba.driver.net.Session;
@@ -40,7 +41,7 @@ public abstract class CalabashAndroidDriver {
 			session = start();
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			throw new RuntimeException(e);
 		}
 	}
@@ -52,7 +53,7 @@ public abstract class CalabashAndroidDriver {
 				"/session", payload);
 		WebDriverLikeResponse response = execute(request);
 		String sessionId = response.getSessionId();
-		
+
 		Session session = new Session(sessionId);
 		return session;
 	}
@@ -69,6 +70,11 @@ public abstract class CalabashAndroidDriver {
 
 		HttpHost h = new HttpHost(host, port);
 		HttpResponse response = client.execute(h, r);
+		if (response.getStatusLine().getStatusCode() == 500) {
+			throw new CalabashException(
+					"The Server responded with a server error. Is the Calabash-driver-server started?",
+					new Throwable(response.toString()));
+		}
 
 		JSONObject o = Helper.extractObject(response);
 
