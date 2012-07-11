@@ -18,33 +18,37 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 		super(driver);
 		this.id = id;
 	}
+	
+	public ViewImpl(RemoteCalabashAndroidDriver driver) {
+		super(driver);
+	}
 
 	public void click() {
+		assertIdNotNull();
 		executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID,
 				id.getIndentifier());
 	}
 
+	private void assertIdNotNull() {
+		if(id==null){
+			throw new IllegalArgumentException("Instance variable id cannot be null.");
+		}
+	}
+
 	public void longPress() {
+		assertIdNotNull();
 		executeCalabashCommand(CalabashCommands.LONG_PRESS_ON_VIEW_BY_ID,
 				id.getIndentifier());
 	}
 
 	public void press() {
+		assertIdNotNull();
 		executeCalabashCommand(CalabashCommands.PRESS, id.getIndentifier());
 	}
 
 	public void waitFor() {
+		assertIdNotNull();
 		executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_ID,
-				id.getIndentifier());
-	}
-
-	public void pressL10nElement() {
-		executeCalabashCommand(CalabashCommands.PRESS_L10N_ELEMENT,
-				id.getIndentifier());
-	}
-
-	public void waitForL10nElement() {
-		executeCalabashCommand(CalabashCommands.WAIT_FOR_L10N_ELEMENT,
 				id.getIndentifier());
 	}
 
@@ -66,5 +70,15 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 			e.printStackTrace();
 		}
 		return file;
+	}
+
+	@Override
+	public void scrollUp() {
+		executeCalabashCommand(CalabashCommands.SCROLL_UP);
+	}
+
+	@Override
+	public void scrollDown() {
+		executeCalabashCommand(CalabashCommands.SCROLL_DOWN);
 	}
 }

@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.model.ButtonSupport;
+import sh.calaba.driver.model.L10nSupport;
 import sh.calaba.driver.model.ListItemSupport;
 import sh.calaba.driver.model.TextFieldSupport;
 import sh.calaba.driver.model.ViewSupport;
@@ -19,6 +20,7 @@ public enum WebDriverLikeCommand {
     BUTTON("GET","/session/:sessionId/button",ButtonSupport.class),
     TEXT_FIELD("POST","/session/:sessionId/textField",TextFieldSupport.class),
     VIEW("GET","/session/:sessionId/view",ViewSupport.class),
+    L10N_SUPPORT("GET","/session/:sessionId/l10nSupport",L10nSupport.class),
     WAIT("POST","/session/:sessionId/wait",WaitingSupport.class),
     
 	// LIST_ITEM

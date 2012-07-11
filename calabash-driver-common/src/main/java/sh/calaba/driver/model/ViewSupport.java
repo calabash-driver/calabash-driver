@@ -10,10 +10,10 @@ public interface ViewSupport {
 	public void press();
 
 	public void waitFor();
-
-	public void pressL10nElement();
-
-	public void waitForL10nElement();
+	
+	public void scrollUp();
+	
+	public void scrollDown();
 
 	@Deprecated
 	public File takeScreenshot(String path);

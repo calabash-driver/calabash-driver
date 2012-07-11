@@ -1,7 +1,5 @@
 package sh.calaba.driver.client.model.impl;
 
-import java.util.Iterator;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,7 +19,7 @@ public class RemoteObject {
 		this.driver = driver;
 	}
 
-	protected JSONObject executeCalabashCommand(CalabashCommands calabashCommand,
+	public JSONObject executeCalabashCommand(CalabashCommands calabashCommand,
 			String... parameter) {
 		try {
 			JSONObject payload = new JSONObject();

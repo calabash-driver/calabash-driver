@@ -5,6 +5,7 @@ import java.util.Map;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.client.model.impl.ButtonImpl;
+import sh.calaba.driver.client.model.impl.L10nElementImpl;
 import sh.calaba.driver.client.model.impl.ListItemImpl;
 import sh.calaba.driver.client.model.impl.TextFieldImpl;
 import sh.calaba.driver.client.model.impl.ViewImpl;
@@ -12,6 +13,7 @@ import sh.calaba.driver.client.model.impl.WaitingSupportImpl;
 import sh.calaba.driver.model.ButtonSupport;
 import sh.calaba.driver.model.By;
 import sh.calaba.driver.model.CalabashAndroidDriver;
+import sh.calaba.driver.model.L10nSupport;
 import sh.calaba.driver.model.ListItemSupport;
 import sh.calaba.driver.model.TextFieldSupport;
 import sh.calaba.driver.model.ViewSupport;
@@ -54,9 +56,23 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
 					"Only By.Id is supported for views.");
 		}
 	}
+	
+	public L10nSupport l10nElement(By.L10nElement id){
+		return new L10nElementImpl(this, id);
+	}
 
 	public File takeScreenshot(String path) {
 		// TODO fix this
-		return new ViewImpl(this, null).takeScreenshot(path);
+		return new ViewImpl(this).takeScreenshot(path);
+	}
+
+	public void scrollUp() {
+		// TODO fix this
+		new ViewImpl(this).scrollUp();
+	}
+
+	public void scrollDown() {
+		// TODO fix this
+		new ViewImpl(this).scrollDown();
 	}
 }

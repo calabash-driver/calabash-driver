@@ -24,6 +24,7 @@ public enum CommandMapping {
     VIEW(CalabashCommandHandler.class),
     TEXT_FIELD(CalabashCommandHandler.class),
     WAIT(CalabashCommandHandler.class),
+    L10N_SUPPORT(CalabashCommandHandler.class),
     
 	// LIST_ITEM
 	LIST_ITEM(CalabashCommandHandler.class);
