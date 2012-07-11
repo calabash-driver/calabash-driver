@@ -8,7 +8,7 @@
 		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>calabash-driver-server</artifactId>
-	
+
 	<name>calabash-driver-server</name>
 
 	<properties>
@@ -47,6 +47,11 @@
 			<artifactId>guava</artifactId>
 			<version>12.0</version>
 		</dependency>
+		<dependency>
+			<groupId>sh.calaba</groupId>
+			<artifactId>calabash-screenshot</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -81,4 +86,12 @@
 			</plugin>
 		</plugins>
 	</build>
+	<repositories>
+		<repository>
+			<id>calabash-screenshot-repo</id>
+			<name>calabash-screenshot repository on GitHub</name>
+			<url>http://dominikdary.github.com/calabash-screenshot/repository</url>
+		</repository>
+
+	</repositories>
 </project>

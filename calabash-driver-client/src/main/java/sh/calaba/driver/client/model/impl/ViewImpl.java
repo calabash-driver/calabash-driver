@@ -53,26 +53,6 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 	}
 
 	@Override
-	public File takeScreenshot(String path) {
-		File file = null;
-		JSONObject result = executeCalabashCommand(CalabashCommands.TAKE_SCREENSHOT);
-		try {
-			String base64String = result.getJSONArray("bonusInformation")
-					.getString(0);
-
-			byte[] img64 = Base64.decodeBase64(base64String);
-			file = new File(path);
-			FileOutputStream os = new FileOutputStream(file);
-			os.write(img64);
-			os.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return file;
-	}
-
-	@Override
 	public void scrollUp() {
 		executeCalabashCommand(CalabashCommands.SCROLL_UP);
 	}

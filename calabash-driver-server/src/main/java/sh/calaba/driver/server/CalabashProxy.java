@@ -1,5 +1,6 @@
 package sh.calaba.driver.server;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,12 +8,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.android.CalabashAndroidConnector;
 import sh.calaba.driver.utils.CalabashAdbCmdRunner;
+
+import com.android.screenshot.Screenshot;
 
 public class CalabashProxy {
 	private Map<String, CalabashAndroidConnector> sessionConnectors = new HashMap<String, CalabashAndroidConnector>();
@@ -145,7 +151,6 @@ public class CalabashProxy {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
-
 				e.printStackTrace();
 			}
 
@@ -153,6 +158,29 @@ public class CalabashProxy {
 		} else {
 			throw new RuntimeException(
 					"Calabash Connector for Session not found: " + sessionId);
+		}
+	}
+
+	public JSONObject takeScreenshot(String sessionId) {
+		File temp = null;
+		try {
+			temp = File.createTempFile("calabash-device-screenshot", ".png");
+			temp.deleteOnExit();
+			
+			Screenshot.main(new String[] { temp.getAbsolutePath(), "-s",
+					getSessionCapabilities(sessionId).getDeviceId() });
+			byte[] fis = FileUtils.readFileToByteArray(temp);
+
+			JSONObject result = new JSONObject();
+			result.put("success", true);
+			List<String> extras = new ArrayList<String>();
+			extras.add(Base64.encodeBase64String(fis));
+			result.put("bonusInformation", new JSONArray(extras));
+
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("An error occured taking a screnshot of the device: ",e);
 		}
 	}
 }

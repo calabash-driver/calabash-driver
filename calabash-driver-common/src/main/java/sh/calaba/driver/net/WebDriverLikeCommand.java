@@ -22,21 +22,11 @@ public enum WebDriverLikeCommand {
     VIEW("GET","/session/:sessionId/view",ViewSupport.class),
     L10N_SUPPORT("GET","/session/:sessionId/l10nSupport",L10nSupport.class),
     WAIT("POST","/session/:sessionId/wait",WaitingSupport.class),
+    SCREENSHOT_WITH_NAME("POST","/session/:sessionId/screenshotWithName",ViewSupport.class),
     
 	// LIST_ITEM
 	LIST_ITEM("GET", "/session/:sessionId/listItem", ListItemSupport.class);
-	/*
-	 * // UIATarget
-	 * LOCAL_TARGET("GET","/session/:sessionId/localTarget",UIATarget.class),
-	 * SCREENSHOT_WITH_NAME
-	 * ("POST","/session/:sessionId/uiaTarget/:reference/screenshotWithName"
-	 * ,Void.class), // UIAHost PERFORM_TASK_WITH_PATH_ARGUMENTS_TIMEOUT("POST",
-	 * "/session/:sessionId/host/:reference",null),
-	 * 
-	 * FONT_MOST_APP("GET" ,
-	 * "/session/:sessionId/uiaTarget/:reference/fontMostApp"
-	 * ,UIAApplication.class);
-	 */
+
 	private final String method;
 	private final String path;
 	private final Class<?> returnType;
