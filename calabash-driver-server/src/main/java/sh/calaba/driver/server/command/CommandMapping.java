@@ -19,15 +19,13 @@ public enum CommandMapping {
 	GET_STATUS(GetStatus.class),
     
 	// ## Calabash Commands
-    //Button
     BUTTON(CalabashCommandHandler.class),
     VIEW(CalabashCommandHandler.class),
     TEXT_FIELD(CalabashCommandHandler.class),
     WAIT(CalabashCommandHandler.class),
     L10N_SUPPORT(CalabashCommandHandler.class),
     SCREENSHOT_WITH_NAME(CalabashCommandHandler.class),
-    
-	// LIST_ITEM
+    SEARCH(CalabashCommandHandler.class),
 	LIST_ITEM(CalabashCommandHandler.class);
 	
 

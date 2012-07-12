@@ -6,6 +6,7 @@ import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.model.ButtonSupport;
 import sh.calaba.driver.model.L10nSupport;
 import sh.calaba.driver.model.ListItemSupport;
+import sh.calaba.driver.model.NativeSearchSupport;
 import sh.calaba.driver.model.TextFieldSupport;
 import sh.calaba.driver.model.ViewSupport;
 import sh.calaba.driver.model.WaitingSupport;
@@ -23,6 +24,7 @@ public enum WebDriverLikeCommand {
     L10N_SUPPORT("GET","/session/:sessionId/l10nSupport",L10nSupport.class),
     WAIT("POST","/session/:sessionId/wait",WaitingSupport.class),
     SCREENSHOT_WITH_NAME("POST","/session/:sessionId/screenshotWithName",ViewSupport.class),
+    SEARCH("POST","/session/:sessionId/search",NativeSearchSupport.class),
     
 	// LIST_ITEM
 	LIST_ITEM("GET", "/session/:sessionId/listItem", ListItemSupport.class);
