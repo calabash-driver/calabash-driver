@@ -13,56 +13,48 @@ import sh.calaba.driver.server.command.impl.StopSession;
 
 public enum CommandMapping {
 
-	NEW_SESSION(NewSession.class), 
-	GET_SESSION(GetCapabilities.class), 
-	DELETE_SESSION(StopSession.class),
-	GET_STATUS(GetStatus.class),
-    
-	// ## Calabash Commands
-    BUTTON(CalabashCommandHandler.class),
-    VIEW(CalabashCommandHandler.class),
-    TEXT_FIELD(CalabashCommandHandler.class),
-    WAIT(CalabashCommandHandler.class),
-    L10N_SUPPORT(CalabashCommandHandler.class),
-    SCREENSHOT_WITH_NAME(CalabashCommandHandler.class),
-    SEARCH(CalabashCommandHandler.class),
-	LIST_ITEM(CalabashCommandHandler.class);
-	
+  NEW_SESSION(NewSession.class), GET_SESSION(GetCapabilities.class), DELETE_SESSION(
+      StopSession.class), GET_STATUS(GetStatus.class),
 
-	private WebDriverLikeCommand command;
-	private final Class<? extends Handler> handlerClass;
+  // ## Calabash Commands
+  BUTTON(CalabashCommandHandler.class), VIEW(CalabashCommandHandler.class), TEXT_FIELD(
+      CalabashCommandHandler.class), WAIT(CalabashCommandHandler.class), L10N_SUPPORT(
+      CalabashCommandHandler.class), SCREENSHOT_WITH_NAME(CalabashCommandHandler.class), SEARCH(
+      CalabashCommandHandler.class), LIST_ITEM(CalabashCommandHandler.class);
 
-	private CommandMapping(Class<? extends Handler> handlerClass) {
-		this.command = WebDriverLikeCommand.valueOf(this.name());
-		this.handlerClass = handlerClass;
-	}
 
-	public static CommandMapping get(WebDriverLikeCommand wdlc) {
-		
-		for (CommandMapping cm : values()) {
-			if (cm.command == wdlc) {
-				return cm;
-			}
-		}
-		throw new RuntimeException("not mapped : " + wdlc);
-	}
+  private WebDriverLikeCommand command;
+  private final Class<? extends Handler> handlerClass;
 
-	public Handler createHandler(CalabashProxy proxy,
-			WebDriverLikeRequest request) throws Exception {
+  private CommandMapping(Class<? extends Handler> handlerClass) {
+    this.command = WebDriverLikeCommand.valueOf(this.name());
+    this.handlerClass = handlerClass;
+  }
 
-		Class<?> clazz = handlerClass;
-		if (clazz == null) {
-			throw new RuntimeException("handler NI");
-		}
+  public static CommandMapping get(WebDriverLikeCommand wdlc) {
 
-		Object[] args = new Object[] { proxy, request };
-		Class<?>[] argsClass = new Class[] { CalabashProxy.class,
-				WebDriverLikeRequest.class };
+    for (CommandMapping cm : values()) {
+      if (cm.command == wdlc) {
+        return cm;
+      }
+    }
+    throw new RuntimeException("not mapped : " + wdlc);
+  }
 
-		Constructor<?> c = clazz.getConstructor(argsClass);
-		Object handler = c.newInstance(args);
-		return (Handler) handler;
+  public Handler createHandler(CalabashProxy proxy, WebDriverLikeRequest request) throws Exception {
 
-	}
+    Class<?> clazz = handlerClass;
+    if (clazz == null) {
+      throw new RuntimeException("handler NI");
+    }
+
+    Object[] args = new Object[] {proxy, request};
+    Class<?>[] argsClass = new Class[] {CalabashProxy.class, WebDriverLikeRequest.class};
+
+    Constructor<?> c = clazz.getConstructor(argsClass);
+    Object handler = c.newInstance(args);
+    return (Handler) handler;
+
+  }
 
 }

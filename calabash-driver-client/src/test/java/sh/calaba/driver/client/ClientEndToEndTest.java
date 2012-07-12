@@ -9,52 +9,52 @@ import sh.calaba.driver.model.By;
 
 public class ClientEndToEndTest {
 
-	private String host = "127.0.0.1";
-	private int port = 4444;
-	
-	@Test
-	public void testJSON()throws Exception{
-		String jsonSource="{\"message\":\"\",\"bonusInformation\":[],\"success\":true}";
-		JSONObject json=new JSONObject(jsonSource);
-		Assert.assertEquals(json.get("success"), true);
-	}
+  private String host = "127.0.0.1";
+  private int port = 4444;
 
-	@Test(enabled=false)
-	public void scriptStartsAndRegisterToServer() {
-		RemoteCalabashAndroidDriver driver = null;
-		try {
+  @Test
+  public void testJSON() throws Exception {
+    String jsonSource = "{\"message\":\"\",\"bonusInformation\":[],\"success\":true}";
+    JSONObject json = new JSONObject(jsonSource);
+    Assert.assertEquals(json.get("success"), true);
+  }
 
-			driver = new RemoteCalabashAndroidDriver(host, port, nexus());
+  @Test(enabled = false)
+  public void scriptStartsAndRegisterToServer() {
+    RemoteCalabashAndroidDriver driver = null;
+    try {
 
-			driver.listItem(By.index(5)).press();
-			driver.button(By.text("Zustimmen")).press();
-			driver.button(By.text("Einloggen")).press();
-			// home_sign_in_button
+      driver = new RemoteCalabashAndroidDriver(host, port, nexus());
 
-			// user_name_autocomplete
-			driver.textField(By.text("username")).enterText("ddary_mobile");
+      driver.listItem(By.index(5)).press();
+      driver.button(By.text("Zustimmen")).press();
+      driver.button(By.text("Einloggen")).press();
+      // home_sign_in_button
 
-			// password_edittext
-			driver.textField(By.text("password")).enterText("password");
+      // user_name_autocomplete
+      driver.textField(By.text("username")).enterText("ddary_mobile");
 
-			// signin_btn
-			driver.button(By.text("Sign In")).press();
+      // password_edittext
+      driver.textField(By.text("password")).enterText("password");
 
-			// Cancel (button)
-		} finally {
-			if (driver != null) {
-				driver.quit();
-			}
-		}
-	}
+      // signin_btn
+      driver.button(By.text("Sign In")).press();
 
-	public CalabashCapabilities note() {
-		return CalabashCapabilities.android("eBayMobile:1.7.0", "2.3", "en_GB",
-				"304D19CE983D818E", "GT-N7000");
-	}
+      // Cancel (button)
+    } finally {
+      if (driver != null) {
+        driver.quit();
+      }
+    }
+  }
 
-	public CalabashCapabilities nexus() {
-		return CalabashCapabilities.android("eBayMobile:1.7.0", "4.0.4",
-				"de_DE", "0149948604012003", "GalaxyNexus");
-	}
+  public CalabashCapabilities note() {
+    return CalabashCapabilities.android("eBayMobile:1.7.0", "2.3", "en_GB", "304D19CE983D818E",
+        "GT-N7000");
+  }
+
+  public CalabashCapabilities nexus() {
+    return CalabashCapabilities.android("eBayMobile:1.7.0", "4.0.4", "de_DE", "0149948604012003",
+        "GalaxyNexus");
+  }
 }

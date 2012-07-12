@@ -6,24 +6,23 @@ import sh.calaba.driver.server.Handler;
 
 public abstract class BaseCommandHandler implements Handler {
 
-	private final WebDriverLikeRequest request;
-	private final CalabashProxy calabashProxy;
+  private final WebDriverLikeRequest request;
+  private final CalabashProxy calabashProxy;
 
-	public BaseCommandHandler(CalabashProxy calabashProxy,
-			WebDriverLikeRequest request) {
-		this.request = request;
-		this.calabashProxy = calabashProxy;
-	}
+  public BaseCommandHandler(CalabashProxy calabashProxy, WebDriverLikeRequest request) {
+    this.request = request;
+    this.calabashProxy = calabashProxy;
+  }
 
-	protected WebDriverLikeRequest getRequest() {
-		return request;
-	}
+  protected WebDriverLikeRequest getRequest() {
+    return request;
+  }
 
-	protected CalabashProxy getCalabashProxy() {
-		return calabashProxy;
-	}
-	
-	protected String getSessionId(){
-		return getRequest().getVariableValue(":sessionId");
-	}
+  protected CalabashProxy getCalabashProxy() {
+    return calabashProxy;
+  }
+
+  protected String getSessionId() {
+    return getRequest().getVariableValue(":sessionId");
+  }
 }

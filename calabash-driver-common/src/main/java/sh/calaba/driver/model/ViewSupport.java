@@ -2,15 +2,15 @@ package sh.calaba.driver.model;
 
 
 public interface ViewSupport {
-	public void click();
+  public void click();
 
-	public void longPress();
+  public void longPress();
 
-	public void press();
+  public void press();
 
-	public void waitFor();
-	
-	public void scrollUp();
-	
-	public void scrollDown();
+  public void waitFor();
+
+  public void scrollUp();
+
+  public void scrollDown();
 }

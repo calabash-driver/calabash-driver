@@ -23,8 +23,8 @@ public class HttpClientFactory {
       return false;
     }
 
-    public HttpUriRequest getRedirect(HttpRequest request, HttpResponse response, HttpContext context)
-        throws ProtocolException {
+    public HttpUriRequest getRedirect(HttpRequest request, HttpResponse response,
+        HttpContext context) throws ProtocolException {
       return null;
     }
   }

@@ -7,15 +7,15 @@ import sh.calaba.driver.server.CalabashProxy;
 
 public abstract class CalabashProxyBasedServlet extends HttpServlet {
 
-	private static final long serialVersionUID = -6028114413114935017L;
+  private static final long serialVersionUID = -6028114413114935017L;
 
-	private CalabashProxy calabashProxy;
+  private CalabashProxy calabashProxy;
 
-	public CalabashProxy getCalabashProxy() {
-		if (calabashProxy == null) {
-			calabashProxy = (CalabashProxy) getServletContext().getAttribute(
-					CalabashAndroidServer.SCRIPT_KEY);
-		}
-		return calabashProxy;
-	}
+  public CalabashProxy getCalabashProxy() {
+    if (calabashProxy == null) {
+      calabashProxy =
+          (CalabashProxy) getServletContext().getAttribute(CalabashAndroidServer.SCRIPT_KEY);
+    }
+    return calabashProxy;
+  }
 }

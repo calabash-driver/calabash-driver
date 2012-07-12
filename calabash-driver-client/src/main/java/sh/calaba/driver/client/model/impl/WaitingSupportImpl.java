@@ -7,27 +7,26 @@ import sh.calaba.driver.model.WaitingSupport;
 
 public class WaitingSupportImpl extends RemoteObject implements WaitingSupport {
 
-	public WaitingSupportImpl(RemoteCalabashAndroidDriver driver) {
-		super(driver);
-	}
+  public WaitingSupportImpl(RemoteCalabashAndroidDriver driver) {
+    super(driver);
+  }
 
-	@Override
-	public void waitForProgressCloses() {
-		executeCalabashCommand(CalabashCommands.WAIT_FOR_NO_PROGRESS_BARS);
-	}
+  @Override
+  public void waitForProgressCloses() {
+    executeCalabashCommand(CalabashCommands.WAIT_FOR_NO_PROGRESS_BARS);
+  }
 
-	@Override
-	public void waitForCurrentDialogCloses() {
-		executeCalabashCommand(CalabashCommands.WAIT_FOR_DIALOG_TO_CLOSE);
-	}
+  @Override
+  public void waitForCurrentDialogCloses() {
+    executeCalabashCommand(CalabashCommands.WAIT_FOR_DIALOG_TO_CLOSE);
+  }
 
-	@Override
-	public void waitFor(By by) {
-		if (by instanceof By.ContentDescription) {
-			executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT,
-					by.getIndentifier());
-		} else {
-			throw new RuntimeException("Not Yet supported");
-		}
-	}
+  @Override
+  public void waitFor(By by) {
+    if (by instanceof By.ContentDescription) {
+      executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT, by.getIndentifier());
+    } else {
+      throw new RuntimeException("Not Yet supported");
+    }
+  }
 }

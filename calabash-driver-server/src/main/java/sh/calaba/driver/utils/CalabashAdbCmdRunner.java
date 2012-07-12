@@ -10,169 +10,161 @@ import java.util.concurrent.locks.ReentrantLock;
 import sh.calaba.utils.AdbConnection;
 
 public class CalabashAdbCmdRunner {
-	private static AdbConnection adbConnection = getAdbConnection();
+  private static AdbConnection adbConnection = getAdbConnection();
 
-	protected static AdbConnection getAdbConnection() {
-		return new AdbConnection();
-	}
+  protected static AdbConnection getAdbConnection() {
+    return new AdbConnection();
+  }
 
-	/**
-	 * TODO ddary: make this configurable
-	 * 
-	 * @param deviceId
-	 */
-	public static void switchToEbayQA(String deviceId) {
-		List<String> commandLineFwd = new ArrayList<String>();
-		if (deviceId != null) {
-			commandLineFwd.add("-s");
-			commandLineFwd.add(deviceId);
-		}
-		commandLineFwd.add("shell");
-		commandLineFwd.add("setprop");
-		// USE THIS for prior 1.8
-		//commandLineFwd.add("log.tag.eBayQAServerSwitch");
-		
-		//Use this for post 1.8 releases
-		commandLineFwd.add("log.tag.fwUseQaServers");
-		
-		
-		commandLineFwd.add("DEBUG");
+  /**
+   * TODO ddary: make this configurable
+   * 
+   * @param deviceId
+   */
+  public static void switchToEbayQA(String deviceId) {
+    List<String> commandLineFwd = new ArrayList<String>();
+    if (deviceId != null) {
+      commandLineFwd.add("-s");
+      commandLineFwd.add(deviceId);
+    }
+    commandLineFwd.add("shell");
+    commandLineFwd.add("setprop");
+    // USE THIS for prior 1.8
+    // commandLineFwd.add("log.tag.eBayQAServerSwitch");
 
-		adbConnection.runProcess(commandLineFwd, "Switching to eBay QA Env",
-				true);
-	}
+    // Use this for post 1.8 releases
+    commandLineFwd.add("log.tag.fwUseQaServers");
 
-	public static void installAPKFile(String pathToAPK, String deviceId) {
-		List<String> commandLineFwd = new ArrayList<String>();
-		if (deviceId != null) {
-			commandLineFwd.add("-s");
-			commandLineFwd.add(deviceId);
-		}
-		commandLineFwd.add("install");
-		commandLineFwd.add("-r");
-		commandLineFwd.add(pathToAPK);
 
-		adbConnection.runProcess(commandLineFwd, "about to start install APK",
-				true);
-	}
+    commandLineFwd.add("DEBUG");
 
-	public static Thread startCalabashServer(final String deviceId) {
-		Thread instrumentationThread = new Thread(new Runnable() {
+    adbConnection.runProcess(commandLineFwd, "Switching to eBay QA Env", true);
+  }
 
-			@Override
-			public void run() {
-				List<String> commandLineFwd = new ArrayList<String>();
-				if (deviceId != null) {
-					commandLineFwd.add("-s");
-					commandLineFwd.add(deviceId);
-				}
-				commandLineFwd.add("shell");
+  public static void installAPKFile(String pathToAPK, String deviceId) {
+    List<String> commandLineFwd = new ArrayList<String>();
+    if (deviceId != null) {
+      commandLineFwd.add("-s");
+      commandLineFwd.add(deviceId);
+    }
+    commandLineFwd.add("install");
+    commandLineFwd.add("-r");
+    commandLineFwd.add(pathToAPK);
 
-				commandLineFwd.add("am");
-				commandLineFwd.add("instrument");
-				commandLineFwd.add("-e class");
-				commandLineFwd
-						.add("sh.calaba.instrumentationbackend.InstrumentationBackend");
-				commandLineFwd.add("-w");
-				commandLineFwd
-						.add("com.ebay.mobile.test/android.test.InstrumentationTestRunner");
+    adbConnection.runProcess(commandLineFwd, "about to start install APK", true);
+  }
 
-				adbConnection.runProcess(commandLineFwd,
-						"about to start CalabashServer", false);
+  public static Thread startCalabashServer(final String deviceId) {
+    Thread instrumentationThread = new Thread(new Runnable() {
 
-			}
-		});
-		instrumentationThread.start();
+      @Override
+      public void run() {
+        List<String> commandLineFwd = new ArrayList<String>();
+        if (deviceId != null) {
+          commandLineFwd.add("-s");
+          commandLineFwd.add(deviceId);
+        }
+        commandLineFwd.add("shell");
 
-		// needed because the process will not end, but wait is needed
-		waitForCalabashServerOnDevice(deviceId);
-		return instrumentationThread;
-	}
+        commandLineFwd.add("am");
+        commandLineFwd.add("instrument");
+        commandLineFwd.add("-e class");
+        commandLineFwd.add("sh.calaba.instrumentationbackend.InstrumentationBackend");
+        commandLineFwd.add("-w");
+        commandLineFwd.add("com.ebay.mobile.test/android.test.InstrumentationTestRunner");
 
-	public static void waitForCalabashServerOnDevice(final String deviceId) {
-		(new CalabashAdbCmdRunner().new CalabashServerWaiter(adbConnection,
-				deviceId)).run();
-		;
-	}
+        adbConnection.runProcess(commandLineFwd, "about to start CalabashServer", false);
 
-	public static void activatePortForwarding(int local, int remote,
-			String deviceId) {
-		List<String> commandLineFwd = new ArrayList<String>();
-		if (deviceId != null) {
-			commandLineFwd.add("-s");
-			commandLineFwd.add(deviceId);
-		}
-		commandLineFwd.add("forward");
-		commandLineFwd.add("tcp:" + local);
-		commandLineFwd.add("tcp:" + remote);
-		adbConnection.runProcess(commandLineFwd,
-				"about to forward: local port: " + local + " to remote port: "
-						+ remote, true);
-	}
+      }
+    });
+    instrumentationThread.start();
 
-	public static void deleteSavedAppData(String appBasePackage, String deviceId) {
-		List<String> commandLineFwd = new ArrayList<String>();
-		if (deviceId != null) {
-			commandLineFwd.add("-s");
-			commandLineFwd.add(deviceId);
-		}
-		commandLineFwd.add("shell");
-		commandLineFwd.add("pm");
-		commandLineFwd.add("clear");
-		commandLineFwd.add(appBasePackage);
-		adbConnection.runProcess(commandLineFwd,
-				"about to delete the saved app data of the app with the base package: "
-						+ appBasePackage, true);
-	}
+    // needed because the process will not end, but wait is needed
+    waitForCalabashServerOnDevice(deviceId);
+    return instrumentationThread;
+  }
 
-	public class CalabashServerWaiter implements Runnable {
-		private Lock lock = new ReentrantLock();
-		private Condition cv = lock.newCondition();
-		private AdbConnection adbConnection;
-		private String deviceId;
+  public static void waitForCalabashServerOnDevice(final String deviceId) {
+    (new CalabashAdbCmdRunner().new CalabashServerWaiter(adbConnection, deviceId)).run();;
+  }
 
-		CalabashServerWaiter(AdbConnection con, String deviceId) {
-			this.adbConnection = con;
-			this.deviceId = deviceId;
-		}
+  public static void activatePortForwarding(int local, int remote, String deviceId) {
+    List<String> commandLineFwd = new ArrayList<String>();
+    if (deviceId != null) {
+      commandLineFwd.add("-s");
+      commandLineFwd.add(deviceId);
+    }
+    commandLineFwd.add("forward");
+    commandLineFwd.add("tcp:" + local);
+    commandLineFwd.add("tcp:" + remote);
+    adbConnection.runProcess(commandLineFwd, "about to forward: local port: " + local
+        + " to remote port: " + remote, true);
+  }
 
-		private boolean isPortBound() {
-			List<String> commandLineFwd = new ArrayList<String>();
-			if (deviceId != null) {
-				commandLineFwd.add("-s");
-				commandLineFwd.add(deviceId);
-			}
-			commandLineFwd.add("shell");
-			commandLineFwd.add("netstat");
-			String result = adbConnection.runProcess(commandLineFwd,
-					"wait for calabash-server on mobile device", true);
-			if (result == null) {
-				return false;
-			} else if (result.contains(":::7101")) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+  public static void deleteSavedAppData(String appBasePackage, String deviceId) {
+    List<String> commandLineFwd = new ArrayList<String>();
+    if (deviceId != null) {
+      commandLineFwd.add("-s");
+      commandLineFwd.add(deviceId);
+    }
+    commandLineFwd.add("shell");
+    commandLineFwd.add("pm");
+    commandLineFwd.add("clear");
+    commandLineFwd.add(appBasePackage);
+    adbConnection.runProcess(commandLineFwd,
+        "about to delete the saved app data of the app with the base package: " + appBasePackage,
+        true);
+  }
 
-		@Override
-		public void run() {
-			lock.lock();
+  public class CalabashServerWaiter implements Runnable {
+    private Lock lock = new ReentrantLock();
+    private Condition cv = lock.newCondition();
+    private AdbConnection adbConnection;
+    private String deviceId;
 
-			try {
-				boolean portIsNotBound = !isPortBound();
-				while (portIsNotBound) {
+    CalabashServerWaiter(AdbConnection con, String deviceId) {
+      this.adbConnection = con;
+      this.deviceId = deviceId;
+    }
 
-					cv.await(2, TimeUnit.SECONDS);
-					portIsNotBound = !isPortBound();
-				}
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				lock.unlock();
-			}
+    private boolean isPortBound() {
+      List<String> commandLineFwd = new ArrayList<String>();
+      if (deviceId != null) {
+        commandLineFwd.add("-s");
+        commandLineFwd.add(deviceId);
+      }
+      commandLineFwd.add("shell");
+      commandLineFwd.add("netstat");
+      String result =
+          adbConnection.runProcess(commandLineFwd, "wait for calabash-server on mobile device",
+              true);
+      if (result == null) {
+        return false;
+      } else if (result.contains(":::7101")) {
+        return true;
+      } else {
+        return false;
+      }
+    }
 
-		}
-	}
+    @Override
+    public void run() {
+      lock.lock();
+
+      try {
+        boolean portIsNotBound = !isPortBound();
+        while (portIsNotBound) {
+
+          cv.await(2, TimeUnit.SECONDS);
+          portIsNotBound = !isPortBound();
+        }
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } finally {
+        lock.unlock();
+      }
+
+    }
+  }
 }

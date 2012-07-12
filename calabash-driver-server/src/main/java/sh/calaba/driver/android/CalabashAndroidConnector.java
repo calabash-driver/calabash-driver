@@ -19,88 +19,82 @@ import sh.calaba.driver.CalabashCapabilities;
  * 
  */
 public class CalabashAndroidConnector {
-	private Socket calabashClientSocket = null;
-	private BufferedReader in = null;
-	private PrintWriter out = null;
-	public static final String PING = "Ping!";
-	public static final String PONG = "Pong!";
-	private String hostname;
-	private int port;
-	private CalabashCapabilities sessionCapabilities;
+  private Socket calabashClientSocket = null;
+  private BufferedReader in = null;
+  private PrintWriter out = null;
+  public static final String PING = "Ping!";
+  public static final String PONG = "Pong!";
+  private String hostname;
+  private int port;
+  private CalabashCapabilities sessionCapabilities;
 
-	public CalabashAndroidConnector(String hostname, int port,
-			CalabashCapabilities sessionCapabilities) {
-		this.hostname = hostname;
-		this.port = port;
-		this.sessionCapabilities = sessionCapabilities;
-	}
+  public CalabashAndroidConnector(String hostname, int port,
+      CalabashCapabilities sessionCapabilities) {
+    this.hostname = hostname;
+    this.port = port;
+    this.sessionCapabilities = sessionCapabilities;
+  }
 
-	public CalabashCapabilities getSessionCapabilities() {
-		return sessionCapabilities;
-	}
+  public CalabashCapabilities getSessionCapabilities() {
+    return sessionCapabilities;
+  }
 
-	public JSONObject execute(JSONObject action) throws IOException,
-			JSONException {
+  public JSONObject execute(JSONObject action) throws IOException, JSONException {
 
-		// Sending operation to the server
-		out.println(action);
+    // Sending operation to the server
+    out.println(action);
 
-		// Reading response
-		String responseString = in.readLine();
-		// System.out.println("JSON response: " + responseString);
+    // Reading response
+    String responseString = in.readLine();
+    // System.out.println("JSON response: " + responseString);
 
-		return new JSONObject(responseString);
-	}
+    return new JSONObject(responseString);
+  }
 
-	protected void finalize() throws Throwable {
-		try {
-			quit(); // close open files
-		} finally {
-			super.finalize();
-		}
-	}
+  protected void finalize() throws Throwable {
+    try {
+      quit(); // close open files
+    } finally {
+      super.finalize();
+    }
+  }
 
-	public void quit() {
-		if (!calabashClientSocket.isClosed()) {
-			try {
-				out.close();
-				in.close();
-				calabashClientSocket.close();
-			} catch (IOException e) {
-				throw new RuntimeException(
-						"Unable to close the socket to calabash client: ", e);
-			}
-		}
-	}
+  public void quit() {
+    if (!calabashClientSocket.isClosed()) {
+      try {
+        out.close();
+        in.close();
+        calabashClientSocket.close();
+      } catch (IOException e) {
+        throw new RuntimeException("Unable to close the socket to calabash client: ", e);
+      }
+    }
+  }
 
-	/**
-	 * @see #initializeCalabashServer()
-	 */
-	public void startConnector() {
-		try {
+  /**
+   * @see #initializeCalabashServer()
+   */
+  public void startConnector() {
+    try {
 
-			if (calabashClientSocket == null) {
-				System.out.println(String.format(
-						"Connecting to calabash server %s on port %s",
-						hostname, port));
-				calabashClientSocket = new Socket(hostname, port);
-			}
-			out = new PrintWriter(calabashClientSocket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(
-					calabashClientSocket.getInputStream()));
-			out.println(PING);
-			String response = in.readLine();
-			System.out.println(PING + "request - Response: " + response);
-			if (!PONG.equals(response)) {
-				throw new RuntimeException(
-						"Calabash server is not responding as expected (PONG): "
-								+ response);
-			}
-		} catch (UnknownHostException e) {
-			throw new RuntimeException("Don't know about host: " + hostname);
-		} catch (IOException e) {
-			throw new RuntimeException("Couldn't get I/O for "
-					+ "the connection to: " + hostname, e);
-		}
-	}
+      if (calabashClientSocket == null) {
+        System.out.println(String.format("Connecting to calabash server %s on port %s", hostname,
+            port));
+        calabashClientSocket = new Socket(hostname, port);
+      }
+      out = new PrintWriter(calabashClientSocket.getOutputStream(), true);
+      in = new BufferedReader(new InputStreamReader(calabashClientSocket.getInputStream()));
+      out.println(PING);
+      String response = in.readLine();
+      System.out.println(PING + "request - Response: " + response);
+      if (!PONG.equals(response)) {
+        throw new RuntimeException("Calabash server is not responding as expected (PONG): "
+            + response);
+      }
+    } catch (UnknownHostException e) {
+      throw new RuntimeException("Don't know about host: " + hostname);
+    } catch (IOException e) {
+      throw new RuntimeException("Couldn't get I/O for " + "the connection to: " + hostname, e);
+    }
+  }
 }

@@ -23,13 +23,13 @@ public class WebDriverLikeRequest {
   }
 
   public boolean hasPayload() {
-    return payload != null && payload.length()!=0 ;
+    return payload != null && payload.length() != 0;
   }
 
   public String toString() {
-    String res =  method + ":" + path ;
-    if (hasPayload()){
-      res+= "\nbody:"+payload;
+    String res = method + ":" + path;
+    if (hasPayload()) {
+      res += "\nbody:" + payload;
     }
     return res;
   }
@@ -37,7 +37,7 @@ public class WebDriverLikeRequest {
   public String toJSON() throws JSONException {
     return toJSON(0);
   }
-  
+
 
   public String toJSON(int i) throws JSONException {
     JSONObject o = new JSONObject();

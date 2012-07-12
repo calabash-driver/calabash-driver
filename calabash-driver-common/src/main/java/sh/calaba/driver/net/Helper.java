@@ -10,17 +10,15 @@ import org.json.JSONObject;
 
 public class Helper {
 
-	public static JSONObject extractObject(HttpResponse resp)
-			throws IOException, JSONException {
-		BufferedReader rd = new BufferedReader(new InputStreamReader(resp
-				.getEntity().getContent()));
-		StringBuilder s = new StringBuilder();
-		String line;
-		while ((line = rd.readLine()) != null) {
-			s.append(line);
-		}
-		rd.close();
-		String str = s.toString();
-		return new JSONObject(str);
-	}
+  public static JSONObject extractObject(HttpResponse resp) throws IOException, JSONException {
+    BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
+    StringBuilder s = new StringBuilder();
+    String line;
+    while ((line = rd.readLine()) != null) {
+      s.append(line);
+    }
+    rd.close();
+    String str = s.toString();
+    return new JSONObject(str);
+  }
 }

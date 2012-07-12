@@ -12,53 +12,50 @@ import sh.calaba.driver.model.By;
 import sh.calaba.driver.model.ViewSupport;
 
 public class ViewImpl extends RemoteObject implements ViewSupport {
-	private By.Id id = null;
+  private By.Id id = null;
 
-	public ViewImpl(RemoteCalabashAndroidDriver driver, By.Id id) {
-		super(driver);
-		this.id = id;
-	}
-	
-	public ViewImpl(RemoteCalabashAndroidDriver driver) {
-		super(driver);
-	}
+  public ViewImpl(RemoteCalabashAndroidDriver driver, By.Id id) {
+    super(driver);
+    this.id = id;
+  }
 
-	public void click() {
-		assertIdNotNull();
-		executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID,
-				id.getIndentifier());
-	}
+  public ViewImpl(RemoteCalabashAndroidDriver driver) {
+    super(driver);
+  }
 
-	private void assertIdNotNull() {
-		if(id==null){
-			throw new IllegalArgumentException("Instance variable id cannot be null.");
-		}
-	}
+  public void click() {
+    assertIdNotNull();
+    executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID, id.getIndentifier());
+  }
 
-	public void longPress() {
-		assertIdNotNull();
-		executeCalabashCommand(CalabashCommands.LONG_PRESS_ON_VIEW_BY_ID,
-				id.getIndentifier());
-	}
+  private void assertIdNotNull() {
+    if (id == null) {
+      throw new IllegalArgumentException("Instance variable id cannot be null.");
+    }
+  }
 
-	public void press() {
-		assertIdNotNull();
-		executeCalabashCommand(CalabashCommands.PRESS, id.getIndentifier());
-	}
+  public void longPress() {
+    assertIdNotNull();
+    executeCalabashCommand(CalabashCommands.LONG_PRESS_ON_VIEW_BY_ID, id.getIndentifier());
+  }
 
-	public void waitFor() {
-		assertIdNotNull();
-		executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_ID,
-				id.getIndentifier());
-	}
+  public void press() {
+    assertIdNotNull();
+    executeCalabashCommand(CalabashCommands.PRESS, id.getIndentifier());
+  }
 
-	@Override
-	public void scrollUp() {
-		executeCalabashCommand(CalabashCommands.SCROLL_UP);
-	}
+  public void waitFor() {
+    assertIdNotNull();
+    executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_ID, id.getIndentifier());
+  }
 
-	@Override
-	public void scrollDown() {
-		executeCalabashCommand(CalabashCommands.SCROLL_DOWN);
-	}
+  @Override
+  public void scrollUp() {
+    executeCalabashCommand(CalabashCommands.SCROLL_UP);
+  }
+
+  @Override
+  public void scrollDown() {
+    executeCalabashCommand(CalabashCommands.SCROLL_DOWN);
+  }
 }
