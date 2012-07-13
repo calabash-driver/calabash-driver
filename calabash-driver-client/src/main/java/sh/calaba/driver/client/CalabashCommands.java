@@ -19,8 +19,8 @@ public enum CalabashCommands {
       "wait_for_l10n_element", "", WebDriverLikeCommand.VIEW), PRESS_L10N_ELEMENT(
       "press_l10n_element", "", WebDriverLikeCommand.VIEW), SCROLL_UP("scroll_up", "",
       WebDriverLikeCommand.VIEW), SCROLL_DOWN("scroll_down", "", WebDriverLikeCommand.VIEW), SEARCH_FOR(
-      "search_for", "", WebDriverLikeCommand.VIEW),
-  // TAKE_SCREENSHOT("take_screenshot_robotium","",WebDriverLikeCommand.VIEW),
+      "search_for", "", WebDriverLikeCommand.VIEW), TAKE_SCREENSHOT("take_screenshot_robotium", "",
+      WebDriverLikeCommand.VIEW),
 
   WAIT_FOR_DIALOG_TO_CLOSE("wait_for_dialog_to_close", "", WebDriverLikeCommand.WAIT), WAIT_FOR_TEXT(
       "wait_for_text", "", WebDriverLikeCommand.WAIT), WAIT_FOR_BUTTON("wait_for_button", "",

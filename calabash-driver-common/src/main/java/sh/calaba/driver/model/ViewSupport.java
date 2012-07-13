@@ -1,5 +1,7 @@
 package sh.calaba.driver.model;
 
+import java.io.File;
+
 
 public interface ViewSupport {
   public void click();
@@ -13,4 +15,6 @@ public interface ViewSupport {
   public void scrollUp();
 
   public void scrollDown();
+
+  public File takeScreenshot(String path);
 }

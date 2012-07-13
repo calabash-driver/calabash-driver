@@ -1,6 +1,5 @@
 package sh.calaba.driver.server;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,17 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.FileUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.android.CalabashAndroidConnector;
 import sh.calaba.driver.utils.CalabashAdbCmdRunner;
-
-import com.android.screenshot.Screenshot;
 
 public class CalabashProxy {
   private Map<String, CalabashAndroidConnector> sessionConnectors =
@@ -145,44 +139,6 @@ public class CalabashProxy {
       return result;
     } else {
       throw new RuntimeException("Calabash Connector for Session not found: " + sessionId);
-    }
-  }
-
-  public JSONObject takeScreenshot(final String sessionId) {
-    File temp = null;
-    try {
-      temp = File.createTempFile("calabash-device-screenshot", ".png");
-      temp.deleteOnExit();
-      final String fileName = temp.getAbsolutePath();
-      Runnable runnable = new Runnable() {
-        public void run() {
-          try {
-            Screenshot.main(new String[] {fileName, "-s",
-                getSessionCapabilities(sessionId).getDeviceId()});
-          } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-          }
-        }
-      };
-      Thread t = new Thread(runnable);
-      t.start();
-      while (t.isAlive()) {
-        // wait
-      }
-
-      byte[] fis = FileUtils.readFileToByteArray(temp);
-
-      JSONObject result = new JSONObject();
-      result.put("success", true);
-      List<String> extras = new ArrayList<String>();
-      extras.add(Base64.encodeBase64String(fis));
-      result.put("bonusInformation", new JSONArray(extras));
-
-      return result;
-    } catch (Exception e) {
-      e.printStackTrace();
-      throw new RuntimeException("An error occured taking a screnshot of the device: ", e);
     }
   }
 }

@@ -68,40 +68,9 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
     return new L10nElementImpl(this, id);
   }
 
-  public File takeScreenshot(String path) {
-    JSONObject result = getJSONResult(WebDriverLikeCommand.SCREENSHOT_WITH_NAME);
-
-    File file = null;
-    try {
-      String base64String = result.getJSONArray("bonusInformation").getString(0);
-
-      byte[] img64 = Base64.decodeBase64(base64String);
-      file = new File(path);
-      FileOutputStream os = new FileOutputStream(file);
-      os.write(img64);
-      os.close();
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return file;
-  }
-
-  private JSONObject getJSONResult(WebDriverLikeCommand command) {
-
-    String genericPath = command.path();
-    String path = genericPath.replace(":sessionId", getSession().getSessionId());
-    WebDriverLikeRequest request =
-        new WebDriverLikeRequest(command.method(), path, new JSONObject());
-    WebDriverLikeResponse response;
-    try {
-      response = execute(request);
-      return ((JSONObject) response.getValue());
-    } catch (Exception e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
-      return null;
-    }
+  
+  public File takeScreenshot(String path){
+    return new ViewImpl(this).takeScreenshot(path);
   }
 
   public void scrollUp() {
