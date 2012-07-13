@@ -21,6 +21,9 @@ public enum CalabashCommands {
       WebDriverLikeCommand.VIEW), SCROLL_DOWN("scroll_down", "", WebDriverLikeCommand.VIEW), SEARCH_FOR(
       "search_for", "", WebDriverLikeCommand.VIEW), TAKE_SCREENSHOT("take_screenshot_robotium", "",
       WebDriverLikeCommand.VIEW),
+      CLICK_ON_VIEW_BY_NAME("click_on_view_by_name","",WebDriverLikeCommand.VIEW),
+    WAIT_FOR_VIEW_BY_NAME("wait_for_view_by_name","",WebDriverLikeCommand.VIEW),
+ ENTER_TEXT_BY_NAME("enter_text_by_name","",WebDriverLikeCommand.TEXT_FIELD),
 
   WAIT_FOR_DIALOG_TO_CLOSE("wait_for_dialog_to_close", "", WebDriverLikeCommand.WAIT), WAIT_FOR_TEXT(
       "wait_for_text", "", WebDriverLikeCommand.WAIT), WAIT_FOR_BUTTON("wait_for_button", "",

@@ -25,7 +25,7 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 
   public void click() {
     assertIdNotNull();
-    executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID, id.getIndentifier());
+    executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_NAME, id.getIndentifier());
   }
 
   private void assertIdNotNull() {
@@ -46,7 +46,7 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 
   public void waitFor() {
     assertIdNotNull();
-    executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_ID, id.getIndentifier());
+    executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_NAME, id.getIndentifier());
   }
 
   @Override
