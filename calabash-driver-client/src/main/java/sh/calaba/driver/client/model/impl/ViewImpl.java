@@ -76,4 +76,17 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
     }
     return file;
   }
+
+  public String getText() {
+    JSONObject result =
+        executeCalabashCommand(CalabashCommands.GET_ELEMENT_TEXT_BY_NAME, id.getIndentifier());
+    return result.optString("elementText");
+  }
+
+  @Override
+  public Boolean isEnabled() {
+    JSONObject result =
+        executeCalabashCommand(CalabashCommands.VIEW_ENABLED_STATUS_BY_NAME, id.getIndentifier());
+    return result.optBoolean("viewEnabledStatus");
+  }
 }

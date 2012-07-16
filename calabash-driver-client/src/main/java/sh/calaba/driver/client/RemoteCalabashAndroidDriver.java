@@ -56,20 +56,16 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
     return new WaitingSupportImpl(this);
   }
 
-  public ViewSupport view(By id) {
-    if (id instanceof By.Id) {
-      return new ViewImpl(this, (By.Id) id);
-    } else {
-      throw new IllegalArgumentException("Only By.Id is supported for views.");
-    }
+  public ViewSupport findViewById(String id) {
+    return new ViewImpl(this, (By.Id) By.id(id));
   }
 
   public L10nSupport l10nElement(By.L10nElement id) {
     return new L10nElementImpl(this, id);
   }
 
-  
-  public File takeScreenshot(String path){
+
+  public File takeScreenshot(String path) {
     return new ViewImpl(this).takeScreenshot(path);
   }
 

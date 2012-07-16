@@ -2,7 +2,11 @@ package sh.calaba.driver.model;
 
 import java.io.File;
 
-
+/**
+ * 
+ * @author ddary
+ *
+ */
 public interface ViewSupport {
   public void click();
 
@@ -17,4 +21,8 @@ public interface ViewSupport {
   public void scrollDown();
 
   public File takeScreenshot(String path);
+  
+  public String getText();
+  
+  public Boolean isEnabled();
 }
