@@ -28,6 +28,17 @@ public class By {
       super(id);
     }
   }
+  /**
+   * for CSS web view selectors
+   * @author ddary
+   *
+   */
+  public class CSS extends By {
+    public CSS(String id) {
+      super(id);
+    }
+  }
+
 
   public class L10nElement extends By {
     private L10nElementType type = null;
@@ -86,5 +97,9 @@ public class By {
 
   public static By.L10nElement l10nMenuItem(String id) {
     return new By().new L10nElement(id, L10nElementType.MENU_ITEM);
+  }
+  
+  public static By.CSS css(String css) {
+    return new By().new CSS(css);
   }
 }

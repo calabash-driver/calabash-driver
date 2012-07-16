@@ -11,6 +11,7 @@ import sh.calaba.driver.model.SpinnerSupport;
 import sh.calaba.driver.model.TextFieldSupport;
 import sh.calaba.driver.model.ViewSupport;
 import sh.calaba.driver.model.WaitingSupport;
+import sh.calaba.driver.model.WebViewSupport;
 
 public enum WebDriverLikeCommand {
   NEW_SESSION("POST", "/session", String.class), GET_SESSION("GET", "/session/:sessionId",
@@ -25,6 +26,7 @@ public enum WebDriverLikeCommand {
       "POST", "/session/:sessionId/wait", WaitingSupport.class), SCREENSHOT_WITH_NAME("POST",
       "/session/:sessionId/screenshotWithName", ViewSupport.class), SEARCH("POST",
       "/session/:sessionId/search", NativeSearchSupport.class),
+ WEB_VIEW("POST","/session/:sessionId/webView",WebViewSupport.class),
 
   // LIST_ITEM
   LIST_ITEM("GET", "/session/:sessionId/listItem", ListItemSupport.class);

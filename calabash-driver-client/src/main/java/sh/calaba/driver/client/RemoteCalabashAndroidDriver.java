@@ -12,6 +12,7 @@ import sh.calaba.driver.client.model.impl.SpinnerImpl;
 import sh.calaba.driver.client.model.impl.TextFieldImpl;
 import sh.calaba.driver.client.model.impl.ViewImpl;
 import sh.calaba.driver.client.model.impl.WaitingSupportImpl;
+import sh.calaba.driver.client.model.impl.WebViewImpl;
 import sh.calaba.driver.model.ButtonSupport;
 import sh.calaba.driver.model.By;
 import sh.calaba.driver.model.CalabashAndroidDriver;
@@ -22,6 +23,7 @@ import sh.calaba.driver.model.SpinnerSupport;
 import sh.calaba.driver.model.TextFieldSupport;
 import sh.calaba.driver.model.ViewSupport;
 import sh.calaba.driver.model.WaitingSupport;
+import sh.calaba.driver.model.WebViewSupport;
 
 public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
 
@@ -43,6 +45,10 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
 
   public SpinnerSupport spinner(By by){
     return new SpinnerImpl(this, by);
+  }
+  
+  public WebViewSupport webview(By.CSS css){
+    return new WebViewImpl(this, css);
   }
   
   public ListItemSupport listItem(By by) {

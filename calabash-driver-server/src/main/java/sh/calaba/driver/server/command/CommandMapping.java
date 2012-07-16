@@ -21,7 +21,7 @@ public enum CommandMapping {
       CalabashCommandHandler.class), WAIT(CalabashCommandHandler.class), L10N_SUPPORT(
       CalabashCommandHandler.class), SCREENSHOT_WITH_NAME(CalabashCommandHandler.class), SEARCH(
       CalabashCommandHandler.class), SPINNER(CalabashCommandHandler.class), LIST_ITEM(
-      CalabashCommandHandler.class);
+      CalabashCommandHandler.class), WEB_VIEW(CalabashCommandHandler.class);
 
 
   private WebDriverLikeCommand command;

@@ -31,7 +31,11 @@ public enum CalabashCommands {
       WebDriverLikeCommand.TEXT_FIELD), GET_ELEMENT_TEXT_BY_NAME("get_element_text_by_name", "",
       WebDriverLikeCommand.VIEW), VIEW_ENABLED_STATUS_BY_NAME("view_enabled_status_by_name", "",
       WebDriverLikeCommand.VIEW), WAIT_FOR_DIALOG_TO_CLOSE("wait_for_dialog_to_close", "",
-      WebDriverLikeCommand.WAIT), WAIT("wait", "", WebDriverLikeCommand.VIEW), WAIT_FOR_TEXT(
+      WebDriverLikeCommand.WAIT), 
+      SET_SET("set_text","set text on a webview",WebDriverLikeCommand.WEB_VIEW),
+      TOUCH("touch","touch something on a webview",WebDriverLikeCommand.WEB_VIEW),
+      
+      WAIT("wait", "", WebDriverLikeCommand.VIEW), WAIT_FOR_TEXT(
       "wait_for_text", "", WebDriverLikeCommand.WAIT), WAIT_FOR_BUTTON("wait_for_button", "",
       WebDriverLikeCommand.WAIT), WAIT_FOR_NO_PROGRESS_BARS("wait_for_no_progress_bars", "",
       WebDriverLikeCommand.WAIT);
