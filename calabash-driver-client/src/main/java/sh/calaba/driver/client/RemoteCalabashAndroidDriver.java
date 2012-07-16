@@ -1,18 +1,13 @@
 package sh.calaba.driver.client;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Map;
-
-import org.apache.commons.codec.binary.Base64;
-import org.json.JSONObject;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.client.model.impl.ButtonImpl;
 import sh.calaba.driver.client.model.impl.L10nElementImpl;
 import sh.calaba.driver.client.model.impl.ListItemImpl;
 import sh.calaba.driver.client.model.impl.NativeSearchImpl;
-import sh.calaba.driver.client.model.impl.RemoteObject;
 import sh.calaba.driver.client.model.impl.TextFieldImpl;
 import sh.calaba.driver.client.model.impl.ViewImpl;
 import sh.calaba.driver.client.model.impl.WaitingSupportImpl;
@@ -25,10 +20,6 @@ import sh.calaba.driver.model.NativeSearchSupport;
 import sh.calaba.driver.model.TextFieldSupport;
 import sh.calaba.driver.model.ViewSupport;
 import sh.calaba.driver.model.WaitingSupport;
-import sh.calaba.driver.net.Path;
-import sh.calaba.driver.net.WebDriverLikeCommand;
-import sh.calaba.driver.net.WebDriverLikeRequest;
-import sh.calaba.driver.net.WebDriverLikeResponse;
 
 public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
 
@@ -70,7 +61,6 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
   }
 
   public void scrollUp() {
-    // TODO fix this
     new ViewImpl(this).scrollUp();
   }
 
@@ -79,7 +69,18 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
   }
 
   public void scrollDown() {
-    // TODO fix this
     new ViewImpl(this).scrollDown();
+  }
+
+  public void waitForText(String text) {
+    new ViewImpl(this).waitFor(By.text(text));
+  }
+
+  public void waitForView(String name) {
+    new ViewImpl(this).waitFor(By.id(name));
+  }
+
+  public void pressContextMenuEntry(String text) {
+    new ViewImpl(this).pressContextMenuItem(By.text(text));
   }
 }

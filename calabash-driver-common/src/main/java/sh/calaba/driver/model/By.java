@@ -60,15 +60,15 @@ public class By {
     return new By().new Index(index);
   }
 
-  public static By index(String index) {
+  public static By.Index index(String index) {
     return new By().new Index(index);
   }
 
-  public static By text(String text) {
+  public static By.ContentDescription text(String text) {
     return new By().new ContentDescription(text);
   }
 
-  public static By id(String id) {
+  public static By.Id id(String id) {
     return new By().new Id(id);
   }
 

@@ -29,4 +29,9 @@ public class WaitingSupportImpl extends RemoteObject implements WaitingSupport {
       throw new RuntimeException("Not Yet supported");
     }
   }
+
+  @Override
+  public void waitFor(Integer seconds) {
+    executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT, String.valueOf(seconds));
+  }
 }

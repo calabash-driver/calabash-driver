@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
 import sh.calaba.driver.model.By;
+import sh.calaba.driver.model.By.ContentDescription;
 import sh.calaba.driver.model.ViewSupport;
 
 public class ViewImpl extends RemoteObject implements ViewSupport {
@@ -44,9 +45,14 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
     executeCalabashCommand(CalabashCommands.PRESS, id.getIndentifier());
   }
 
-  public void waitFor() {
-    assertIdNotNull();
-    executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_NAME, id.getIndentifier());
+  public void waitFor(By by) {
+    if(by instanceof By.Id){
+      executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_NAME, id.getIndentifier());  
+    }else if(by instanceof By.ContentDescription){
+      executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT, id.getIndentifier());
+    }else{
+      throw new IllegalArgumentException("Type of by not supported now");
+    }
   }
 
   @Override
@@ -88,5 +94,10 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
     JSONObject result =
         executeCalabashCommand(CalabashCommands.VIEW_ENABLED_STATUS_BY_NAME, id.getIndentifier());
     return result.optBoolean("viewEnabledStatus");
+  }
+
+  @Override
+  public void pressContextMenuItem(ContentDescription text) {
+    executeCalabashCommand(CalabashCommands.PRESS_LONG_ON_TEXT, text.getIndentifier());
   }
 }

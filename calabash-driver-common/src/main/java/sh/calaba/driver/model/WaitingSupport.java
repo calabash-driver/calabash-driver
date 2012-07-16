@@ -6,4 +6,6 @@ public interface WaitingSupport {
   public void waitForCurrentDialogCloses();
 
   public void waitFor(By by);
+  
+  public void waitFor(Integer seconds);
 }

@@ -14,7 +14,7 @@ public interface ViewSupport {
 
   public void press();
 
-  public void waitFor();
+  public void waitFor(By by);
 
   public void scrollUp();
 
@@ -25,4 +25,6 @@ public interface ViewSupport {
   public String getText();
   
   public Boolean isEnabled();
+  
+  public void pressContextMenuItem(By.ContentDescription text);
 }
