@@ -22,16 +22,16 @@ public enum CalabashCommands {
       "press_l10n_element", "", WebDriverLikeCommand.VIEW), SCROLL_UP("scroll_up", "",
       WebDriverLikeCommand.VIEW), SCROLL_DOWN("scroll_down", "", WebDriverLikeCommand.VIEW), SEARCH_FOR(
       "search_for", "", WebDriverLikeCommand.VIEW), TAKE_SCREENSHOT("take_screenshot_robotium", "",
-      WebDriverLikeCommand.VIEW),
-      CLICK_ON_VIEW_BY_NAME("click_on_view_by_name","",WebDriverLikeCommand.VIEW),
-      PRESS_LONG_ON_TEXT("press_long_on_text'","",WebDriverLikeCommand.VIEW),
-    WAIT_FOR_VIEW_BY_NAME("wait_for_view_by_name","",WebDriverLikeCommand.VIEW),
- ENTER_TEXT_BY_NAME("enter_text_by_name","",WebDriverLikeCommand.TEXT_FIELD),
- GET_ELEMENT_TEXT_BY_NAME("get_element_text_by_name","",WebDriverLikeCommand.VIEW),
- VIEW_ENABLED_STATUS_BY_NAME("view_enabled_status_by_name","",WebDriverLikeCommand.VIEW),
-  WAIT_FOR_DIALOG_TO_CLOSE("wait_for_dialog_to_close", "", WebDriverLikeCommand.WAIT),
-  WAIT("wait","",WebDriverLikeCommand.VIEW),
-  WAIT_FOR_TEXT(
+      WebDriverLikeCommand.VIEW), SELECT_ITEM_FROM_NAMED_SPINNER("select_item_from_named_spinner",
+      "", WebDriverLikeCommand.SPINNER), SELECT_ITEM_BY_NAME("select_item_by_name", "",
+      WebDriverLikeCommand.SPINNER), CLICK_ON_VIEW_BY_NAME("click_on_view_by_name", "",
+      WebDriverLikeCommand.VIEW), PRESS_LONG_ON_TEXT("press_long_on_text'", "",
+      WebDriverLikeCommand.VIEW), WAIT_FOR_VIEW_BY_NAME("wait_for_view_by_name", "",
+      WebDriverLikeCommand.VIEW), ENTER_TEXT_BY_NAME("enter_text_by_name", "",
+      WebDriverLikeCommand.TEXT_FIELD), GET_ELEMENT_TEXT_BY_NAME("get_element_text_by_name", "",
+      WebDriverLikeCommand.VIEW), VIEW_ENABLED_STATUS_BY_NAME("view_enabled_status_by_name", "",
+      WebDriverLikeCommand.VIEW), WAIT_FOR_DIALOG_TO_CLOSE("wait_for_dialog_to_close", "",
+      WebDriverLikeCommand.WAIT), WAIT("wait", "", WebDriverLikeCommand.VIEW), WAIT_FOR_TEXT(
       "wait_for_text", "", WebDriverLikeCommand.WAIT), WAIT_FOR_BUTTON("wait_for_button", "",
       WebDriverLikeCommand.WAIT), WAIT_FOR_NO_PROGRESS_BARS("wait_for_no_progress_bars", "",
       WebDriverLikeCommand.WAIT);

@@ -8,6 +8,7 @@ import sh.calaba.driver.client.model.impl.ButtonImpl;
 import sh.calaba.driver.client.model.impl.L10nElementImpl;
 import sh.calaba.driver.client.model.impl.ListItemImpl;
 import sh.calaba.driver.client.model.impl.NativeSearchImpl;
+import sh.calaba.driver.client.model.impl.SpinnerImpl;
 import sh.calaba.driver.client.model.impl.TextFieldImpl;
 import sh.calaba.driver.client.model.impl.ViewImpl;
 import sh.calaba.driver.client.model.impl.WaitingSupportImpl;
@@ -17,6 +18,7 @@ import sh.calaba.driver.model.CalabashAndroidDriver;
 import sh.calaba.driver.model.L10nSupport;
 import sh.calaba.driver.model.ListItemSupport;
 import sh.calaba.driver.model.NativeSearchSupport;
+import sh.calaba.driver.model.SpinnerSupport;
 import sh.calaba.driver.model.TextFieldSupport;
 import sh.calaba.driver.model.ViewSupport;
 import sh.calaba.driver.model.WaitingSupport;
@@ -39,6 +41,10 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
     return new ButtonImpl(this, by);
   }
 
+  public SpinnerSupport spinner(By by){
+    return new SpinnerImpl(this, by);
+  }
+  
   public ListItemSupport listItem(By by) {
     return new ListItemImpl(this, by);
   }
