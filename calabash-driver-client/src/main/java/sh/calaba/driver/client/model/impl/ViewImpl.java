@@ -47,9 +47,9 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 
   public void waitFor(By by) {
     if(by instanceof By.Id){
-      executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_NAME, id.getIndentifier());  
+      executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_NAME, by.getIndentifier());  
     }else if(by instanceof By.ContentDescription){
-      executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT, id.getIndentifier());
+      executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT, by.getIndentifier());
     }else{
       throw new IllegalArgumentException("Type of by not supported now");
     }
