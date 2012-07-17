@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 import org.json.JSONObject;
@@ -58,14 +59,18 @@ public abstract class CalabashAndroidDriver {
 
   public WebDriverLikeResponse execute(WebDriverLikeRequest request) throws Exception {
     HttpClient client = HttpClientFactory.getClient();
+
     String url = remoteURL + request.getPath();
     BasicHttpEntityEnclosingRequest r =
         new BasicHttpEntityEnclosingRequest(request.getMethod(), url);
+    r.setHeader("Content-Type", "text/plain; charset=utf-8");
     if (request.hasPayload()) {
-      r.setEntity(new StringEntity(request.getPayload().toString()));
+      System.out.println("Payload: " + request.getPayload().toString());
+      r.setEntity(new StringEntity(request.getPayload().toString(),"UTF-8"));
     }
 
     HttpHost h = new HttpHost(host, port);
+    
     HttpResponse response = client.execute(h, r);
     if (response.getStatusLine().getStatusCode() == 500) {
       throw new CalabashException(
