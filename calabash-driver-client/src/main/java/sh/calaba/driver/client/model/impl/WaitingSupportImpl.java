@@ -32,6 +32,6 @@ public class WaitingSupportImpl extends RemoteObject implements WaitingSupport {
 
   @Override
   public void waitFor(Integer seconds) {
-    executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT, String.valueOf(seconds));
+    executeCalabashCommand(CalabashCommands.WAIT, String.valueOf(seconds));
   }
 }
