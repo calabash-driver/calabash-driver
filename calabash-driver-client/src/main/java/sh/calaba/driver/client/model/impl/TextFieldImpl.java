@@ -28,7 +28,7 @@ public class TextFieldImpl extends RemoteObject implements TextFieldSupport {
     if (by instanceof By.Index) {
       executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_NUMBERED_FIELD, text,
           by.getIndentifier());
-    } else if (by instanceof By.ContentDescription || by instanceof By.Id) {
+    } else if (by instanceof By.ContentDescription) {
       executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_NAMED_FIELD, text,
           by.getIndentifier());
     } else if (by instanceof By.Id) {
