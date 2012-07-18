@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
 import sh.calaba.driver.model.By;
+import sh.calaba.driver.model.ElementType;
 import sh.calaba.driver.model.By.ContentDescription;
 import sh.calaba.driver.model.ViewSupport;
 
@@ -46,11 +47,11 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
   }
 
   public void waitFor(By by) {
-    if(by instanceof By.Id){
-      executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_NAME, by.getIndentifier());  
-    }else if(by instanceof By.ContentDescription){
+    if (by instanceof By.Id) {
+      executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_NAME, by.getIndentifier());
+    } else if (by instanceof By.ContentDescription) {
       executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT, by.getIndentifier());
-    }else{
+    } else {
       throw new IllegalArgumentException("Type of by not supported now");
     }
   }
@@ -99,5 +100,12 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
   @Override
   public void pressContextMenuItem(ContentDescription text) {
     executeCalabashCommand(CalabashCommands.PRESS_LONG_ON_TEXT, text.getIndentifier());
+  }
+
+  public String getText(ElementType type, Integer number) {
+    JSONObject result =
+        executeCalabashCommand(CalabashCommands.GET_ELEMENT_TEXT_BY_TYPE, type.name(),
+            String.valueOf(number));
+    return result.optString("elementText");
   }
 }

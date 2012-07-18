@@ -64,7 +64,7 @@ public class CalabashNodeConfiguration {
   private int driverPort;
   private boolean driverRegistrationEnabled;
   private String hubHost = null;
-
+  private String proxy = null;
   private int hubPort;
 
   protected CalabashNodeConfiguration(JSONObject config) throws JSONException,
@@ -78,6 +78,13 @@ public class CalabashNodeConfiguration {
    */
   public List<CalabashCapabilities> getCapabilities() {
     return capabilities;
+  }
+
+  /**
+   * @return the proxy
+   */
+  public String getProxy() {
+    return proxy;
   }
 
   /**
@@ -158,6 +165,10 @@ public class CalabashNodeConfiguration {
     driverMaxSession = configuration.getInt("maxSession");
     mobileAppPath = configuration.getString("autApk");
     mobileTestAppPath = configuration.getString("autTestApk");
+    proxy =
+        configuration.isNull("proxy")
+            ? "org.openqa.grid.selenium.proxy.DefaultRemoteProxy"
+            : configuration.getString("proxy");
   }
 
 }

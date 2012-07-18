@@ -27,4 +27,6 @@ public interface ViewSupport {
   public Boolean isEnabled();
   
   public void pressContextMenuItem(By.ContentDescription text);
+  
+  public String getText(ElementType type, Integer number);
 }

@@ -69,7 +69,7 @@ public class DriverRegistrationHandler {
     configuration.put("port", config.getDriverPort());
     configuration.put("register", true);
     configuration.put("host", config.getDriverHost());
-    configuration.put("proxy", "org.openqa.grid.selenium.proxy.DefaultRemoteProxy");
+    configuration.put("proxy", config.getProxy());
     configuration.put("maxSession", config.getDriverMaxSession());
     configuration.put("hubHost", config.getHubHost());
     configuration.put("role", "node");
