@@ -1,5 +1,10 @@
 package sh.calaba.driver.model;
 
+/**
+ * Interface representing basic waiting operations.
+ * 
+ * @author ddary
+ */
 public interface WaitingSupport {
   public void waitForProgressCloses();
 

@@ -13,35 +13,34 @@
  */
 package sh.calaba.driver.model;
 
+import java.io.File;
 
 /**
- * Interface representing basic UI-view element operations.
+ *  Interface representing basic device interaction operations.
  * 
  * @author ddary
  */
-public interface ViewSupport {
+public interface DeviceSupport {
   /**
-   * 
+   * Allows to scroll up the device screen.
    */
-  public void click();
+  public void scrollUp();
 
   /**
-   * 
-   * @return
+   * Allows to scroll down the device screen.
    */
-  public String getText();
+  public void scrollDown();
 
   /**
-   * 
-   * @return
+   * Capture the screenshot and store it in the specified path.
+   * @param path The path to safe the screenshot to.
+   * @return The file name of the created screenshot.
    */
-  public Boolean isEnabled();
+  public File takeScreenshot(String path);
 
   /**
-   * 
-   * @param type
-   * @param number
-   * @return
+   * Allows to press the context menu item.
+   * @param text The text to press on.
    */
-  public String getText(ElementType type, Integer number);
+  public void pressContextMenuItem(By.ContentDescription text);
 }

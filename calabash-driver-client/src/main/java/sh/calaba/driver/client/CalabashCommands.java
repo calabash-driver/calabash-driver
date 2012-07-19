@@ -1,9 +1,25 @@
+/*
+ * Copyright 2012 calabash-driver committers.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package sh.calaba.driver.client;
-
-import javax.swing.text.View;
 
 import sh.calaba.driver.net.WebDriverLikeCommand;
 
+/**
+ * Describes the list of supported Calabash commands with corresponding description.
+ * 
+ * @author ddary
+ */
 public enum CalabashCommands {
   PRESS_LIST_ITEM("press_list_item", "", WebDriverLikeCommand.LIST_ITEM), LONG_PRESS_LIST_ITEM(
       "long_press_list_item", "", WebDriverLikeCommand.LIST_ITEM), PRESS_LIST_ITEM_TEXT(
@@ -28,19 +44,17 @@ public enum CalabashCommands {
       WebDriverLikeCommand.VIEW), PRESS_LONG_ON_TEXT("press_long_on_text'", "",
       WebDriverLikeCommand.VIEW), WAIT_FOR_VIEW_BY_NAME("wait_for_view_by_name", "",
       WebDriverLikeCommand.VIEW), ENTER_TEXT_BY_NAME("enter_text_by_name", "",
-      WebDriverLikeCommand.TEXT_FIELD),
-      GET_ELEMENT_TEXT_BY_TYPE("get_element_text_by_type","",WebDriverLikeCommand.VIEW),
-      GET_ELEMENT_TEXT_BY_NAME("get_element_text_by_name", "",
+      WebDriverLikeCommand.TEXT_FIELD), GET_ELEMENT_TEXT_BY_TYPE("get_element_text_by_type", "",
+      WebDriverLikeCommand.VIEW), GET_ELEMENT_TEXT_BY_NAME("get_element_text_by_name", "",
       WebDriverLikeCommand.VIEW), VIEW_ENABLED_STATUS_BY_NAME("view_enabled_status_by_name", "",
       WebDriverLikeCommand.VIEW), WAIT_FOR_DIALOG_TO_CLOSE("wait_for_dialog_to_close", "",
-      WebDriverLikeCommand.WAIT), 
-      SET_SET("set_text","set text on a webview",WebDriverLikeCommand.WEB_VIEW),
-      TOUCH("touch","touch something on a webview",WebDriverLikeCommand.WEB_VIEW),
-      
-      WAIT("wait", "", WebDriverLikeCommand.VIEW), WAIT_FOR_TEXT(
-      "wait_for_text", "", WebDriverLikeCommand.WAIT), WAIT_FOR_BUTTON("wait_for_button", "",
-      WebDriverLikeCommand.WAIT), WAIT_FOR_NO_PROGRESS_BARS("wait_for_no_progress_bars", "",
-      WebDriverLikeCommand.WAIT);
+      WebDriverLikeCommand.WAIT), SET_SET("set_text", "set text on a webview",
+      WebDriverLikeCommand.WEB_VIEW), TOUCH("touch", "touch something on a webview",
+      WebDriverLikeCommand.WEB_VIEW),
+
+  WAIT("wait", "", WebDriverLikeCommand.VIEW), WAIT_FOR_TEXT("wait_for_text", "",
+      WebDriverLikeCommand.WAIT), WAIT_FOR_BUTTON("wait_for_button", "", WebDriverLikeCommand.WAIT), WAIT_FOR_NO_PROGRESS_BARS(
+      "wait_for_no_progress_bars", "", WebDriverLikeCommand.WAIT);
 
   String name;
   String desc;
@@ -59,5 +73,4 @@ public enum CalabashCommands {
   public WebDriverLikeCommand getWebDriverLikeCommand() {
     return webDriverCommand;
   }
-
 }
