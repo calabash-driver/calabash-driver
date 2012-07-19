@@ -13,6 +13,11 @@
  */
 package sh.calaba.driver.model;
 
+/**
+ * Interface representing basic web view interaction operations.
+ * @author ddary
+ *
+ */
 public interface WebViewSupport {
   public void enterText(String text);
   public void click();

@@ -13,8 +13,23 @@
  */
 package sh.calaba.driver.model;
 
+import sh.calaba.driver.model.By.L10nElement;
+
+/**
+ * Interface representing basic UI element interaction operations based on the resource bundle key.
+ * 
+ * @author ddary
+ * 
+ */
 public interface L10nSupport {
+  
+  /**
+   * Allows to press a button.
+   */
   public void press();
 
+  /**
+   * Allows to wait for an {@link L10nElement}.
+   */
   public void waitFor();
 }

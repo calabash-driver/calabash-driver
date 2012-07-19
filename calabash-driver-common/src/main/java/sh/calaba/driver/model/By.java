@@ -13,6 +13,13 @@
  */
 package sh.calaba.driver.model;
 
+/**
+ * Mechanism used to locate elements within a view. In order to create your own locating mechanisms,
+ * it is possible to subclass this class. Inspired by the Selenium By class.
+ * 
+ * @author ddary
+ * 
+ */
 public class By {
   private String identifier;
 
@@ -22,10 +29,19 @@ public class By {
     this.identifier = identifier;
   }
 
+  /**
+   * @return The identifyer of the locator.
+   */
   public String getIndentifier() {
     return identifier;
   }
 
+  /**
+   * Locator based on index of an element.
+   * 
+   * @author ddary
+   * 
+   */
   public class Index extends By {
     public Index(Integer identifier) {
       super(String.valueOf(identifier));
@@ -36,15 +52,22 @@ public class By {
     }
   }
 
+  /**
+   * Locator based on Android native name / id of an element.
+   * 
+   * @author ddary
+   * 
+   */
   public class Id extends By {
     public Id(String id) {
       super(id);
     }
   }
   /**
-   * for CSS web view selectors
+   * Locator based CSS selectors for web views.
+   * 
    * @author ddary
-   *
+   * 
    */
   public class CSS extends By {
     public CSS(String id) {
@@ -52,7 +75,12 @@ public class By {
     }
   }
 
-
+  /**
+   * Locator based on key of an Appp resource bundle file.
+   * 
+   * @author ddary
+   * 
+   */
   public class L10nElement extends By {
     private L10nElementType type = null;
 
@@ -70,48 +98,89 @@ public class By {
     }
   }
 
+  /**
+   * Locator based on the text of an element.
+   * 
+   * @author ddary
+   * 
+   */
   public class ContentDescription extends By {
     public ContentDescription(String text) {
       super(text);
     }
   }
 
+  /**
+   * Describing the types of supported {@link L10nElement} types.
+   * 
+   * @author ddary
+   * 
+   */
   public enum L10nElementType {
     BUTTON, TOOGLE_BUTTON, MENU_ITEM;
   }
 
-  public static By index(Integer index) {
+  /**
+   * 
+   * @param index Index of element.
+   * @return a By which locates elements via index.
+   */
+  public static By.Index index(Integer index) {
     return new By().new Index(index);
   }
 
-  public static By.Index index(String index) {
-    return new By().new Index(index);
-  }
-
+  /**
+   * @param text The text of the element.
+   * @return a By which locates elements via text.
+   */
   public static By.ContentDescription text(String text) {
     return new By().new ContentDescription(text);
   }
 
+  /**
+   * @param id The Id / native name of the element.
+   * @return a By which locates elements via the id.
+   */
   public static By.Id id(String id) {
     return new By().new Id(id);
   }
 
+  /**
+   * @param id The resource bundle key.
+   * @return a By which locates elements via the resource bundle key.
+   */
   public static By.L10nElement l10nElement(String id) {
     return new By().new L10nElement(id);
   }
 
+  /**
+   * @param id The resource bundle key.
+   * @return a By of type button which locates elements via the resource bundle key.
+   */
   public static By.L10nElement l10nButton(String id) {
     return new By().new L10nElement(id, L10nElementType.BUTTON);
   }
 
+  /**
+   * @param id The resource bundle key.
+   * @return a By of type toggle_button which locates elements via the resource bundle key.
+   */
   public static By.L10nElement l10nToggleButton(String id) {
     return new By().new L10nElement(id, L10nElementType.TOOGLE_BUTTON);
   }
 
+  /**
+   * @param id The resource bundle key.
+   * @return a By of type menu item which locates elements via the resource bundle key.
+   */
   public static By.L10nElement l10nMenuItem(String id) {
     return new By().new L10nElement(id, L10nElementType.MENU_ITEM);
   }
-  
+
+  /**
+   * @param id The css selector.
+   * @return a By which locates elements via css selector.
+   */
   public static By.CSS css(String css) {
     return new By().new CSS(css);
   }

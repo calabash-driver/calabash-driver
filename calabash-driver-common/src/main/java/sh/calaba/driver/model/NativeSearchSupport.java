@@ -13,7 +13,7 @@
  */
 package sh.calaba.driver.model;
 /**
- * 
+ * Interface representing basic native search interaction operations.
  * @author ddary
  *
  */

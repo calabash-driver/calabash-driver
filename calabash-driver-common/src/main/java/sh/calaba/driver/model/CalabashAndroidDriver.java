@@ -1,4 +1,5 @@
 /*
+ * Copyright 2012 ios-driver committers.
  * Copyright 2012 calabash-driver committers.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -31,9 +32,7 @@ import sh.calaba.driver.net.WebDriverLikeRequest;
 import sh.calaba.driver.net.WebDriverLikeResponse;
 
 /**
- * 
- * @author ddary
- * 
+ * Client driver for Http communication handling.
  */
 public abstract class CalabashAndroidDriver {
 
@@ -75,9 +74,7 @@ public abstract class CalabashAndroidDriver {
     String url = remoteURL + request.getPath();
     BasicHttpEntityEnclosingRequest r =
         new BasicHttpEntityEnclosingRequest(request.getMethod(), url);
-    r.setHeader("Content-Type", "text/plain; charset=utf-8");
     if (request.hasPayload()) {
-      System.out.println("Payload: " + request.getPayload().toString());
       r.setEntity(new StringEntity(request.getPayload().toString(), "UTF-8"));
     }
 
@@ -99,11 +96,6 @@ public abstract class CalabashAndroidDriver {
     return session;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see sh.calaba.driver.CalabashAndroidDriver#quit()
-   */
   public void quit() {
     WebDriverLikeRequest request =
         new WebDriverLikeRequest("DELETE", "/session/" + session.getSessionId(), new JSONObject());

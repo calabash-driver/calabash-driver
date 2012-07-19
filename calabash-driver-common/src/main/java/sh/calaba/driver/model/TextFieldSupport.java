@@ -12,7 +12,11 @@
  * the License.
  */
 package sh.calaba.driver.model;
-
+/**
+ * Interface representing basic spinner interaction operations.
+ * @author ddary
+ *
+ */
 public interface TextFieldSupport {
 
   public abstract void clear();
