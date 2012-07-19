@@ -1,3 +1,16 @@
+/*
+ * Copyright 2012 calabash-driver committers.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package sh.calaba.driver;
 
 import java.util.HashMap;
@@ -6,6 +19,12 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Capabilities of an Android testing device that can be weather a real device or an emulator.
+ * 
+ * @author ddary
+ * 
+ */
 public class CalabashCapabilities {
 
   public static final String AUT = "aut";
@@ -166,9 +185,4 @@ public class CalabashCapabilities {
         + ", getSDKVersion()=" + getSDKVersion() + ", getDeviceName()=" + getDeviceName()
         + ", getDeviceId()=" + getDeviceId() + "]";
   }
-
-  public static CalabashCapabilities nexus() {
-    return android("eBay:1.7.0", "4.0.4", "de_DE", "0149948604012003", "GalaxyNexus");
-  }
-
 }
