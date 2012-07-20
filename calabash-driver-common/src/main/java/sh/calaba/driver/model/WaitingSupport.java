@@ -19,11 +19,27 @@ package sh.calaba.driver.model;
  * @author ddary
  */
 public interface WaitingSupport {
+  /**
+   * Allows to wait until the progress dialog is closed.
+   */
   public void waitForProgressCloses();
 
+  /**
+   * Allows to wait until the current dialog is closed.
+   */
   public void waitForCurrentDialogCloses();
 
+  /**
+   * Allows to wait using the given method.
+   * 
+   * @param by The locating mechanism to use.
+   */
   public void waitFor(By by);
-  
+
+  /**
+   * Allows to wait for a given time.
+   * 
+   * @param seconds The number of seconds to wait.
+   */
   public void waitFor(Integer seconds);
 }

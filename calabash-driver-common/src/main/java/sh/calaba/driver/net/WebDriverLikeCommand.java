@@ -1,5 +1,6 @@
 /*
  * Copyright 2012 ios-driver committers.
+ * Copyright 2012 calabash-driver committers.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -29,20 +30,15 @@ import sh.calaba.driver.model.WebViewSupport;
 public enum WebDriverLikeCommand {
   NEW_SESSION("POST", "/session", String.class), GET_SESSION("GET", "/session/:sessionId",
       JSONObject.class), DELETE_SESSION("DELETE", "/session/:sessionId", null), GET_STATUS("GET",
-      "/status", JSONObject.class),
-
-  // Button
-  BUTTON("GET", "/session/:sessionId/button", ButtonSupport.class), TEXT_FIELD("POST",
-      "/session/:sessionId/textField", TextFieldSupport.class), SPINNER("POST",
+      "/status", JSONObject.class), BUTTON("GET", "/session/:sessionId/button", ButtonSupport.class), TEXT_FIELD(
+      "POST", "/session/:sessionId/textField", TextFieldSupport.class), SPINNER("POST",
       "/session/:sessionId/spinner", SpinnerSupport.class), VIEW("GET", "/session/:sessionId/view",
       ViewSupport.class), L10N_SUPPORT("GET", "/session/:sessionId/l10nSupport", L10nSupport.class), WAIT(
       "POST", "/session/:sessionId/wait", WaitingSupport.class), SCREENSHOT_WITH_NAME("POST",
       "/session/:sessionId/screenshotWithName", ViewSupport.class), SEARCH("POST",
-      "/session/:sessionId/search", NativeSearchSupport.class),
- WEB_VIEW("POST","/session/:sessionId/webView",WebViewSupport.class),
-
-  // LIST_ITEM
-  LIST_ITEM("GET", "/session/:sessionId/listItem", ListItemSupport.class);
+      "/session/:sessionId/search", NativeSearchSupport.class), WEB_VIEW("POST",
+      "/session/:sessionId/webView", WebViewSupport.class), LIST_ITEM("GET",
+      "/session/:sessionId/listItem", ListItemSupport.class);
 
   private final String method;
   private final String path;

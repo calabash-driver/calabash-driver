@@ -15,10 +15,19 @@ package sh.calaba.driver.model;
 
 /**
  * Interface representing basic web view interaction operations.
+ * 
  * @author ddary
- *
  */
 public interface WebViewSupport {
+  
+  /**
+   * Allows to enter text into a text field inside a web view.
+   * @param text The text to enter.
+   */
   public void enterText(String text);
+  
+  /**
+   * Allows to click an element inside a web view.
+   */
   public void click();
 }

@@ -17,8 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class WebDriverLikeRequest {
-
-
   private String method;
   private String path;
   private JSONObject payload;
@@ -51,7 +49,6 @@ public class WebDriverLikeRequest {
     return toJSON(0);
   }
 
-
   public String toJSON(int i) throws JSONException {
     JSONObject o = new JSONObject();
     o.put("method", method);
@@ -60,19 +57,13 @@ public class WebDriverLikeRequest {
     return o.toString(i);
   }
 
-
-
   public String getMethod() {
     return method;
   }
 
-
-
   public String getPath() {
     return path;
   }
-
-
 
   public JSONObject getPayload() {
     return payload;
@@ -88,7 +79,4 @@ public class WebDriverLikeRequest {
     String[] pieces = path.split("/");
     return pieces[i];
   }
-
-
-
 }

@@ -12,11 +12,17 @@
  * the License.
  */
 package sh.calaba.driver.model;
+
 /**
  * Interface representing basic spinner interaction operations.
+ * 
  * @author ddary
- *
  */
 public interface SpinnerSupport {
+  /**
+   * Allows to select an spinner item by the given text.
+   * 
+   * @param text The text to select.
+   */
   public void selectSpinnerItem(String text);
 }

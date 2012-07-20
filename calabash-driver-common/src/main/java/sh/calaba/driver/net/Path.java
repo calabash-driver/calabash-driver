@@ -18,14 +18,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Path {
-
   private String path;
   private Set<String> variables = new HashSet<String>();
 
   public static final String SESSION_ID = ":sessionId";
-  public static final String REFERENCE = ":reference";
-
-
 
   public Path(WebDriverLikeCommand command) {
     this.path = command.path();
@@ -42,13 +38,6 @@ public class Path {
     validateAndReplace(SESSION_ID, sessionId);
     return this;
   }
-
-  public Path withReference(String reference) {
-    validateAndReplace(REFERENCE, reference);
-    return this;
-  }
-
-
 
   private void validateAndReplace(String variable, String value) {
     validateContains(variable);
@@ -68,7 +57,4 @@ public class Path {
   public String getPath() {
     return path;
   }
-
-
-
 }

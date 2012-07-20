@@ -12,15 +12,23 @@
  * the License.
  */
 package sh.calaba.driver.model;
+
 /**
- * Interface representing basic spinner interaction operations.
+ * Interface representing basic TextField interaction operations.
+ * 
  * @author ddary
- *
  */
 public interface TextFieldSupport {
 
+  /**
+   * Allows to clear a text field.
+   */
   public abstract void clear();
 
+  /**
+   * Allows to enter the given text.
+   * 
+   * @param text The text to enter.
+   */
   public abstract void enterText(String text);
-
 }

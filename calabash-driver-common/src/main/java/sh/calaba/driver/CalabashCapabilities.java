@@ -23,10 +23,8 @@ import org.json.JSONObject;
  * Capabilities of an Android testing device that can be weather a real device or an emulator.
  * 
  * @author ddary
- * 
  */
 public class CalabashCapabilities {
-
   public static final String AUT = "aut";
   public static final String LOCALE = "locale";
   public static final String DEVICE_NAME = "deviceName";

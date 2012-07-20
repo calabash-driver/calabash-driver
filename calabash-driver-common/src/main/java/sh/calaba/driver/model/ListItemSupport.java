@@ -13,8 +13,20 @@
  */
 package sh.calaba.driver.model;
 
+/**
+ * Interface representing basic list item interaction operations.
+ * 
+ * @author ddary
+ * 
+ */
 public interface ListItemSupport {
+  /**
+   * Allows to press an list item.
+   */
   public void press();
 
+  /**
+   * Allows to long press on a list item.
+   */
   public void longPress();
 }

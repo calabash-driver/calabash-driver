@@ -30,8 +30,6 @@ public class FailedWebDriverLikeResponse extends WebDriverLikeResponse {
       JSONObject value = new JSONObject();
       value.put("message", extraMessage + " , " + e.getMessage());
       value.put("class", e.getClass().getCanonicalName());
-      // TODO freynaud
-      value.put("screen", "TODO");
 
       JSONArray stacktace = new JSONArray();
       for (StackTraceElement el : e.getStackTrace()) {
@@ -40,8 +38,7 @@ public class FailedWebDriverLikeResponse extends WebDriverLikeResponse {
       value.put("stacktrace", stacktace);
       setValue(value);
     } catch (JSONException e1) {
-      // TODO freynaud
-      throw new RuntimeException("NI");
+      throw new RuntimeException("Error creating JSONObject.", e1);
     }
   }
 

@@ -18,5 +18,9 @@ package sh.calaba.driver.model;
  *
  */
 public interface NativeSearchSupport {
+  /**
+   * Allows to search for the given <code>searchTerm</code>.
+   * @param searchTerm The term to search for.
+   */
   public void text(String searchTerm);
 }

@@ -36,7 +36,6 @@ public class WebDriverLikeResponse {
     this.value = content.get("value");
   }
 
-
   public String getSessionId() {
     return sessionId;
   }
@@ -68,7 +67,5 @@ public class WebDriverLikeResponse {
   protected void setValue(Object value) {
     this.value = value;
   }
-
-
 
 }
