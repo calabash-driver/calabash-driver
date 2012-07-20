@@ -24,9 +24,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import sh.calaba.driver.CalabashCapabilities;
-import sh.calaba.driver.android.CalabashAndroidConnector;
+import sh.calaba.driver.server.connector.CalabashAndroidConnector;
+import sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl;
 import sh.calaba.driver.utils.CalabashAdbCmdRunner;
 
+/**
+ * Proxy to handle the full life cycle of interacting with the mobile device.
+ * 
+ * @author ddary
+ * 
+ */
 public class CalabashProxy {
   private Map<String, CalabashAndroidConnector> sessionConnectors =
       new HashMap<String, CalabashAndroidConnector>();
@@ -36,10 +43,23 @@ public class CalabashProxy {
   private final List<CalabashCapabilities> availableCapabilities =
       new ArrayList<CalabashCapabilities>();
 
+  /**
+   * Default constructor that {@link #initializeMobileDevices(CalabashNodeConfiguration)}.
+   * 
+   * @param nodeConfig The node config to use.
+   */
   public CalabashProxy(CalabashNodeConfiguration nodeConfig) {
     initializeMobileDevices(nodeConfig);
   }
 
+  /**
+   * Constructor that {@link #initializeMobileDevices(CalabashNodeConfiguration)} and is notifying
+   * afterwards the provided listener {@link ProxyInitializationListener#afterProxyInitialization()}
+   * about the completed initialization.
+   * 
+   * @param listener
+   * @param nodeConfig
+   */
   public CalabashProxy(final ProxyInitializationListener listener,
       final CalabashNodeConfiguration nodeConfig) {
     new Thread(new Runnable() {
@@ -48,18 +68,26 @@ public class CalabashProxy {
         listener.afterProxyInitialization();
       }
     }).run();
-
   }
 
+  /**
+   * Initializes a new test session for provided {@link CalabashCapabilities}. This means the
+   * calabash-server on the device is started by starting the Android instrumentation and if the
+   * test server in the device is successfully started, a connected to this server is established.
+   * 
+   * @see #startCalabashServerAndStartConnector(String, CalabashCapabilities)
+   * 
+   * @param calabashCapabilities The {@link CalabashCapabilities} to use to start the test session.
+   * @return The session ID of the new created session.
+   */
   public String initializeSessionForCapabilities(CalabashCapabilities calabashCapabilities) {
-
     System.out.println("reuqested capa: " + calabashCapabilities);
     if (availableCapabilities.contains(calabashCapabilities)) {
       // is available and can be used
       String sessionId = UUID.randomUUID().toString();
 
       // start the connector in an own thread
-      startCalabashConnector(sessionId, calabashCapabilities);
+      startCalabashServerAndStartConnector(sessionId, calabashCapabilities);
 
       return sessionId;
     } else {
@@ -68,10 +96,19 @@ public class CalabashProxy {
     }
   }
 
+  /**
+   * Get the {@link CalabashCapabilities} of the provided session.
+   * 
+   * @param sessionId The session id of the session.
+   * @return The {@link CalabashCapabilities}.
+   */
   public CalabashCapabilities getSessionCapabilities(String sessionId) {
     return sessionConnectors.get(sessionId).getSessionCapabilities();
   }
 
+  /**
+   * @return The next free port number that will be used on the local computer.
+   */
   protected Integer getNextPortNumber() {
     if (localCalabashSocketPort == null) {
       localCalabashSocketPort = DEFAULT_CALABASH_ANDROID_LOCAL_PORT;
@@ -82,7 +119,7 @@ public class CalabashProxy {
   }
 
   /**
-   * initializes the capabilities and adds afterwards them to the {@link #availableCapabilities}
+   * Initializes the capabilities and adds afterwards them to the {@link #availableCapabilities}
    * list.
    * 
    * @param capabilities the capabilities to initialize
@@ -111,15 +148,42 @@ public class CalabashProxy {
     return portNumber;
   }
 
-  private void startCalabashConnector(final String sessionId, final CalabashCapabilities capa) {
+  /**
+   * Convenient method to start the calabash-server on the device and connect to it afterwards. The
+   * connector is initialized using the
+   * {@link #initCalabashConnector(Integer, CalabashCapabilities)} method.
+   * 
+   * @param sessionId The session id to use.
+   * @param capa The session capabilities.
+   */
+  private void startCalabashServerAndStartConnector(String sessionId, CalabashCapabilities capa) {
     Integer portNumber = initializeCalabashServer(capa, sessionId);
 
-    CalabashAndroidConnector calabashConnector =
-        new CalabashAndroidConnector("127.0.0.1", portNumber, capa);
-    calabashConnector.startConnector();
+    CalabashAndroidConnector calabashConnector = initCalabashConnector(portNumber, capa);
+
+    calabashConnector.start();
     sessionConnectors.put(sessionId, calabashConnector);
   }
 
+  /**
+   * Initializes the default Calabash-Connector implementation.
+   * 
+   * @param portNumber The port number to use. This is the one that is use on the local computer and
+   *        not the port number on the device itself.
+   * @param capa The capabilties used for this session.
+   * 
+   * @return The initialized connector, which is not yet started.
+   */
+  protected CalabashAndroidConnector initCalabashConnector(Integer portNumber,
+      CalabashCapabilities capa) {
+    return new CalabashAndroidConnectorImpl("127.0.0.1", portNumber, capa);
+  }
+
+  /**
+   * Stops the calabash connector for the given session.
+   * 
+   * @param sessionId The session id of the session to stop.
+   */
   public void stopCalabashConnector(String sessionId) {
     if (sessionConnectors.containsKey(sessionId)) {
       sessionConnectors.get(sessionId).quit();
@@ -136,6 +200,14 @@ public class CalabashProxy {
     sessionInstrumentationThreads.remove(sessionId);
   }
 
+  /**
+   * Redirects the given calabash <code>command</code> to the calabash server of the corresponding
+   * session.
+   * 
+   * @param command The command to redirect and execute.
+   * @param sessionId The test session id.
+   * @return The response of the calabash server running on the device.
+   */
   public JSONObject redirectMessageToCalabashServer(JSONObject command, String sessionId) {
     System.out.println("received command: " + command.toString());
     System.out.println("received sessionId: " + sessionId);

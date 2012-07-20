@@ -31,7 +31,6 @@ import sh.calaba.driver.server.Handler;
 import sh.calaba.driver.server.command.CommandMapping;
 
 public class CalabashServlet extends CalabashProxyBasedServlet {
-
   private static final long serialVersionUID = -8544875030463578977L;
 
   @Override
@@ -71,25 +70,27 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
     response.setContentType("application/json;charset=UTF-8");
     response.setCharacterEncoding("UTF-8");
 
-    // TODO implement the json protocol properly.
     if (req.getGenericCommand() == WebDriverLikeCommand.NEW_SESSION) {
       String session = resp.getSessionId();
       System.out.println("CalabashServlet: new session: " + session);
-      // TODO DDARY protocol, host & port need to be written there, values
-      // seems not to be very important
-      response.setHeader("Location", "http://localhost:2345/session/" + session);
+      String scheme = request.getScheme(); // http
+      String serverName = request.getServerName(); // hostname.com
+      int serverPort = request.getServerPort(); // 80
+      String contextPath = request.getContextPath(); // /mywebapp
+
+      // Reconstruct original requesting URL
+      String url = scheme + "://" + serverName + ":" + serverPort + contextPath;
+      response.setHeader("Location", url + "/session/" + session);
       response.setStatus(301);
       writeResultToResponse(response, resp);
     } else {
       response.setStatus(200);
       writeResultToResponse(response, resp);
     }
-
   }
 
   private void writeResultToResponse(HttpServletResponse response, WebDriverLikeResponse resp)
       throws Exception {
-    // System.out.println("Response CS: " + resp.getValue());
     String responseTXT = resp.stringify();
 
     response.getWriter().print(responseTXT);
@@ -97,7 +98,6 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
   }
 
   private WebDriverLikeRequest getRequest(HttpServletRequest request) throws Exception {
-
     String method = request.getMethod();
     String path = request.getPathInfo();
     String json = null;
@@ -130,9 +130,8 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
     } catch (Exception e) {
       System.out.println("Error occured: " + request.getPath() + " Error: " + e);
       System.out.println(request.toString());
-      // TODO ddary find somehting better
+
       return new FailedWebDriverLikeResponse(request.getVariableValue(":sessionId"), e);
     }
-
   }
 }

@@ -13,8 +13,13 @@
  */
 package sh.calaba.driver.server;
 
+import sh.calaba.driver.net.WebDriverLikeRequest;
 import sh.calaba.driver.net.WebDriverLikeResponse;
 
+/**
+ * Describe the handler for {@link WebDriverLikeRequest}.
+ * 
+ */
 public interface Handler {
   public WebDriverLikeResponse handle() throws Exception;
 }

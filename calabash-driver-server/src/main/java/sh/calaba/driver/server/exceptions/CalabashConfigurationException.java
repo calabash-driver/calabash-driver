@@ -13,6 +13,11 @@
  */
 package sh.calaba.driver.server.exceptions;
 
+/**
+ * Exception describes calabash configuration exceptions.
+ * 
+ * @author ddary
+ */
 public class CalabashConfigurationException extends Exception {
   private static final long serialVersionUID = 2482901359161347701L;
 

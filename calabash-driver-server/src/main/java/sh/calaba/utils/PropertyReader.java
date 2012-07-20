@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
+ * Reader to read property files.
  * 
  * @author ddary
  * 
@@ -25,6 +26,11 @@ import java.util.Properties;
 public class PropertyReader {
   private Properties properties = new Properties();
 
+  /**
+   * Default constructor.
+   * 
+   * @param propertyFileName The name of the property file to use.
+   */
   public PropertyReader(String propertyFileName) {
     if (propertyFileName == null || propertyFileName.isEmpty()) {
       throw new IllegalArgumentException("String 'propertyFileName' must not be null!");
@@ -38,6 +44,12 @@ public class PropertyReader {
     }
   }
 
+  /**
+   * Allows to retrieve the value of the given key.
+   * 
+   * @param key The key to use.
+   * @return The value of the provided key.
+   */
   public String getProperty(String key) {
     if (key == null || key.isEmpty()) {
       throw new IllegalArgumentException("String 'key' must not be null!");

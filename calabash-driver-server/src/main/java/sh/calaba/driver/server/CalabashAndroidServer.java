@@ -103,7 +103,7 @@ public class CalabashAndroidServer {
 
   public void registerDriverNodeInHub() {
     try {
-      new DriverRegistrationHandler(config).handleRegsitration();
+      new DriverRegistrationHandler(config).performRegsitration();
     } catch (Exception e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

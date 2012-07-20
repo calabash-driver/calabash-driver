@@ -28,7 +28,7 @@ import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.server.exceptions.CalabashConfigurationException;
 
 /**
- * Calabash Driver Configuration.
+ * The object to hold the Calabash Driver configuration.
  * 
  * @author ddary
  * 
@@ -36,6 +36,16 @@ import sh.calaba.driver.server.exceptions.CalabashConfigurationException;
 public class CalabashNodeConfiguration {
   public static final String CAPABILITIES = "capabilities";
   public static final String CONFIGURATION = "configuration";
+  private List<CalabashCapabilities> capabilities = new ArrayList<CalabashCapabilities>();
+  private String driverHost = null;
+  private String mobileAppPath = null;
+  private String mobileTestAppPath = null;
+  private int driverMaxSession;
+  private int driverPort;
+  private boolean driverRegistrationEnabled;
+  private String hubHost = null;
+  private String proxy = null;
+  private int hubPort;
 
   /**
    * Reads the the driver configuration form the specified file. The file is expected to be in JSON
@@ -68,17 +78,7 @@ public class CalabashNodeConfiguration {
     }
   }
 
-  private List<CalabashCapabilities> capabilities = new ArrayList<CalabashCapabilities>();
 
-  private String driverHost = null;
-  private String mobileAppPath = null;
-  private String mobileTestAppPath = null;
-  private int driverMaxSession;
-  private int driverPort;
-  private boolean driverRegistrationEnabled;
-  private String hubHost = null;
-  private String proxy = null;
-  private int hubPort;
 
   protected CalabashNodeConfiguration(JSONObject config) throws JSONException,
       CalabashConfigurationException {
@@ -169,6 +169,11 @@ public class CalabashNodeConfiguration {
 
   }
 
+  /**
+   * Reads the driver configuration from given config.
+   * @param configuration The driver config.
+   * @throws JSONException On JSON errors.
+   */
   private void readDriverConfiguration(JSONObject configuration) throws JSONException {
     hubHost = configuration.getString("hubHost");
     hubPort = configuration.getInt("hubPort");
@@ -183,5 +188,4 @@ public class CalabashNodeConfiguration {
             ? "org.openqa.grid.selenium.proxy.DefaultRemoteProxy"
             : configuration.getString("proxy");
   }
-
 }

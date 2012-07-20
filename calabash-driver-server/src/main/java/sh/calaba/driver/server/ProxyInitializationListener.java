@@ -14,10 +14,13 @@
 package sh.calaba.driver.server;
 
 /**
+ * Listener to the driver proxy initialization process.
  * 
  * @author ddary
- * 
  */
 public interface ProxyInitializationListener {
+  /**
+   * Called after the proxy initialization is finished.
+   */
   public void afterProxyInitialization();
 }

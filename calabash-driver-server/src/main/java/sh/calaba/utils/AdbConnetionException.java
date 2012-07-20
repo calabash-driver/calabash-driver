@@ -14,15 +14,13 @@
 package sh.calaba.utils;
 
 /**
- * @author ddary
+ * Exception describes ADB excution errors.
  * 
+ * @author ddary
  */
 public class AdbConnetionException extends RuntimeException {
   private static final long serialVersionUID = -1163794059008382619L;
 
-  /**
-   * @param message
-   */
   public AdbConnetionException(String message) {
     super(message);
   }

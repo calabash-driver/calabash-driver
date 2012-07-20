@@ -27,18 +27,27 @@ import org.json.JSONObject;
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.net.HttpClientFactory;
 
+/**
+ * Handler to register the calabash driver into the selenium grid2 hub.
+ * 
+ * @author ddary
+ */
 public class DriverRegistrationHandler {
-  private HttpClientFactory httpClientFactory = new HttpClientFactory();
   private CalabashNodeConfiguration config;
 
   public DriverRegistrationHandler(CalabashNodeConfiguration config) {
     this.config = config;
   }
 
-  public void handleRegsitration() throws Exception {
+  /**
+   * Performs actually the registration of the calabash driver node into the grid hub.
+   * 
+   * @throws Exception On registration errors.
+   */
+  public void performRegsitration() throws Exception {
     String tmp = "http://" + config.getHubHost() + ":" + config.getHubPort() + "/grid/register";
 
-    HttpClient client = httpClientFactory.getClient();
+    HttpClient client = HttpClientFactory.getClient();
 
     URL registration = new URL(tmp);
     System.out.println("Registering the node to hub :" + registration);
@@ -53,11 +62,9 @@ public class DriverRegistrationHandler {
     if (response.getStatusLine().getStatusCode() != 200) {
       throw new RuntimeException("Error sending the registration request.");
     }
-
   }
 
-  public JSONObject getNodeConfig() {
-
+  private JSONObject getNodeConfig() {
     JSONObject res = new JSONObject();
     try {
       res.put("class", "org.openqa.grid.common.RegistrationRequest");
@@ -74,7 +81,13 @@ public class DriverRegistrationHandler {
     return res;
   }
 
-  public JSONObject getConfiguration() throws JSONException {
+  /**
+   * Extracts the configuration.
+   * 
+   * @return The configuration
+   * @throws JSONException On JSON errors.
+   */
+  private JSONObject getConfiguration() throws JSONException {
     JSONObject configuration = new JSONObject();
 
     configuration.put("port", config.getDriverPort());

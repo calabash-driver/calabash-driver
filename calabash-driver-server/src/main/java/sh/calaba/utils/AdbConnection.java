@@ -18,13 +18,11 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.ByteArrayOutputStream;
 
 /**
- * adb -s 304D19CE983D818E -e shell getprop ro.product.model
+ * Handels the execution of adb commands.
  * 
  * @author ddary
- * 
  */
 public class AdbConnection {
   public static final String ANDROID_SDK_PATH_KEY = "android.sdk.path";
@@ -51,11 +49,12 @@ public class AdbConnection {
   }
 
   /**
+   * Runs the process with the given parameters.
    * 
-   * @param abdParameter
-   * @param name
-   * @param confirmExitValue
-   * @throws AdbConnetionException
+   * @param abdParameter The adb parameters to use.
+   * @param name The name of the process use for logging.
+   * @param confirmExitValue If true, the process out exit value is verified.
+   * @throws AdbConnetionException On adb execution issues.
    */
   public String runProcess(List<String> abdParameter, String name, boolean confirmExitValue)
       throws AdbConnetionException {
@@ -77,16 +76,6 @@ public class AdbConnection {
       throw new AdbConnetionException("An IOException occurred when starting ADB.");
     }
   }
-
-  /*
-   * just for debugging private static void pipeOutput(Process process) {
-   * pipe(process.getErrorStream(), System.err); pipe(process.getInputStream(), System.out); }
-   * 
-   * private static void pipe(final InputStream src, final PrintStream dest) { new Thread(new
-   * Runnable() { public void run() { try { byte[] buffer = new byte[1024]; for (int n = 0; n != -1;
-   * n = src.read(buffer)) { dest.write(buffer, 0, n); } } catch (IOException e) { // just exit } }
-   * }).start(); }
-   */
 
   /**
    * 

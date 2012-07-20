@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package sh.calaba.driver.android;
+package sh.calaba.driver.server.connector.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,14 +24,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import sh.calaba.driver.CalabashCapabilities;
+import sh.calaba.driver.server.connector.CalabashAndroidConnector;
 
 /**
- * The Calabash Android Client Driver.
+ * The Calabash Android Client that is connecting to the Calabash-Android server that is running on
+ * the device.
  * 
  * @author ddary
- * 
  */
-public class CalabashAndroidConnector {
+public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
   private Socket calabashClientSocket = null;
   private BufferedReader in = null;
   private PrintWriter out = null;
@@ -41,29 +42,37 @@ public class CalabashAndroidConnector {
   private int port;
   private CalabashCapabilities sessionCapabilities;
 
-  public CalabashAndroidConnector(String hostname, int port,
+  public CalabashAndroidConnectorImpl(String hostname, int port,
       CalabashCapabilities sessionCapabilities) {
     this.hostname = hostname;
     this.port = port;
     this.sessionCapabilities = sessionCapabilities;
   }
 
+  /* (non-Javadoc)
+   * @see sh.calaba.driver.android.CalabashAndroidConnectorI#getSessionCapabilities()
+   */
+  @Override
   public CalabashCapabilities getSessionCapabilities() {
     return sessionCapabilities;
   }
 
+  /* (non-Javadoc)
+   * @see sh.calaba.driver.android.CalabashAndroidConnectorI#execute(org.json.JSONObject)
+   */
+  @Override
   public JSONObject execute(JSONObject action) throws IOException, JSONException {
-
     // Sending operation to the server
     out.println(action);
 
     // Reading response
     String responseString = in.readLine();
-    // System.out.println("JSON response: " + responseString);
-
     return new JSONObject(responseString);
   }
 
+  /**
+   * Cleans up the connector using the {@link #quit()} method.
+   */
   protected void finalize() throws Throwable {
     try {
       quit(); // close open files
@@ -72,6 +81,10 @@ public class CalabashAndroidConnector {
     }
   }
 
+  /* (non-Javadoc)
+   * @see sh.calaba.driver.android.CalabashAndroidConnectorI#quit()
+   */
+  @Override
   public void quit() {
     if (!calabashClientSocket.isClosed()) {
       try {
@@ -84,10 +97,11 @@ public class CalabashAndroidConnector {
     }
   }
 
-  /**
-   * @see #initializeCalabashServer()
+  /* (non-Javadoc)
+   * @see sh.calaba.driver.android.CalabashAndroidConnectorI#startConnector()
    */
-  public void startConnector() {
+  @Override
+  public void start() {
     try {
 
       if (calabashClientSocket == null) {

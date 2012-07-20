@@ -21,7 +21,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import sh.calaba.utils.AdbConnection;
-
+/**
+ * Central place to execute Calabash ADB commands.
+ * @author ddary
+ *
+ */
 public class CalabashAdbCmdRunner {
   private static AdbConnection adbConnection = getAdbConnection();
 
@@ -32,7 +36,7 @@ public class CalabashAdbCmdRunner {
   /**
    * TODO ddary: make this configurable
    * 
-   * @param deviceId
+   * @param deviceId The device id to use to install the device.
    */
   public static void switchToEbayQA(String deviceId) {
     List<String> commandLineFwd = new ArrayList<String>();
@@ -54,6 +58,11 @@ public class CalabashAdbCmdRunner {
     adbConnection.runProcess(commandLineFwd, "Switching to eBay QA Env", true);
   }
 
+  /**
+   * Allows to install an APK file on the given device.
+   * @param pathToAPK The path to the APK file to install.
+   * @param deviceId The device id to use to install the device.
+   */
   public static void installAPKFile(String pathToAPK, String deviceId) {
     List<String> commandLineFwd = new ArrayList<String>();
     if (deviceId != null) {
@@ -67,6 +76,11 @@ public class CalabashAdbCmdRunner {
     adbConnection.runProcess(commandLineFwd, "about to start install APK", true);
   }
 
+  /**
+   * Allows to start the calabash server on the given device.
+   * @param deviceId The device id to use to start the server.
+   * @return The thread that has started the Android instrumentation.
+   */
   public static Thread startCalabashServer(final String deviceId) {
     Thread instrumentationThread = new Thread(new Runnable() {
 
@@ -97,10 +111,20 @@ public class CalabashAdbCmdRunner {
     return instrumentationThread;
   }
 
+  /**
+   * Allows to wait until the calabash server is started on the device.
+   * @param deviceId The device id to use.
+   */
   public static void waitForCalabashServerOnDevice(final String deviceId) {
     (new CalabashAdbCmdRunner().new CalabashServerWaiter(adbConnection, deviceId)).run();;
   }
 
+  /**
+   * Forwards the given remote port of the calabash server to the given local port.
+   * @param local The local port to use.
+   * @param remote The remote port on the device to use.
+   * @param deviceId The device id to use to activate the port forwarding.
+   */
   public static void activatePortForwarding(int local, int remote, String deviceId) {
     List<String> commandLineFwd = new ArrayList<String>();
     if (deviceId != null) {
@@ -114,6 +138,11 @@ public class CalabashAdbCmdRunner {
         + " to remote port: " + remote, true);
   }
 
+  /**
+   * Allows all the user data of the app for the given <code>appBasePackage</code>
+   * @param appBasePackage The base package of the app to delete the user data for.
+   * @param deviceId The device id to use.
+   */
   public static void deleteSavedAppData(String appBasePackage, String deviceId) {
     List<String> commandLineFwd = new ArrayList<String>();
     if (deviceId != null) {
@@ -129,6 +158,10 @@ public class CalabashAdbCmdRunner {
         true);
   }
 
+  /**
+   * Runnable implementation to wait until the calabash server is started on the device.
+   * @author ddary
+   */
   public class CalabashServerWaiter implements Runnable {
     private Lock lock = new ReentrantLock();
     private Condition cv = lock.newCondition();
@@ -172,12 +205,10 @@ public class CalabashAdbCmdRunner {
           portIsNotBound = !isPortBound();
         }
       } catch (InterruptedException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       } finally {
         lock.unlock();
       }
-
     }
   }
 }
