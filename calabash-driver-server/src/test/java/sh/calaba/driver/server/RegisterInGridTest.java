@@ -9,7 +9,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHttpEntityEnclosingRequest;
-import org.eclipse.jetty.util.ajax.JSON;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,13 +18,11 @@ import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.net.HttpClientFactory;
 
 public class RegisterInGridTest {
-  HttpClientFactory httpClientFactory = new HttpClientFactory();
-
-  @Test
+  @Test(enabled = false)
   public void registerInGrid() throws Exception {
     String tmp = "http://127.0.0.1:4444/grid/register";
 
-    HttpClient client = httpClientFactory.getClient();
+    HttpClient client = HttpClientFactory.getClient();
 
     URL registration = new URL(tmp);
     System.out.println("Registering the node to hub :" + registration);
@@ -44,7 +41,6 @@ public class RegisterInGridTest {
   }
 
   public JSONObject getNodeConfig() {
-
     JSONObject res = new JSONObject();
     try {
       res.put("class", "org.openqa.grid.common.RegistrationRequest");
@@ -91,5 +87,4 @@ public class RegisterInGridTest {
 
     return capabilities;
   }
-
 }

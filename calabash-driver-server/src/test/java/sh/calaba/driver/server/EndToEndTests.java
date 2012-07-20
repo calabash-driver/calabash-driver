@@ -25,7 +25,7 @@ public class EndToEndTests {
     server.start();
   }
 
-  @Test
+  @Test(enabled=false)
   public void scriptStartsAndRegisterToServer() {
     RemoteCalabashAndroidDriver driver = null;
     try {
