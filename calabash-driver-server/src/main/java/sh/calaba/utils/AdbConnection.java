@@ -25,7 +25,7 @@ import org.apache.commons.io.IOUtils;
  * @author ddary
  */
 public class AdbConnection {
-  public static final String ANDROID_SDK_PATH_KEY = "android.sdk.path";
+  public static final String ANDROID_SDK_PATH_KEY = "ANDROID_HOME";
   private String pathToAdb = null;
 
   public AdbConnection(String pathToAdb) {
@@ -36,8 +36,7 @@ public class AdbConnection {
    * Reading the ADB path from the property file
    */
   public AdbConnection() {
-    String androidHome =
-        new PropertyReader("calabash.properties").getProperty(ANDROID_SDK_PATH_KEY);
+    String androidHome = System.getenv(ANDROID_SDK_PATH_KEY);
 
     if (androidHome == null) {
       throw new RuntimeException("System property 'android.sdk.path' not found!");
