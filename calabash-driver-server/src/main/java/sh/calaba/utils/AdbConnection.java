@@ -20,7 +20,7 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 
 /**
- * Handels the execution of adb commands.
+ * Handles the execution of ADB commands.
  * 
  * @author ddary
  */
@@ -33,13 +33,14 @@ public class AdbConnection {
   }
 
   /**
-   * Reading the ADB path from the property file
+   * Reading the ADB path from the environment variable {@link #ANDROID_SDK_PATH_KEY}.
    */
   public AdbConnection() {
     String androidHome = System.getenv(ANDROID_SDK_PATH_KEY);
 
     if (androidHome == null) {
-      throw new RuntimeException("System property 'android.sdk.path' not found!");
+      throw new RuntimeException("Environment variable '" + ANDROID_SDK_PATH_KEY
+          + "' was not found!");
     }
     boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("win") >= 0;
     String executableSuffix = isWindows ? ".exe" : "";
