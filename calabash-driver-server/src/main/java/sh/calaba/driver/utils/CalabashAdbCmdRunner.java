@@ -13,6 +13,7 @@
  */
 package sh.calaba.driver.utils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -21,16 +22,38 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import sh.calaba.utils.AdbConnection;
+
 /**
  * Central place to execute Calabash ADB commands.
+ * 
  * @author ddary
- *
+ * 
  */
 public class CalabashAdbCmdRunner {
   private static AdbConnection adbConnection = getAdbConnection();
+  public static final String CALABASH_DRIVER_APPS = "CALABASH_DRIVER_APPS";
+  private static String pathToDriverApps = null;
 
   protected static AdbConnection getAdbConnection() {
     return new AdbConnection();
+  }
+
+  /**
+   * @return The path to the apps folder, where the APK files are located.
+   */
+  protected static String getPathToDriverApps() {
+    if (pathToDriverApps == null) {
+      pathToDriverApps = System.getenv(CALABASH_DRIVER_APPS);
+      if (pathToDriverApps == null) {
+        throw new RuntimeException("The environment variable '" + CALABASH_DRIVER_APPS
+            + "' seems not to be configured. "
+            + "Please make sure this is properly configured on your machine.");
+      }
+      if (!pathToDriverApps.endsWith(File.separator)) {
+        pathToDriverApps = pathToDriverApps.concat(File.separator);
+      }
+    }
+    return pathToDriverApps;
   }
 
   /**
@@ -59,11 +82,13 @@ public class CalabashAdbCmdRunner {
   }
 
   /**
-   * Allows to install an APK file on the given device.
-   * @param pathToAPK The path to the APK file to install.
+   * Allows to install an APK file on the given device. The path, where the APK files are located is
+   * retrieved from the system variable {@link #CALABASH_DRIVER_APPS}.
+   * 
+   * @param apkFileName The file name of the APK file to install.
    * @param deviceId The device id to use to install the device.
    */
-  public static void installAPKFile(String pathToAPK, String deviceId) {
+  public static void installAPKFile(String apkFileName, String deviceId) {
     List<String> commandLineFwd = new ArrayList<String>();
     if (deviceId != null) {
       commandLineFwd.add("-s");
@@ -71,13 +96,15 @@ public class CalabashAdbCmdRunner {
     }
     commandLineFwd.add("install");
     commandLineFwd.add("-r");
-    commandLineFwd.add(pathToAPK);
+    String path = getPathToDriverApps();
+    commandLineFwd.add(path + apkFileName);
 
     adbConnection.runProcess(commandLineFwd, "about to start install APK", true);
   }
 
   /**
    * Allows to start the calabash server on the given device.
+   * 
    * @param deviceId The device id to use to start the server.
    * @return The thread that has started the Android instrumentation.
    */
@@ -113,6 +140,7 @@ public class CalabashAdbCmdRunner {
 
   /**
    * Allows to wait until the calabash server is started on the device.
+   * 
    * @param deviceId The device id to use.
    */
   public static void waitForCalabashServerOnDevice(final String deviceId) {
@@ -121,6 +149,7 @@ public class CalabashAdbCmdRunner {
 
   /**
    * Forwards the given remote port of the calabash server to the given local port.
+   * 
    * @param local The local port to use.
    * @param remote The remote port on the device to use.
    * @param deviceId The device id to use to activate the port forwarding.
@@ -140,6 +169,7 @@ public class CalabashAdbCmdRunner {
 
   /**
    * Allows all the user data of the app for the given <code>appBasePackage</code>
+   * 
    * @param appBasePackage The base package of the app to delete the user data for.
    * @param deviceId The device id to use.
    */
@@ -160,6 +190,7 @@ public class CalabashAdbCmdRunner {
 
   /**
    * Runnable implementation to wait until the calabash server is started on the device.
+   * 
    * @author ddary
    */
   public class CalabashServerWaiter implements Runnable {
