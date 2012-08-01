@@ -50,11 +50,11 @@ public class ClientEndToEndTest {
 
   public CalabashCapabilities note() {
     return CalabashCapabilities.android("eBayMobile:1.7.0", "2.3", "en_GB", "304D19CE983D818E",
-        "GT-N7000");
+        "GT-N7000", "com.ebay.mobile");
   }
 
   public CalabashCapabilities nexus() {
     return CalabashCapabilities.android("eBayMobile:1.7.0", "4.0.4", "de_DE", "0149948604012003",
-        "GalaxyNexus");
+        "GalaxyNexus", "com.ebay.mobile");
   }
 }

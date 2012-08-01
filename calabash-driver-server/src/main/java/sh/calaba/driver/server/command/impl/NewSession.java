@@ -21,6 +21,11 @@ import sh.calaba.driver.net.WebDriverLikeResponse;
 import sh.calaba.driver.server.CalabashProxy;
 import sh.calaba.driver.server.command.BaseCommandHandler;
 
+/**
+ * Command handler for a new calabash test session.
+ * 
+ * @author ddary
+ */
 public class NewSession extends BaseCommandHandler {
 
   public NewSession(CalabashProxy proxy, WebDriverLikeRequest request) {
@@ -28,8 +33,10 @@ public class NewSession extends BaseCommandHandler {
   }
 
   public WebDriverLikeResponse handle() throws Exception {
-    JSONObject desiredCapabilities = getRequest().getPayload().getJSONObject("desiredCapabilities");
-    System.out.println("desiredCapabilities: " + desiredCapabilities);
+    JSONObject payload = getRequest().getPayload();
+    // Retrieving the capabilities for the session
+    JSONObject desiredCapabilities = payload.getJSONObject("desiredCapabilities");
+
     CalabashCapabilities capabilities = CalabashCapabilities.fromJSON(desiredCapabilities);
 
     JSONObject json = new JSONObject();

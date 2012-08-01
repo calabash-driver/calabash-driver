@@ -81,7 +81,7 @@ public class CalabashProxy {
    * @return The session ID of the new created session.
    */
   public String initializeSessionForCapabilities(CalabashCapabilities calabashCapabilities) {
-    System.out.println("reuqested capa: " + calabashCapabilities);
+    System.out.println("reqqested capa: " + calabashCapabilities);
     if (availableCapabilities.contains(calabashCapabilities)) {
       // is available and can be used
       String sessionId = UUID.randomUUID().toString();
@@ -134,11 +134,31 @@ public class CalabashProxy {
     }
   }
 
+  /**
+   * initializes the calabash server with starting the instrumentation. Before doing this the saved
+   * user data of the {@link CalabashCapabilities#getAppBasePackage()} are deleted and the
+   * #adbCommands are executed. Please note that every entry in the list will be taken as complete
+   * parameter list for executing an <em>adb</em> command.
+   * 
+   * @param capability The capability to use to start the calabash server.
+   * @param sessionId The newly created session id.
+   * @return The port number used for the current session.
+   */
   private Integer initializeCalabashServer(CalabashCapabilities capability, String sessionId) {
-    // TODO ddary make this configurable
-    CalabashAdbCmdRunner.deleteSavedAppData("com.ebay.mobile", capability.getDeviceId());
-    CalabashAdbCmdRunner.switchToEbayQA(capability.getDeviceId());
-    Thread instThread = CalabashAdbCmdRunner.startCalabashServer(capability.getDeviceId());
+
+    CalabashAdbCmdRunner.deleteSavedAppData(capability.getAppBasePackage(),
+        capability.getDeviceId());
+    List<String> adbCommands = capability.getAdditionalAdbCommands();
+    if (adbCommands != null && !adbCommands.isEmpty()) {
+      for (String adbCommandParameter : adbCommands) {
+        System.out.println("executing adb with parameter: " + adbCommandParameter);
+        CalabashAdbCmdRunner.executeAdbCommand(capability.getDeviceId(), adbCommandParameter);
+      }
+    }
+
+    Thread instThread =
+        CalabashAdbCmdRunner.startCalabashServer(capability.getDeviceId(),
+            capability.getAppBasePackage());
     sessionInstrumentationThreads.put(sessionId, instThread);
 
     Integer portNumber = getNextPortNumber();

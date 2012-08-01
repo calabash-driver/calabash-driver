@@ -81,9 +81,9 @@ public class RegisterInGridTest {
   public List<CalabashCapabilities> getCalabashCapabilities() throws JSONException {
     List<CalabashCapabilities> capabilities = new ArrayList<CalabashCapabilities>();
     capabilities.add(CalabashCapabilities.android("eBayMobile:1.7.0", "2.3", "en_GB",
-        "304D19CE983D818E", "GT-N7000"));
+        "304D19CE983D818E", "GT-N7000", "com.ebay.mobile"));
     capabilities.add(CalabashCapabilities.android("eBayMobile:1.7.0", "4.0.3", "de_DE",
-        "0149948604012003", "GalaxyNexus"));
+        "0149948604012003", "GalaxyNexus", "com.ebay.mobile"));
 
     return capabilities;
   }

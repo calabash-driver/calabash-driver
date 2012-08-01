@@ -53,12 +53,15 @@ import sh.calaba.driver.model.WebViewSupport;
  * 
  */
 public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
-  public RemoteCalabashAndroidDriver(String host, Integer port, CalabashCapabilities capa) {
-    super("http://" + host + ":" + port + "/wd/hub", capa.getRawCapabilities());
+  public RemoteCalabashAndroidDriver(String host, Integer port, CalabashCapabilities capa,
+      String... beforeSessionAdbCommands) {
+    super("http://" + host + ":" + port + "/wd/hub", capa.getRawCapabilities(),
+        beforeSessionAdbCommands);
   }
 
-  public RemoteCalabashAndroidDriver(String remoteURL, Map<String, Object> capabilities) {
-    super(remoteURL, capabilities);
+  public RemoteCalabashAndroidDriver(String remoteURL, Map<String, Object> capabilities,
+      String... beforeSessionAdbCommands) {
+    super(remoteURL, capabilities, beforeSessionAdbCommands);
   }
 
   /**

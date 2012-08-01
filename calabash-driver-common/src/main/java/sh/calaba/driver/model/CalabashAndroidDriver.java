@@ -1,6 +1,5 @@
 /*
- * Copyright 2012 ios-driver committers.
- * Copyright 2012 calabash-driver committers.
+ * Copyright 2012 ios-driver committers. Copyright 2012 calabash-driver committers.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -15,6 +14,7 @@
 package sh.calaba.driver.model;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Map;
 
 import org.apache.http.HttpHost;
@@ -22,6 +22,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHttpEntityEnclosingRequest;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import sh.calaba.driver.exceptions.CalabashException;
@@ -42,14 +43,15 @@ public abstract class CalabashAndroidDriver {
   private static String host;
   private static int port;
 
-  public CalabashAndroidDriver(String remoteURL, Map<String, Object> capabilities) {
+  public CalabashAndroidDriver(String remoteURL, Map<String, Object> capabilities,
+      String... beforeSessionAdbCommands) {
     this.remoteURL = remoteURL;
     this.requestedCapabilities = capabilities;
     try {
       URL url = new URL(remoteURL);
       port = url.getPort();
       host = url.getHost();
-      session = start();
+      session = start(beforeSessionAdbCommands);
     } catch (Exception e) {
       e.printStackTrace();
 
@@ -57,9 +59,15 @@ public abstract class CalabashAndroidDriver {
     }
   }
 
-  private Session start() throws Exception {
+  private Session start(String... beforeSessionAdbCommands) throws Exception {
     JSONObject payload = new JSONObject();
     payload.put("desiredCapabilities", requestedCapabilities);
+
+    if (beforeSessionAdbCommands != null) {
+      payload.put("beforeSessionAdbCommands",
+          new JSONArray(Arrays.asList(beforeSessionAdbCommands)));
+    }
+
     WebDriverLikeRequest request = new WebDriverLikeRequest("POST", "/session", payload);
     WebDriverLikeResponse response = execute(request);
     String sessionId = response.getSessionId();
@@ -77,6 +85,7 @@ public abstract class CalabashAndroidDriver {
     if (request.hasPayload()) {
       r.setEntity(new StringEntity(request.getPayload().toString(), "UTF-8"));
     }
+    System.out.println("request: " + r.getEntity());
 
     HttpHost h = new HttpHost(host, port);
 

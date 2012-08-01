@@ -15,6 +15,7 @@ package sh.calaba.driver.utils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
@@ -57,28 +58,46 @@ public class CalabashAdbCmdRunner {
   }
 
   /**
-   * TODO ddary: make this configurable
+   * Executes the android adb program for the specified deviceId and with the given adbParameters.
    * 
    * @param deviceId The device id to use to install the device.
+   * @param adbParamter The paramtert to use to execute the adb command.
+   * @throws {@link IllegalArgumentException} if adbParameter are not existent.
    */
-  public static void switchToEbayQA(String deviceId) {
+  public static void executeAdbCommand(String deviceId, String adbParamter) {
+    if (adbParamter == null || adbParamter.isEmpty()) {
+      throw new IllegalArgumentException("adbParamter must not be null!'");
+    }
+    List<String> commandLineFwd = new ArrayList<String>();
+    if (deviceId != null) {
+      commandLineFwd.add("-s");
+      commandLineFwd.add(deviceId);
+    }
+    //It is very important to add every argument as separate string.
+    commandLineFwd.addAll(Arrays.asList(adbParamter.split(" ")));
+
+    adbConnection.runProcess(commandLineFwd, "Executing adb Command", true);
+  }
+
+  /**
+   * Allows all the user data of the app for the given <code>appBasePackage</code>
+   * 
+   * @param appBasePackage The base package of the app to delete the user data for.
+   * @param deviceId The device id to use.
+   */
+  public static void deleteSavedAppData(String appBasePackage, String deviceId) {
     List<String> commandLineFwd = new ArrayList<String>();
     if (deviceId != null) {
       commandLineFwd.add("-s");
       commandLineFwd.add(deviceId);
     }
     commandLineFwd.add("shell");
-    commandLineFwd.add("setprop");
-    // USE THIS for prior 1.8
-    // commandLineFwd.add("log.tag.eBayQAServerSwitch");
-
-    // Use this for post 1.8 releases
-    commandLineFwd.add("log.tag.fwUseQaServers");
-
-
-    commandLineFwd.add("DEBUG");
-
-    adbConnection.runProcess(commandLineFwd, "Switching to eBay QA Env", true);
+    commandLineFwd.add("pm");
+    commandLineFwd.add("clear");
+    commandLineFwd.add(appBasePackage);
+    adbConnection.runProcess(commandLineFwd,
+        "about to delete the saved app data of the app with the base package: " + appBasePackage,
+        true);
   }
 
   /**
@@ -106,9 +125,10 @@ public class CalabashAdbCmdRunner {
    * Allows to start the calabash server on the given device.
    * 
    * @param deviceId The device id to use to start the server.
+   * @param appBasePackageName The base package name of the app e.g. com.ebay.mobile.
    * @return The thread that has started the Android instrumentation.
    */
-  public static Thread startCalabashServer(final String deviceId) {
+  public static Thread startCalabashServer(final String deviceId, final String appBasePackageName) {
     Thread instrumentationThread = new Thread(new Runnable() {
 
       @Override
@@ -125,7 +145,7 @@ public class CalabashAdbCmdRunner {
         commandLineFwd.add("-e class");
         commandLineFwd.add("sh.calaba.instrumentationbackend.InstrumentationBackend");
         commandLineFwd.add("-w");
-        commandLineFwd.add("com.ebay.mobile.test/android.test.InstrumentationTestRunner");
+        commandLineFwd.add(appBasePackageName + ".test/android.test.InstrumentationTestRunner");
 
         adbConnection.runProcess(commandLineFwd, "about to start CalabashServer", false);
 
@@ -165,27 +185,6 @@ public class CalabashAdbCmdRunner {
     commandLineFwd.add("tcp:" + remote);
     adbConnection.runProcess(commandLineFwd, "about to forward: local port: " + local
         + " to remote port: " + remote, true);
-  }
-
-  /**
-   * Allows all the user data of the app for the given <code>appBasePackage</code>
-   * 
-   * @param appBasePackage The base package of the app to delete the user data for.
-   * @param deviceId The device id to use.
-   */
-  public static void deleteSavedAppData(String appBasePackage, String deviceId) {
-    List<String> commandLineFwd = new ArrayList<String>();
-    if (deviceId != null) {
-      commandLineFwd.add("-s");
-      commandLineFwd.add(deviceId);
-    }
-    commandLineFwd.add("shell");
-    commandLineFwd.add("pm");
-    commandLineFwd.add("clear");
-    commandLineFwd.add(appBasePackage);
-    adbConnection.runProcess(commandLineFwd,
-        "about to delete the saved app data of the app with the base package: " + appBasePackage,
-        true);
   }
 
   /**

@@ -105,7 +105,6 @@ public class CalabashAndroidServer {
     try {
       new DriverRegistrationHandler(config).performRegsitration();
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
