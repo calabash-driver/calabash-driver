@@ -61,7 +61,7 @@ public class CalabashAdbCmdRunner {
    * Executes the android adb program for the specified deviceId and with the given adbParameters.
    * 
    * @param deviceId The device id to use to install the device.
-   * @param adbParamter The paramtert to use to execute the adb command.
+   * @param adbParamter The parameter to use to execute the adb command.
    * @throws {@link IllegalArgumentException} if adbParameter are not existent.
    */
   public static void executeAdbCommand(String deviceId, String adbParamter) {
