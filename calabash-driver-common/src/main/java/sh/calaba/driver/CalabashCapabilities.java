@@ -95,6 +95,10 @@ public class CalabashCapabilities {
     return ((String) o);
   }
 
+  /**
+   * @return ADB commands that will be executed before the calabash server will be started on the
+   *         device.
+   */
   public List<String> getAdditionalAdbCommands() {
     List<String> res = new ArrayList<String>();
     if (raw.get(ADDITIONAL_ADB_COMMANDS) != null) {
@@ -168,6 +172,10 @@ public class CalabashCapabilities {
     raw.put(AUT, aut);
   }
 
+  /**
+   * @param commands The list of ADB commands to execute before the calabash server will be started
+   *        on the device.
+   */
   public void setAdditionalAdbCommands(List<String> commands) {
     raw.put(ADDITIONAL_ADB_COMMANDS, commands);
   }

@@ -43,15 +43,14 @@ public abstract class CalabashAndroidDriver {
   private static String host;
   private static int port;
 
-  public CalabashAndroidDriver(String remoteURL, Map<String, Object> capabilities,
-      String... beforeSessionAdbCommands) {
+  public CalabashAndroidDriver(String remoteURL, Map<String, Object> capabilities) {
     this.remoteURL = remoteURL;
     this.requestedCapabilities = capabilities;
     try {
       URL url = new URL(remoteURL);
       port = url.getPort();
       host = url.getHost();
-      session = start(beforeSessionAdbCommands);
+      session = start();
     } catch (Exception e) {
       e.printStackTrace();
 
@@ -59,14 +58,9 @@ public abstract class CalabashAndroidDriver {
     }
   }
 
-  private Session start(String... beforeSessionAdbCommands) throws Exception {
+  private Session start() throws Exception {
     JSONObject payload = new JSONObject();
     payload.put("desiredCapabilities", requestedCapabilities);
-
-    if (beforeSessionAdbCommands != null) {
-      payload.put("beforeSessionAdbCommands",
-          new JSONArray(Arrays.asList(beforeSessionAdbCommands)));
-    }
 
     WebDriverLikeRequest request = new WebDriverLikeRequest("POST", "/session", payload);
     WebDriverLikeResponse response = execute(request);

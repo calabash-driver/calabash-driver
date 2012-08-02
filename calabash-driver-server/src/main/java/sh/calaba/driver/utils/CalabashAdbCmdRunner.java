@@ -214,9 +214,10 @@ public class CalabashAdbCmdRunner {
       String result =
           adbConnection.runProcess(commandLineFwd, "wait for calabash-server on mobile device",
               true);
+
       if (result == null) {
         return false;
-      } else if (result.contains(":::7101")) {
+      } else if (result.contains(":7101")) {
         return true;
       } else {
         return false;
