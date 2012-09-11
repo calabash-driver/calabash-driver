@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 ios-driver committers. Copyright 2012 calabash-driver committers.
+ * Copyright 2012 calabash-driver committers.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -14,7 +14,6 @@
 package sh.calaba.driver.model;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Map;
 
 import org.apache.http.HttpHost;
@@ -22,7 +21,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHttpEntityEnclosingRequest;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import sh.calaba.driver.exceptions.CalabashException;

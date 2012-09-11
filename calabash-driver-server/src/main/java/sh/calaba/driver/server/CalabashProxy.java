@@ -162,7 +162,8 @@ public class CalabashProxy {
     sessionInstrumentationThreads.put(sessionId, instThread);
 
     Integer portNumber = getNextPortNumber();
-    CalabashAdbCmdRunner.activatePortForwarding(portNumber, 7101, capability.getDeviceId());
+    CalabashAdbCmdRunner.activatePortForwarding(portNumber,
+        CalabashAdbCmdRunner.CALABASH_INTERNAL_PORT, capability.getDeviceId());
     System.out.println("Capability initialized: " + capability.getDeviceName() + " on local port: "
         + portNumber);
     return portNumber;

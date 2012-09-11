@@ -34,6 +34,7 @@ public class CalabashAdbCmdRunner {
   private static AdbConnection adbConnection = getAdbConnection();
   public static final String CALABASH_DRIVER_APPS = "CALABASH_DRIVER_APPS";
   private static String pathToDriverApps = null;
+  public static final int CALABASH_INTERNAL_PORT = 7102;
 
   protected static AdbConnection getAdbConnection() {
     return new AdbConnection();
@@ -73,7 +74,7 @@ public class CalabashAdbCmdRunner {
       commandLineFwd.add("-s");
       commandLineFwd.add(deviceId);
     }
-    //It is very important to add every argument as separate string.
+    // It is very important to add every argument as separate string.
     commandLineFwd.addAll(Arrays.asList(adbParamter.split(" ")));
 
     adbConnection.runProcess(commandLineFwd, "Executing adb Command", true);
@@ -145,7 +146,10 @@ public class CalabashAdbCmdRunner {
         commandLineFwd.add("-e class");
         commandLineFwd.add("sh.calaba.instrumentationbackend.InstrumentationBackend");
         commandLineFwd.add("-w");
-        commandLineFwd.add(appBasePackageName + ".test/android.test.InstrumentationTestRunner");
+        commandLineFwd.add(appBasePackageName + ".test/sh.calaba.instrumentationbackend.CalabashInstrumentationTestRunner");
+        
+    
+
 
         adbConnection.runProcess(commandLineFwd, "about to start CalabashServer", false);
 
@@ -164,7 +168,7 @@ public class CalabashAdbCmdRunner {
    * @param deviceId The device id to use.
    */
   public static void waitForCalabashServerOnDevice(final String deviceId) {
-    (new CalabashAdbCmdRunner().new CalabashServerWaiter(adbConnection, deviceId)).run();;
+    (new CalabashAdbCmdRunner().new CalabashServerWaiter(adbConnection, deviceId)).run();
   }
 
   /**
@@ -217,7 +221,7 @@ public class CalabashAdbCmdRunner {
 
       if (result == null) {
         return false;
-      } else if (result.contains(":7101")) {
+      } else if (result.contains(":" + CalabashAdbCmdRunner.CALABASH_INTERNAL_PORT)) {
         return true;
       } else {
         return false;
