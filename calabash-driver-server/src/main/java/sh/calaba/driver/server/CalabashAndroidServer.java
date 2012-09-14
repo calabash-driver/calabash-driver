@@ -13,6 +13,9 @@
  */
 package sh.calaba.driver.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
@@ -30,6 +33,7 @@ public class CalabashAndroidServer {
   public static final String SCRIPT_KEY = CalabashProxy.class.getName();
   private final Server server;
   private CalabashNodeConfiguration config;
+  private boolean isReady = false;
 
   public static void main(String[] args) {
     if ((args == null || args.length <= 1)
@@ -69,6 +73,10 @@ public class CalabashAndroidServer {
     server.stop();
   }
 
+  public boolean isReady() {
+    return server.isStarted() ;
+  }
+
   public CalabashAndroidServer(CalabashNodeConfiguration config) {
     this.config = config;
 
@@ -78,16 +86,26 @@ public class CalabashAndroidServer {
         new ServletContextHandler(server, "/wd/hub", true, false);
 
     servletContextHandler.addServlet(CalabashServlet.class, "/*");
-    CalabashProxy proxy = null;
+    List<ProxyInitializationListener> listeners = new ArrayList<ProxyInitializationListener>();
+    listeners.add(new ProxyInitializationListener() {
+
+      @Override
+      public void afterProxyInitialization() {
+        isReady = true;
+        System.out.println("The CalabashAndroidServer is initialized.");
+      }
+    });
+
     if (config.isDriverRegistrationEnabled()) {
-      proxy = new CalabashProxy(new ProxyInitializationListener() {
+      listeners.add(new ProxyInitializationListener() {
+
+        @Override
         public void afterProxyInitialization() {
           registerDriverNodeInHub();
         }
-      }, config);
-    } else {
-      proxy = new CalabashProxy(config);
+      });
     }
+    CalabashProxy proxy = new CalabashProxy(listeners, config);
     servletContextHandler.setAttribute(SCRIPT_KEY, proxy);
 
     Runtime.getRuntime().addShutdownHook(new Thread() {

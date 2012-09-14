@@ -77,7 +77,6 @@ public abstract class CalabashAndroidDriver {
     if (request.hasPayload()) {
       r.setEntity(new StringEntity(request.getPayload().toString(), "UTF-8"));
     }
-    System.out.println("request: " + r.getEntity());
 
     HttpHost h = new HttpHost(host, port);
 

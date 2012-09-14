@@ -8,8 +8,11 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
 import sh.calaba.driver.model.By;
+import sh.calaba.driver.server.support.CalabashLocalNodeConfiguration;
+import sh.calaba.driver.server.support.CapabilityFactory;
 
 public class EndToEndTests {
 
@@ -19,21 +22,18 @@ public class EndToEndTests {
 
   @BeforeClass
   public void startServer() throws Exception {
-    server =
-        new CalabashAndroidServer(
-            CalabashNodeConfiguration.readConfig("src/test/resources/driverConfig.json"));
+    CalabashLocalNodeConfiguration conf =
+        new CalabashLocalNodeConfiguration(CapabilityFactory.anAndroidCapability(), host, port);
+    server = new CalabashAndroidServer(conf);
     server.start();
   }
 
-  @Test(enabled=false)
+  @Test(enabled = true)
   public void scriptStartsAndRegisterToServer() {
     RemoteCalabashAndroidDriver driver = null;
     try {
-      Map<String, Object> caps = new HashMap<String, Object>();
-      caps.put("version", "4.0.3");
-      caps.put("language", "de");
-      caps.put("locale", "" + Locale.GERMANY);
-      driver = new RemoteCalabashAndroidDriver("http://" + host + ":" + port + "/wd/hub", caps);
+      CalabashCapabilities capa = CapabilityFactory.anAndroidCapability();
+      driver = new RemoteCalabashAndroidDriver("http://" + host + ":" + port + "/wd/hub", capa.getRawCapabilities());
 
       System.out.println("created session: " + driver.getSession().getSessionId());
       System.out.println("session cap: " + driver.getSession().getActualCapabilities());

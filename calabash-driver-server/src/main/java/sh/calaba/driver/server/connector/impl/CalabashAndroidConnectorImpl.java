@@ -15,13 +15,18 @@ package sh.calaba.driver.server.connector.impl;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -30,7 +35,7 @@ import org.json.JSONObject;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.server.connector.CalabashAndroidConnector;
-import sh.calaba.driver.utils.CalabashAdbCmdRunner.CalabashServerWaiter;
+import sh.calaba.driver.server.connector.CalabashConnecterException;
 
 /**
  * The Calabash Android Client that is connecting to the Calabash-Android server that is running on
@@ -51,8 +56,6 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
     this.sessionCapabilities = sessionCapabilities;
   }
 
-  private CalabashAndroidConnectorImpl() {}
-
   /*
    * (non-Javadoc)
    * 
@@ -70,27 +73,75 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
    */
   @Override
   public JSONObject execute(JSONObject action) throws IOException, JSONException {
-    return new JSONObject(execute("/", action));
+    return new JSONObject(extractStringResponse(execute("/", action)));
   }
 
-  private String execute(String path, JSONObject action) throws IOException, JSONException {
-    HttpPost postRequest = new HttpPost("http://" + hostname + ":" + port + path);
-    postRequest.addHeader("Content-Type", "application/json;charset=utf-8");
-    if (action != null) {
-      postRequest.setEntity(new StringEntity(action.toString(), "UTF-8"));
+  /*
+   * (non-Javadoc)
+   * 
+   * @see sh.calaba.driver.server.connector.CalabashAndroidConnector#takeScreenshot()
+   */
+  public JSONObject takeScreenshot() {
+    HttpResponse screenshot = null;
+    JSONObject result = new JSONObject();
+
+    try {
+     
+      screenshot = execute("/screenshot", null);
+
+      List<String> extras = new ArrayList<String>();
+      byte[] byteArray = IOUtils.toByteArray(screenshot.getEntity().getContent());
+      extras.add(Base64.encodeBase64String(byteArray));
+      result.put("success", true);
+      result.put("bonusInformation", extras);
+      result.put("message", "");
+
+    } catch (JSONException e) {
+      throw new CalabashConnecterException(e);
+    } catch (IllegalStateException e) {
+      throw new CalabashConnecterException(e);
+    } catch (IOException e) {
+      throw new CalabashConnecterException(e);
     }
 
-    HttpResponse response = httpClient.execute(postRequest);
+    return result;
 
+  }
+
+  private HttpResponse execute(String path, JSONObject action) {
+    HttpResponse response = null;
+    try {
+      HttpPost postRequest = new HttpPost("http://" + hostname + ":" + port + path);
+      postRequest.addHeader("Content-Type", "application/json;charset=utf-8");
+      if (action != null) {
+        postRequest.setEntity(new StringEntity(action.toString(), "UTF-8"));
+      }
+
+      response = httpClient.execute(postRequest);
+    } catch (UnsupportedEncodingException e) {
+      throw new CalabashConnecterException(e);
+    } catch (ClientProtocolException e) {
+      throw new CalabashConnecterException(e);
+    } catch (IOException e) {
+      throw new CalabashConnecterException(e);
+    }
     if (response.getStatusLine().getStatusCode() != 200) {
       throw new RuntimeException("Failed : HTTP error code : "
           + response.getStatusLine().getStatusCode());
     }
+    return response;
+  }
 
+  private String extractStringResponse(HttpResponse response) {
     StringWriter writer = new StringWriter();
-    IOUtils.copy(response.getEntity().getContent(), writer);
+    try {
+      IOUtils.copy(response.getEntity().getContent(), writer);
+    } catch (IllegalStateException e) {
+      throw new CalabashConnecterException(e);
+    } catch (IOException e) {
+      throw new CalabashConnecterException(e);
+    }
     String responseString = writer.toString();
-    System.out.println("Output from Server: " + responseString);
 
     return responseString;
   }
@@ -113,15 +164,7 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
    */
   @Override
   public void quit() {
-    try {
-      execute("/kill", null);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } catch (JSONException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    execute("/kill", null);
     httpClient.getConnectionManager().shutdown();
   }
 
@@ -142,16 +185,8 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
     private Condition cv = lock.newCondition();
 
     private boolean isPortBound() {
-      Boolean ready = null;
-      try {
-        ready = Boolean.parseBoolean(execute("/ready", null));
-      } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      } catch (JSONException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
+      Boolean ready = Boolean.parseBoolean(extractStringResponse(execute("/ready", null)));
+
       if (ready == null || ready == Boolean.FALSE) {
         return Boolean.FALSE;
       } else {
@@ -159,18 +194,18 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
       }
     }
 
+
+
     @Override
     public void run() {
       lock.lock();
 
       try {
         Boolean portIsNotBound = !isPortBound();
-        System.out.println("port is initially bound: " + portIsNotBound);
-        while (portIsNotBound) {
 
+        while (portIsNotBound) {
           cv.await(2, TimeUnit.SECONDS);
           portIsNotBound = !isPortBound();
-          System.out.println("port is bound: " + portIsNotBound);
         }
       } catch (InterruptedException e) {
         e.printStackTrace();

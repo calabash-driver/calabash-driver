@@ -37,7 +37,7 @@ public enum CalabashCommands {
       "wait_for_l10n_element", "", WebDriverLikeCommand.VIEW), PRESS_L10N_ELEMENT(
       "press_l10n_element", "", WebDriverLikeCommand.VIEW), SCROLL_UP("scroll_up", "",
       WebDriverLikeCommand.VIEW), SCROLL_DOWN("scroll_down", "", WebDriverLikeCommand.VIEW), SEARCH_FOR(
-      "search_for", "", WebDriverLikeCommand.VIEW), TAKE_SCREENSHOT("take_screenshot_robotium", "",
+      "search_for", "", WebDriverLikeCommand.VIEW), TAKE_SCREENSHOT("take_screenshot_embed", "",
       WebDriverLikeCommand.VIEW), SELECT_ITEM_FROM_NAMED_SPINNER("select_item_from_named_spinner",
       "", WebDriverLikeCommand.SPINNER), SELECT_ITEM_BY_NAME("select_item_by_name", "",
       WebDriverLikeCommand.SPINNER), CLICK_ON_VIEW_BY_NAME("click_on_view_by_name", "",

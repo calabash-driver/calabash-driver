@@ -43,7 +43,7 @@ import sh.calaba.driver.model.WebViewSupport;
  * Calabash-Driver-Server. For load balancing in between the Selenium Grid2 hub can be used for load
  * balancing purposes.
  * 
- * After initializing the {@link RemoteCalabashAndroidDriver} automatically a new test session is
+ * After initializing the {@link RemoteCalabashAndroidDriver}, automatically a new test session is
  * started. The driver offers different ways to interact with the Android Application.
  * 
  * The main idea of interacting with the different kind of elements is by different locators (called

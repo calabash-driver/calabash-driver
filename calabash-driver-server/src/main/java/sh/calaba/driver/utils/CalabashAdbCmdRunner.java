@@ -146,9 +146,9 @@ public class CalabashAdbCmdRunner {
         commandLineFwd.add("-e class");
         commandLineFwd.add("sh.calaba.instrumentationbackend.InstrumentationBackend");
         commandLineFwd.add("-w");
-        commandLineFwd.add(appBasePackageName + ".test/sh.calaba.instrumentationbackend.CalabashInstrumentationTestRunner");
-        
-    
+        commandLineFwd.add(appBasePackageName
+            + ".test/sh.calaba.instrumentationbackend.CalabashInstrumentationTestRunner");
+
 
 
         adbConnection.runProcess(commandLineFwd, "about to start CalabashServer", false);

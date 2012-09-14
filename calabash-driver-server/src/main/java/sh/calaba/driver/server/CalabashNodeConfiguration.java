@@ -36,16 +36,18 @@ import sh.calaba.driver.server.exceptions.CalabashConfigurationException;
 public class CalabashNodeConfiguration {
   public static final String CAPABILITIES = "capabilities";
   public static final String CONFIGURATION = "configuration";
-  private List<CalabashCapabilities> capabilities = new ArrayList<CalabashCapabilities>();
-  private String driverHost = null;
-  private String mobileAppPath = null;
-  private String mobileTestAppPath = null;
-  private int driverMaxSession;
-  private int driverPort;
-  private boolean driverRegistrationEnabled;
-  private String hubHost = null;
-  private String proxy = null;
-  private int hubPort;
+  protected List<CalabashCapabilities> capabilities = new ArrayList<CalabashCapabilities>();
+  protected String driverHost = null;
+  protected String mobileAppPath = null;
+  protected String mobileTestAppPath = null;
+  protected int driverMaxSession;
+  protected int driverPort;
+  protected boolean driverRegistrationEnabled;
+  protected boolean installApksEnabled;
+  protected boolean cleanSavedUserDataEnabled;
+  protected String hubHost = null;
+  protected String proxy = null;
+  protected int hubPort;
 
   /**
    * Reads the the driver configuration form the specified file. The file is expected to be in JSON
@@ -78,7 +80,7 @@ public class CalabashNodeConfiguration {
     }
   }
 
-
+  protected CalabashNodeConfiguration() {}
 
   protected CalabashNodeConfiguration(JSONObject config) throws JSONException,
       CalabashConfigurationException {
@@ -150,6 +152,20 @@ public class CalabashNodeConfiguration {
   }
 
   /**
+   * @return the installApksEnabled
+   */
+  public boolean isInstallApksEnabled() {
+    return installApksEnabled;
+  }
+
+  /**
+   * @return the cleanSavedUserData
+   */
+  public boolean isCleanSavedUserDataEnabled() {
+    return cleanSavedUserDataEnabled;
+  }
+
+  /**
    * @return the driverRegistrationEnabled
    */
   public boolean isDriverRegistrationEnabled() {
@@ -171,6 +187,7 @@ public class CalabashNodeConfiguration {
 
   /**
    * Reads the driver configuration from given config.
+   * 
    * @param configuration The driver config.
    * @throws JSONException On JSON errors.
    */
@@ -183,6 +200,8 @@ public class CalabashNodeConfiguration {
     driverMaxSession = configuration.getInt("maxSession");
     mobileAppPath = configuration.getString("autApk");
     mobileTestAppPath = configuration.getString("autTestApk");
+    installApksEnabled = configuration.getBoolean("installApks");
+    cleanSavedUserDataEnabled=configuration.getBoolean("cleanSavedUserData");
     proxy =
         configuration.isNull("proxy")
             ? "org.openqa.grid.selenium.proxy.DefaultRemoteProxy"

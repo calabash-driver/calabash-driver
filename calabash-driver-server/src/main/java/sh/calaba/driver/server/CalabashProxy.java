@@ -42,6 +42,7 @@ public class CalabashProxy {
   private Integer localCalabashSocketPort = null;
   private final List<CalabashCapabilities> availableCapabilities =
       new ArrayList<CalabashCapabilities>();
+  private boolean cleanSavedUserData = true;
 
   /**
    * Default constructor that {@link #initializeMobileDevices(CalabashNodeConfiguration)}.
@@ -60,12 +61,15 @@ public class CalabashProxy {
    * @param listener
    * @param nodeConfig
    */
-  public CalabashProxy(final ProxyInitializationListener listener,
+  public CalabashProxy(final List<ProxyInitializationListener> listeners,
       final CalabashNodeConfiguration nodeConfig) {
     new Thread(new Runnable() {
       public void run() {
         initializeMobileDevices(nodeConfig);
-        listener.afterProxyInitialization();
+        if (listeners != null && !listeners.isEmpty()) {
+          for (ProxyInitializationListener listener : listeners)
+            listener.afterProxyInitialization();
+        }
       }
     }).run();
   }
@@ -125,11 +129,14 @@ public class CalabashProxy {
    * @param capabilities the capabilities to initialize
    */
   protected void initializeMobileDevices(CalabashNodeConfiguration nodeConfig) {
+    this.cleanSavedUserData = nodeConfig.isCleanSavedUserDataEnabled();
     for (CalabashCapabilities capability : nodeConfig.getCapabilities()) {
-      CalabashAdbCmdRunner.installAPKFile(nodeConfig.getMobileAppPath(), capability.getDeviceId());
-      CalabashAdbCmdRunner.installAPKFile(nodeConfig.getMobileTestAppPath(),
-          capability.getDeviceId());
-
+      if (nodeConfig.isInstallApksEnabled()) {
+        CalabashAdbCmdRunner
+            .installAPKFile(nodeConfig.getMobileAppPath(), capability.getDeviceId());
+        CalabashAdbCmdRunner.installAPKFile(nodeConfig.getMobileTestAppPath(),
+            capability.getDeviceId());
+      }
       availableCapabilities.add(capability);
     }
   }
@@ -145,9 +152,11 @@ public class CalabashProxy {
    * @return The port number used for the current session.
    */
   private Integer initializeCalabashServer(CalabashCapabilities capability, String sessionId) {
-
-    CalabashAdbCmdRunner.deleteSavedAppData(capability.getAppBasePackage(),
-        capability.getDeviceId());
+    if (cleanSavedUserData) {
+      String basePackage = capability.getAppBasePackage();
+      String device = capability.getDeviceId();
+      CalabashAdbCmdRunner.deleteSavedAppData(basePackage, device);
+    }
     List<String> adbCommands = capability.getAdditionalAdbCommands();
     if (adbCommands != null && !adbCommands.isEmpty()) {
       for (String adbCommandParameter : adbCommands) {
@@ -235,7 +244,11 @@ public class CalabashProxy {
     if (sessionConnectors.containsKey(sessionId)) {
       JSONObject result = null;
       try {
-        result = sessionConnectors.get(sessionId).execute(command);
+        if ("take_screenshot_embed".equals(command.get("command"))) {
+          result = sessionConnectors.get(sessionId).takeScreenshot();
+        } else {
+          result = sessionConnectors.get(sessionId).execute(command);
+        }
       } catch (JSONException e) {
         e.printStackTrace();
       } catch (IOException e) {
