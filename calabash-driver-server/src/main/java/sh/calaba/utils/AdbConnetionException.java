@@ -14,7 +14,7 @@
 package sh.calaba.utils;
 
 /**
- * Exception describes ADB excution errors.
+ * Exception describes ADB execution errors.
  * 
  * @author ddary
  */
@@ -24,5 +24,4 @@ public class AdbConnetionException extends RuntimeException {
   public AdbConnetionException(String message) {
     super(message);
   }
-
 }

@@ -18,24 +18,28 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Handles the execution of ADB commands.
+ * Default {@link AdbConection} implementation to use the Android sdkHandles the execution of ADB
+ * commands.
  * 
  * @author ddary
  */
-public class AdbConnection {
+public class DefaultAdbConnection implements AdbConection {
+  final Logger logger = LoggerFactory.getLogger(DefaultAdbConnection.class);
   public static final String ANDROID_SDK_PATH_KEY = "ANDROID_HOME";
   private String pathToAdb = null;
 
-  public AdbConnection(String pathToAdb) {
+  public DefaultAdbConnection(String pathToAdb) {
     this.pathToAdb = pathToAdb;
   }
 
   /**
    * Reading the ADB path from the environment variable {@link #ANDROID_SDK_PATH_KEY}.
    */
-  public AdbConnection() {
+  public DefaultAdbConnection() {
     String androidHome = System.getenv(ANDROID_SDK_PATH_KEY);
 
     if (androidHome == null) {
@@ -48,21 +52,20 @@ public class AdbConnection {
         androidHome + File.separator + "platform-tools" + File.separator + "adb" + executableSuffix;
   }
 
-  /**
-   * Runs the process with the given parameters.
+  /*
+   * (non-Javadoc)
    * 
-   * @param abdParameter The adb parameters to use.
-   * @param name The name of the process use for logging.
-   * @param confirmExitValue If true, the process out exit value is verified.
-   * @throws AdbConnetionException On adb execution issues.
+   * @see sh.calaba.utils.AdbConection#runProcess(java.util.List, java.lang.String, boolean)
    */
-  public String runProcess(List<String> abdParameter, String name, boolean confirmExitValue)
+  @Override
+  public String runProcess(List<String> adbParameter, String name, boolean confirmExitValue)
       throws AdbConnetionException {
-    abdParameter.add(0, this.pathToAdb);
-    ProcessBuilder processBuilder = new ProcessBuilder(abdParameter);
+    adbParameter.add(0, this.pathToAdb);
+    ProcessBuilder processBuilder = new ProcessBuilder(adbParameter);
     processBuilder.redirectErrorStream(true);
-    // processBuilder.
-    System.out.println("Process '" + name + "' is about to start: " + processBuilder.command());
+    if (logger.isDebugEnabled()) {
+      logger.debug("Process '" + name + "' is about to start: " + processBuilder.command());
+    }
     try {
       Process process = processBuilder.start();
 
@@ -72,25 +75,24 @@ public class AdbConnection {
       String out = IOUtils.toString(process.getInputStream());
       return out;
     } catch (IOException exception) {
-      System.err.println("Error occured: ");
+      logger.error("Error occured: ", exception);
       throw new AdbConnetionException("An IOException occurred when starting ADB.");
     }
   }
 
-  /**
+  /*
+   * (non-Javadoc)
    * 
-   * Confirms the exit value of a process is equal to an expected value, and throws an exception if
-   * it is not. This method will also wait for the process to finish before checking the exit value.
-   * 
-   * @param expected the expected exit value, usually {@code 0}
-   * @param process the process whose exit value will be confirmed
-   * @throws AdbException if the exit value was not equal to {@code expected}
+   * @see sh.calaba.utils.AdbConection#confirmExitValueIs(int, java.lang.Process)
    */
-  public static void confirmExitValueIs(int expected, Process process) {
+  @Override
+  public void confirmExitValueIs(int expected, Process process) {
     while (true) {
       try {
         process.waitFor();
-        System.out.println("Waiting for process...");
+        if (logger.isDebugEnabled()) {
+          logger.debug("Waiting for process...");
+        }
         break;
       } catch (InterruptedException exception) {
         // do nothing, try to wait again
