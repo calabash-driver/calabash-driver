@@ -92,7 +92,9 @@ public class CalabashProxy {
    * @return The session ID of the new created session.
    */
   public String initializeSessionForCapabilities(CalabashCapabilities calabashCapabilities) {
-    System.out.println("reqqested capa: " + calabashCapabilities);
+    if (logger.isDebugEnabled()) {
+      logger.debug("reqqested capa: " + calabashCapabilities);
+    }
     if (availableCapabilities.contains(calabashCapabilities)) {
       // is available and can be used
       String sessionId = UUID.randomUUID().toString();

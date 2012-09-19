@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.net.FailedWebDriverLikeResponse;
 import sh.calaba.driver.net.WebDriverLikeCommand;
@@ -31,6 +33,7 @@ import sh.calaba.driver.server.Handler;
 import sh.calaba.driver.server.command.CommandMapping;
 
 public class CalabashServlet extends CalabashProxyBasedServlet {
+  final Logger logger = LoggerFactory.getLogger(CalabashProxyBasedServlet.class);
   private static final long serialVersionUID = -8544875030463578977L;
 
   @Override
@@ -72,7 +75,9 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
 
     if (req.getGenericCommand() == WebDriverLikeCommand.NEW_SESSION) {
       String session = resp.getSessionId();
-      System.out.println("CalabashServlet: new session: " + session);
+      if (logger.isDebugEnabled()) {
+        logger.debug("CalabashServlet: new session: " + session);
+      }
       String scheme = request.getScheme(); // http
       String serverName = request.getServerName(); // hostname.com
       int serverPort = request.getServerPort(); // 80
@@ -128,8 +133,8 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
       Handler h = CommandMapping.get(wdlc).createHandler(getCalabashProxy(), request);
       return h.handle();
     } catch (Exception e) {
-      System.out.println("Error occured: " + request.getPath() + " Error: " + e);
-      System.out.println(request.toString());
+      logger.error("Error occured: " + request.getPath() + " Error: " + e);
+      logger.error(request.toString());
 
       return new FailedWebDriverLikeResponse(request.getVariableValue(":sessionId"), e);
     }

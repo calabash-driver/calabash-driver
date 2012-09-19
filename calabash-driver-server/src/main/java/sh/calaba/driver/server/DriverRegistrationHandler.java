@@ -23,6 +23,8 @@ import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.net.HttpClientFactory;
@@ -33,6 +35,7 @@ import sh.calaba.driver.net.HttpClientFactory;
  * @author ddary
  */
 public class DriverRegistrationHandler {
+  final Logger logger = LoggerFactory.getLogger(DriverRegistrationHandler.class);
   private CalabashNodeConfiguration config;
 
   public DriverRegistrationHandler(CalabashNodeConfiguration config) {
@@ -50,8 +53,9 @@ public class DriverRegistrationHandler {
     HttpClient client = HttpClientFactory.getClient();
 
     URL registration = new URL(tmp);
-    System.out.println("Registering the node to hub :" + registration);
-
+    if (logger.isDebugEnabled()) {
+      logger.debug("Registering the node to hub :" + registration);
+    }
     BasicHttpEntityEnclosingRequest r =
         new BasicHttpEntityEnclosingRequest("POST", registration.toExternalForm());
     JSONObject nodeConfig = getNodeConfig();

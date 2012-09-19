@@ -32,6 +32,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.server.connector.CalabashAndroidConnector;
@@ -44,6 +46,7 @@ import sh.calaba.driver.server.connector.CalabashConnecterException;
  * @author ddary
  */
 public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
+  final Logger logger = LoggerFactory.getLogger(CalabashAndroidConnectorImpl.class);
   private DefaultHttpClient httpClient;
   private String hostname;
   private int port;
@@ -86,7 +89,7 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
     JSONObject result = new JSONObject();
 
     try {
-     
+
       screenshot = execute("/screenshot", null);
 
       List<String> extras = new ArrayList<String>();
@@ -175,7 +178,9 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
    */
   @Override
   public void start() {
-    System.out.println("Starting Calabash HTTP Connector");
+    if (logger.isDebugEnabled()) {
+      logger.debug("Starting Calabash HTTP Connector");
+    }
     httpClient = new DefaultHttpClient();
     this.new CalabashHttpServerWaiter().run();
   }
@@ -194,25 +199,18 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
       }
     }
 
-
-
     @Override
     public void run() {
       lock.lock();
-
       try {
-        Boolean portIsNotBound = !isPortBound();
-
-        while (portIsNotBound) {
+        while (!isPortBound()) {
           cv.await(2, TimeUnit.SECONDS);
-          portIsNotBound = !isPortBound();
         }
       } catch (InterruptedException e) {
-        e.printStackTrace();
+        logger.error("Process to wait for starting the calabash server was interupted.", e);
       } finally {
         lock.unlock();
       }
     }
   }
-
 }

@@ -98,7 +98,9 @@ public class DefaultAdbConnection implements AdbConection {
         // do nothing, try to wait again
       }
     }
-    System.out.println(" process exit value: " + process.exitValue());
+    if (logger.isDebugEnabled()) {
+      logger.debug(" process exit value: " + process.exitValue());
+    }
     if (expected != process.exitValue()) {
       throw new AdbConnetionException("Exit value of process was " + process.exitValue()
           + " but expected " + expected);
