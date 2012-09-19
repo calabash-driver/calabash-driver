@@ -17,10 +17,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import org.apache.commons.codec.binary.Base64;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
+import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.model.By.ContentDescription;
 import sh.calaba.driver.model.DeviceSupport;
 
@@ -49,8 +51,12 @@ public class DeviceImpl extends RemoteObject implements DeviceSupport {
   public File takeScreenshot(String path) {
     File file = null;
     JSONObject result = executeCalabashCommand(CalabashCommands.TAKE_SCREENSHOT);
+    if (result == null || !result.has("bonusInformation")) {
+      throw new CalabashException("An error occured while taking a screenshot.");
+    }
     try {
-      String base64String = result.getJSONArray("bonusInformation").getString(0);
+      JSONArray bonusInformation = result.getJSONArray("bonusInformation");
+      String base64String = bonusInformation.getString(0);
 
       byte[] img64 = Base64.decodeBase64(base64String);
       file = new File(path);
