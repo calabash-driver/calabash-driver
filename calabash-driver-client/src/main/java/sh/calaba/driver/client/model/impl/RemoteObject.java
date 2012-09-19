@@ -1,6 +1,5 @@
 /*
- * Copyright 2012 ios-driver committers.
- * Copyright 2012 calabash-driver committers.
+ * Copyright 2012 ios-driver committers. Copyright 2012 calabash-driver committers.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -19,6 +18,7 @@ import org.json.JSONObject;
 
 import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
+import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.net.Path;
 import sh.calaba.driver.net.Session;
 import sh.calaba.driver.net.WebDriverLikeCommand;
@@ -40,18 +40,17 @@ public class RemoteObject {
       payload.put("arguments", parameter);
 
       Object res = get(calabashCommand.getWebDriverLikeCommand(), payload);
-      // TODO ddary do this in a nicer way ;-)
       JSONObject result = ((JSONObject) res);
 
       Boolean status = (Boolean) result.get("success");
-      if (!status) {
-        throw new RuntimeException("Calabash command '" + calabashCommand.getCommand()
+      if (result == null || !status) {
+        throw new CalabashException("Calabash command '" + calabashCommand.getCommand()
             + "' was not successful: " + result);
       }
       return result;
     } catch (JSONException e) {
       e.printStackTrace();
-      return null;
+      throw new CalabashException("Error ocured while parsing calabash-driver response.", e);
     }
   }
 
