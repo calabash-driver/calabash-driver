@@ -34,11 +34,11 @@ public class WebViewImpl extends RemoteObject implements WebViewSupport {
 
   @Override
   public void enterText(String text) {
-    executeCalabashCommand(CalabashCommands.SET_SET, CSS, css.getIndentifier(), text);
+    executeCalabashCommand(CalabashCommands.SET_SET, CSS, css.getIdentifier(), text);
   }
 
   @Override
   public void click() {
-    executeCalabashCommand(CalabashCommands.TOUCH, CSS, css.getIndentifier());
+    executeCalabashCommand(CalabashCommands.TOUCH, CSS, css.getIdentifier());
   }
 }

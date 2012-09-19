@@ -34,15 +34,15 @@ public class L10nElementImpl extends RemoteObject implements L10nSupport {
   @Override
   public void press() {
     if (id.getType() == null) {
-      executeCalabashCommand(CalabashCommands.PRESS_L10N_ELEMENT, id.getIndentifier());
+      executeCalabashCommand(CalabashCommands.PRESS_L10N_ELEMENT, id.getIdentifier());
     } else {
-      executeCalabashCommand(CalabashCommands.PRESS_L10N_ELEMENT, id.getIndentifier(), id.getType()
+      executeCalabashCommand(CalabashCommands.PRESS_L10N_ELEMENT, id.getIdentifier(), id.getType()
           .name());
     }
   }
 
   @Override
   public void waitFor() {
-    executeCalabashCommand(CalabashCommands.WAIT_FOR_L10N_ELEMENT, id.getIndentifier());
+    executeCalabashCommand(CalabashCommands.WAIT_FOR_L10N_ELEMENT, id.getIdentifier());
   }
 }

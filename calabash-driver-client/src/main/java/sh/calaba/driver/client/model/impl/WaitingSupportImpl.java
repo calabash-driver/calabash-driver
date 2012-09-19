@@ -42,9 +42,9 @@ public class WaitingSupportImpl extends RemoteObject implements WaitingSupport {
   @Override
   public void waitFor(By by) {
     if (by instanceof By.Id) {
-      executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_NAME, by.getIndentifier());
+      executeCalabashCommand(CalabashCommands.WAIT_FOR_VIEW_BY_NAME, by.getIdentifier());
     } else if (by instanceof By.ContentDescription) {
-      executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT, by.getIndentifier());
+      executeCalabashCommand(CalabashCommands.WAIT_FOR_TEXT, by.getIdentifier());
     } else {
       throw new IllegalArgumentException("Type of by not supported now");
     }

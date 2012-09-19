@@ -24,6 +24,7 @@ public class FailedWebDriverLikeResponse extends WebDriverLikeResponse {
   }
 
   public FailedWebDriverLikeResponse(String sessionId, Exception e, String extraMessage) {
+    // Webdriver Status 13 for UnknownError
     super(sessionId, 13, null);
 
     try {
@@ -46,5 +47,4 @@ public class FailedWebDriverLikeResponse extends WebDriverLikeResponse {
     this(sessionId, e, "");
 
   }
-
 }

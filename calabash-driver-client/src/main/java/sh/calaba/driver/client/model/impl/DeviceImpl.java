@@ -72,6 +72,6 @@ public class DeviceImpl extends RemoteObject implements DeviceSupport {
 
   @Override
   public void pressContextMenuItem(ContentDescription text) {
-    executeCalabashCommand(CalabashCommands.PRESS_LONG_ON_TEXT, text.getIndentifier());
+    executeCalabashCommand(CalabashCommands.PRESS_LONG_ON_TEXT, text.getIdentifier());
   }
 }

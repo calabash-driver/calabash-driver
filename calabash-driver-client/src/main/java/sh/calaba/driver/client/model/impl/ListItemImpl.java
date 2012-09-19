@@ -35,11 +35,11 @@ public class ListItemImpl extends RemoteObject implements ListItemSupport {
   @Override
   public void press() {
     if (by instanceof By.Index) {
-      executeCalabashCommand(CalabashCommands.PRESS_LIST_ITEM, by.getIndentifier(), "0");
+      executeCalabashCommand(CalabashCommands.PRESS_LIST_ITEM, by.getIdentifier(), "0");
     } else if (by instanceof By.ContentDescription) {
-      executeCalabashCommand(CalabashCommands.PRESS_LIST_ITEM_TEXT, by.getIndentifier());
+      executeCalabashCommand(CalabashCommands.PRESS_LIST_ITEM_TEXT, by.getIdentifier());
     } else if (by instanceof By.Id) {
-      executeCalabashCommand(CalabashCommands.PRESS, by.getIndentifier());
+      executeCalabashCommand(CalabashCommands.PRESS, by.getIdentifier());
     } else {
       throw new IllegalArgumentException("By not available.");
     }
@@ -48,7 +48,7 @@ public class ListItemImpl extends RemoteObject implements ListItemSupport {
   @Override
   public void longPress() {
     if (by instanceof By.Index) {
-      executeCalabashCommand(CalabashCommands.LONG_PRESS_LIST_ITEM, by.getIndentifier());
+      executeCalabashCommand(CalabashCommands.LONG_PRESS_LIST_ITEM, by.getIdentifier());
     } else {
       throw new IllegalArgumentException("By not available.");
     }

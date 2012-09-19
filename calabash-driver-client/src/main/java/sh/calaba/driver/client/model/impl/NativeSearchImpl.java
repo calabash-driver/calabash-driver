@@ -32,6 +32,6 @@ public class NativeSearchImpl extends RemoteObject implements NativeSearchSuppor
 
   @Override
   public void text(String searchTerm) {
-    executeCalabashCommand(CalabashCommands.SEARCH_FOR, by.getIndentifier(), searchTerm);
+    executeCalabashCommand(CalabashCommands.SEARCH_FOR, by.getIdentifier(), searchTerm);
   }
 }

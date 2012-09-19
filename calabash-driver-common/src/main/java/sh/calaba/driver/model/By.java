@@ -1,11 +1,11 @@
 /*
  * Copyright 2012 calabash-driver committers.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -16,9 +16,9 @@ package sh.calaba.driver.model;
 /**
  * Mechanism used to locate elements within a view. In order to create your own locating mechanisms,
  * it is possible to subclass this class. Inspired by the Selenium By class.
- * 
+ *
  * @author ddary
- * 
+ *
  */
 public class By {
   private String identifier;
@@ -28,19 +28,18 @@ public class By {
   protected By(String identifier) {
     this.identifier = identifier;
   }
-
   /**
-   * @return The identifyer of the locator.
+   * @return The identifier of the locator.
    */
-  public String getIndentifier() {
+  public String getIdentifier() {
     return identifier;
   }
 
   /**
    * Locator based on index of an element.
-   * 
+   *
    * @author ddary
-   * 
+   *
    */
   public class Index extends By {
     public Index(Integer identifier) {
@@ -54,9 +53,9 @@ public class By {
 
   /**
    * Locator based on Android native name / id of an element.
-   * 
+   *
    * @author ddary
-   * 
+   *
    */
   public class Id extends By {
     public Id(String id) {
@@ -65,9 +64,9 @@ public class By {
   }
   /**
    * Locator based CSS selectors for web views.
-   * 
+   *
    * @author ddary
-   * 
+   *
    */
   public class CSS extends By {
     public CSS(String id) {
@@ -76,10 +75,10 @@ public class By {
   }
 
   /**
-   * Locator based on key of an Appp resource bundle file.
-   * 
+   * Locator based on key of an App resource bundle file.
+   *
    * @author ddary
-   * 
+   *
    */
   public class L10nElement extends By {
     private L10nElementType type = null;
@@ -100,9 +99,9 @@ public class By {
 
   /**
    * Locator based on the text of an element.
-   * 
+   *
    * @author ddary
-   * 
+   *
    */
   public class ContentDescription extends By {
     public ContentDescription(String text) {
@@ -112,16 +111,16 @@ public class By {
 
   /**
    * Describing the types of supported {@link L10nElement} types.
-   * 
+   *
    * @author ddary
-   * 
+   *
    */
   public enum L10nElementType {
     BUTTON, TOOGLE_BUTTON, MENU_ITEM;
   }
 
   /**
-   * 
+   *
    * @param index Index of element.
    * @return a By which locates elements via index.
    */

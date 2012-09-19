@@ -203,19 +203,25 @@ public class CalabashCapabilities {
    */
   @Override
   public boolean equals(Object obj) {
+
     if (this == obj) return true;
     if (obj == null) return false;
+
     if (getClass() != obj.getClass()) return false;
     CalabashCapabilities other = (CalabashCapabilities) obj;
+
     if (getDeviceId() == null) {
       if (other.getDeviceId() != null) return false;
     } else if (!getDeviceId().equals(other.getDeviceId())) return false;
+
     if (getLocale() == null) {
       if (other.getLocale() != null) return false;
     } else if (!getLocale().equals(other.getLocale())) return false;
+
     if (getSDKVersion() == null) {
       if (other.getSDKVersion() != null) return false;
     } else if (!getSDKVersion().equals(other.getSDKVersion())) return false;
+
     if (getAppBasePackage() == null) {
       if (other.getAppBasePackage() != null) return false;
     } else if (!getAppBasePackage().equals(other.getAppBasePackage())) return false;
