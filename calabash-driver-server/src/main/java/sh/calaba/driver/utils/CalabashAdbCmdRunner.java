@@ -22,7 +22,11 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import sh.calaba.utils.AdbConnection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import sh.calaba.utils.AdbConection;
+import sh.calaba.utils.DefaultAdbConnection;
 
 /**
  * Central place to execute Calabash ADB commands.
@@ -31,22 +35,28 @@ import sh.calaba.utils.AdbConnection;
  * 
  */
 public class CalabashAdbCmdRunner {
-  private static AdbConnection adbConnection = getAdbConnection();
+  final Logger logger = LoggerFactory.getLogger(CalabashAdbCmdRunner.class);
+  private AdbConection adbConnection = null;
   public static final String CALABASH_DRIVER_APPS = "CALABASH_DRIVER_APPS";
   private static String pathToDriverApps = null;
   public static final int CALABASH_INTERNAL_PORT = 7102;
 
-  protected static AdbConnection getAdbConnection() {
-    return new AdbConnection();
+  public CalabashAdbCmdRunner() {
+    this.adbConnection = new DefaultAdbConnection();
+  }
+
+  public CalabashAdbCmdRunner(AdbConection adbConnection) {
+    this.adbConnection = adbConnection;
   }
 
   /**
    * @return The path to the apps folder, where the APK files are located.
    */
-  protected static String getPathToDriverApps() {
+  protected String getPathToDriverApps() {
     if (pathToDriverApps == null) {
       pathToDriverApps = System.getenv(CALABASH_DRIVER_APPS);
       if (pathToDriverApps == null) {
+        logger.error("Environment variable " + CALABASH_DRIVER_APPS + " is not configured.");
         throw new RuntimeException("The environment variable '" + CALABASH_DRIVER_APPS
             + "' seems not to be configured. "
             + "Please make sure this is properly configured on your machine.");
@@ -65,7 +75,7 @@ public class CalabashAdbCmdRunner {
    * @param adbParamter The parameter to use to execute the adb command.
    * @throws {@link IllegalArgumentException} if adbParameter are not existent.
    */
-  public static void executeAdbCommand(String deviceId, String adbParamter) {
+  public void executeAdbCommand(String deviceId, String adbParamter) {
     if (adbParamter == null || adbParamter.isEmpty()) {
       throw new IllegalArgumentException("adbParamter must not be null!'");
     }
@@ -86,7 +96,7 @@ public class CalabashAdbCmdRunner {
    * @param appBasePackage The base package of the app to delete the user data for.
    * @param deviceId The device id to use.
    */
-  public static void deleteSavedAppData(String appBasePackage, String deviceId) {
+  public void deleteSavedAppData(String appBasePackage, String deviceId) {
     List<String> commandLineFwd = new ArrayList<String>();
     if (deviceId != null) {
       commandLineFwd.add("-s");
@@ -108,7 +118,7 @@ public class CalabashAdbCmdRunner {
    * @param apkFileName The file name of the APK file to install.
    * @param deviceId The device id to use to install the device.
    */
-  public static void installAPKFile(String apkFileName, String deviceId) {
+  public void installAPKFile(String apkFileName, String deviceId) {
     List<String> commandLineFwd = new ArrayList<String>();
     if (deviceId != null) {
       commandLineFwd.add("-s");
@@ -129,7 +139,7 @@ public class CalabashAdbCmdRunner {
    * @param appBasePackageName The base package name of the app e.g. com.ebay.mobile.
    * @return The thread that has started the Android instrumentation.
    */
-  public static Thread startCalabashServer(final String deviceId, final String appBasePackageName) {
+  public Thread startCalabashServer(final String deviceId, final String appBasePackageName) {
     Thread instrumentationThread = new Thread(new Runnable() {
 
       @Override
@@ -149,8 +159,6 @@ public class CalabashAdbCmdRunner {
         commandLineFwd.add(appBasePackageName
             + ".test/sh.calaba.instrumentationbackend.CalabashInstrumentationTestRunner");
 
-
-
         adbConnection.runProcess(commandLineFwd, "about to start CalabashServer", false);
 
       }
@@ -167,7 +175,7 @@ public class CalabashAdbCmdRunner {
    * 
    * @param deviceId The device id to use.
    */
-  public static void waitForCalabashServerOnDevice(final String deviceId) {
+  public void waitForCalabashServerOnDevice(final String deviceId) {
     (new CalabashAdbCmdRunner().new CalabashServerWaiter(adbConnection, deviceId)).run();
   }
 
@@ -178,7 +186,7 @@ public class CalabashAdbCmdRunner {
    * @param remote The remote port on the device to use.
    * @param deviceId The device id to use to activate the port forwarding.
    */
-  public static void activatePortForwarding(int local, int remote, String deviceId) {
+  public void activatePortForwarding(int local, int remote, String deviceId) {
     List<String> commandLineFwd = new ArrayList<String>();
     if (deviceId != null) {
       commandLineFwd.add("-s");
@@ -199,10 +207,10 @@ public class CalabashAdbCmdRunner {
   public class CalabashServerWaiter implements Runnable {
     private Lock lock = new ReentrantLock();
     private Condition cv = lock.newCondition();
-    private AdbConnection adbConnection;
+    private AdbConection adbConnection;
     private String deviceId;
 
-    CalabashServerWaiter(AdbConnection con, String deviceId) {
+    CalabashServerWaiter(AdbConection con, String deviceId) {
       this.adbConnection = con;
       this.deviceId = deviceId;
     }
@@ -233,14 +241,11 @@ public class CalabashAdbCmdRunner {
       lock.lock();
 
       try {
-        boolean portIsNotBound = !isPortBound();
-        while (portIsNotBound) {
-
+        while (!isPortBound()) {
           cv.await(2, TimeUnit.SECONDS);
-          portIsNotBound = !isPortBound();
         }
       } catch (InterruptedException e) {
-        e.printStackTrace();
+        logger.error("Waiting Thread for calabash server was interrupted: ", e);
       } finally {
         lock.unlock();
       }
