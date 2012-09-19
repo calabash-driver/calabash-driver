@@ -14,13 +14,17 @@
 package sh.calaba.driver.server.command.impl;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.net.WebDriverLikeRequest;
 import sh.calaba.driver.net.WebDriverLikeResponse;
 import sh.calaba.driver.server.CalabashProxy;
 import sh.calaba.driver.server.command.BaseCommandHandler;
+import sh.calaba.driver.server.connector.CalabashConnecterException;
 
 public class StopSession extends BaseCommandHandler {
+  final Logger logger = LoggerFactory.getLogger(StopSession.class);
 
   public StopSession(CalabashProxy proxy, WebDriverLikeRequest request) {
     super(proxy, request);
@@ -28,23 +32,21 @@ public class StopSession extends BaseCommandHandler {
 
   public WebDriverLikeResponse handle() throws Exception {
     String sessionId = getSessionId();
-    // TODO validate that
+
     getCalabashProxy().stopCalabashConnector(sessionId);
-    JSONObject o = new JSONObject();
+    JSONObject responsePayload = new JSONObject();
     try {
-      o.put("sessionId", sessionId);
-      o.put("status", 0);
-      o.put("value", "");
-      WebDriverLikeResponse r = new WebDriverLikeResponse(o);
-      return r;
+      responsePayload.put("sessionId", sessionId);
+      responsePayload.put("status", 0);
+      responsePayload.put("value", "");
+      WebDriverLikeResponse response = new WebDriverLikeResponse(responsePayload);
+      return response;
     } catch (Exception e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-      return null;
+      throw new CalabashConnecterException("Error occured while ending the session", e);
     } finally {
-      System.out.println("\n\n\n---------Session STOP ---------------\n\n\n");
+      if (logger.isDebugEnabled()) {
+        logger.debug("\n\n\n---------Session STOP ---------------\n\n\n");
+      }
     }
-
   }
-
 }

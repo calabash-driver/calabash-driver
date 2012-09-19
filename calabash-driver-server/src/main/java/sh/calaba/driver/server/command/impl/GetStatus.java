@@ -29,16 +29,15 @@ public class GetStatus extends BaseCommandHandler {
   }
 
   public WebDriverLikeResponse handle() throws Exception {
-    // TODO ddary find a better way to implement this
     JSONObject build = new JSONObject();
     build.put("version", "1.0-snapshot");
     build.put("revision", "01");
-    build.put("time", new Date(2012, 5, 1).getTime());
+    build.put("time", new Date().getTime());
 
     JSONObject os = new JSONObject();
-    os.put("arch", "INTEL");
-    os.put("name", "MAC");
-    os.put("version", "10.7.4");
+    os.put("arch", System.getProperty("os.arch"));
+    os.put("name", System.getProperty("os.name"));
+    os.put("version", System.getProperty("os.version"));
 
     JSONObject json = new JSONObject();
     json.put("build", build);
@@ -47,8 +46,6 @@ public class GetStatus extends BaseCommandHandler {
     // TODO ddary find a solution for non existing session
     WebDriverLikeResponse r = new WebDriverLikeResponse("0815", 200, json);
 
-
     return r;
-
   }
 }

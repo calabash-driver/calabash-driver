@@ -14,6 +14,8 @@
 package sh.calaba.driver.server.command.impl;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.net.WebDriverLikeRequest;
@@ -27,6 +29,7 @@ import sh.calaba.driver.server.command.BaseCommandHandler;
  * @author ddary
  */
 public class NewSession extends BaseCommandHandler {
+  final Logger logger = LoggerFactory.getLogger(NewSession.class);
 
   public NewSession(CalabashProxy proxy, WebDriverLikeRequest request) {
     super(proxy, request);
@@ -41,13 +44,17 @@ public class NewSession extends BaseCommandHandler {
 
     JSONObject json = new JSONObject();
     String sessionID = getCalabashProxy().initializeSessionForCapabilities(capabilities);
-    System.out.println("New Session Class; session iD: " + sessionID);
+    if (logger.isDebugEnabled()) {
+      logger.debug("New Session Class; session iD: " + sessionID);
+    }
     json.put("sessionId", sessionID);
     json.put("status", 0);
     json.put("value", new JSONObject());
-    WebDriverLikeResponse r = new WebDriverLikeResponse(json);
+    WebDriverLikeResponse response = new WebDriverLikeResponse(json);
 
-    System.out.println("Created session ID in response: " + r.getSessionId());
-    return r;
+    if (logger.isDebugEnabled()) {
+      logger.debug("Created session ID in response: " + response.getSessionId());
+    }
+    return response;
   }
 }
