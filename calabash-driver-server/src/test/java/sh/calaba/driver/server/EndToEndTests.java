@@ -1,9 +1,5 @@
 package sh.calaba.driver.server;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,8 +7,10 @@ import org.testng.annotations.Test;
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
 import sh.calaba.driver.model.By;
+import sh.calaba.driver.server.support.AdbConnectionStub;
 import sh.calaba.driver.server.support.CalabashLocalNodeConfiguration;
 import sh.calaba.driver.server.support.CapabilityFactory;
+import sh.calaba.driver.utils.CalabashAdbCmdRunner;
 
 public class EndToEndTests {
 
@@ -24,8 +22,11 @@ public class EndToEndTests {
   public void startServer() throws Exception {
     CalabashLocalNodeConfiguration conf =
         new CalabashLocalNodeConfiguration(CapabilityFactory.anAndroidCapability(), host, port);
-    server = new CalabashAndroidServer(conf);
-    server.start();
+    CalabashProxy proxy = new CalabashProxy();
+    proxy.setCalabashAdbCmdRunner(new CalabashAdbCmdRunner(new AdbConnectionStub()));
+    server = new CalabashAndroidServer();
+    server.setProxy(proxy);
+    server.start(conf);
   }
 
   @Test(enabled = true)
@@ -33,21 +34,19 @@ public class EndToEndTests {
     RemoteCalabashAndroidDriver driver = null;
     try {
       CalabashCapabilities capa = CapabilityFactory.anAndroidCapability();
-      driver = new RemoteCalabashAndroidDriver("http://" + host + ":" + port + "/wd/hub", capa.getRawCapabilities());
+      driver =
+          new RemoteCalabashAndroidDriver("http://" + host + ":" + port + "/wd/hub",
+              capa.getRawCapabilities());
 
       System.out.println("created session: " + driver.getSession().getSessionId());
       System.out.println("session cap: " + driver.getSession().getActualCapabilities());
 
-      driver.listItem(By.index(5)).press();
+      driver.findListItem(By.index(5)).press();
 
-      driver.textField(By.text("username")).enterText("ddary_mobile");
-      driver.textField(By.text("password")).enterText("password");
-      driver.button(By.text("Sign In")).press();
-      /*
-       * RemoteUIATarget target = driver.getLocalTarget();
-       * Assert.assertEquals(target.getReference(), "1"); target = (RemoteUIATarget)
-       * driver.getLocalTarget(); Assert.assertEquals(target.getReference(), "2");
-       */
+      driver.findTextField(By.text("username")).enterText("ddary_mobile");
+      driver.findTextField(By.text("password")).enterText("password");
+      driver.findButton(By.text("Sign In")).press();
+
     } finally {
       if (driver != null) {
         driver.quit();
