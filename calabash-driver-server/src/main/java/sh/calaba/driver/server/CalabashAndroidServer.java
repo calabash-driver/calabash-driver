@@ -18,22 +18,27 @@ import java.util.List;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import sh.calaba.driver.server.exceptions.CalabashConfigurationException;
+import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.server.servlet.CalabashServlet;
 
 /**
+ * The main calabash android driver server.
  * 
  * @author ddary
  * 
  */
 public class CalabashAndroidServer {
+  final Logger logger = LoggerFactory.getLogger(CalabashAndroidServer.class);
   public static final String COMMAND_LNE_PARAMETER = "-driverConfig";
 
   public static final String SCRIPT_KEY = CalabashProxy.class.getName();
-  private final Server server;
+  private Server server;
   private CalabashNodeConfiguration config;
   private boolean isReady = false;
+  private CalabashProxy proxy = null;
 
   public static void main(String[] args) {
     if ((args == null || args.length <= 1)
@@ -47,17 +52,10 @@ public class CalabashAndroidServer {
     }
     String driverConfigurationFile = args[1];
 
-    CalabashAndroidServer server = null;
+    CalabashAndroidServer server = new CalabashAndroidServer();
+
     try {
-      server =
-          new CalabashAndroidServer(CalabashNodeConfiguration.readConfig(driverConfigurationFile));
-    } catch (CalabashConfigurationException e) {
-      System.out.println("A CalabashDriver configuartion error occured:");
-      System.out.println(e.getMessage());
-      System.exit(0);
-    }
-    try {
-      server.start();
+      server.start(CalabashNodeConfiguration.readConfig(driverConfigurationFile));
     } catch (Exception e) {
       System.out.println("An error occured starting the CalabashDriver:");
       System.out.println(e.getMessage());
@@ -65,19 +63,7 @@ public class CalabashAndroidServer {
     }
   }
 
-  public void start() throws Exception {
-    server.start();
-  }
-
-  public void stop() throws Exception {
-    server.stop();
-  }
-
-  public boolean isReady() {
-    return server.isStarted() ;
-  }
-
-  public CalabashAndroidServer(CalabashNodeConfiguration config) {
+  public void start(CalabashNodeConfiguration config) throws Exception {
     this.config = config;
 
     server = new Server(config.getDriverPort());
@@ -92,7 +78,9 @@ public class CalabashAndroidServer {
       @Override
       public void afterProxyInitialization() {
         isReady = true;
-        System.out.println("The CalabashAndroidServer is initialized.");
+        if (logger.isDebugEnabled()) {
+          logger.debug("The CalabashAndroidServer is initialized.");
+        }
       }
     });
 
@@ -105,7 +93,8 @@ public class CalabashAndroidServer {
         }
       });
     }
-    CalabashProxy proxy = new CalabashProxy(listeners, config);
+
+    proxy.initializeMobileDevices(listeners, config);
     servletContextHandler.setAttribute(SCRIPT_KEY, proxy);
 
     Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -113,18 +102,35 @@ public class CalabashAndroidServer {
         try {
           server.stop();
         } catch (Exception e) {
-          e.printStackTrace();
+          logger.error("An error occured while shutting down the calabash driver server: ", e);
         }
       }
     });
+    server.start();
+  }
+
+  public void stop() throws Exception {
+    server.stop();
+  }
+
+  public boolean isReady() {
+    return server.isStarted() && isReady;
   }
 
   public void registerDriverNodeInHub() {
     try {
       new DriverRegistrationHandler(config).performRegsitration();
     } catch (Exception e) {
-      e.printStackTrace();
+      String msg = "An error occured while registering the driver into the grid hub:";
+      logger.error(msg, e);
+      throw new CalabashException(msg, e);
     }
   }
 
+  /**
+   * @param proxy the proxy to set
+   */
+  public void setProxy(CalabashProxy proxy) {
+    this.proxy = proxy;
+  }
 }
