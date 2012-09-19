@@ -14,6 +14,8 @@
 package sh.calaba.driver.server.command.impl;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.net.WebDriverLikeRequest;
 import sh.calaba.driver.net.WebDriverLikeResponse;
@@ -21,6 +23,8 @@ import sh.calaba.driver.server.CalabashProxy;
 import sh.calaba.driver.server.command.BaseCommandHandler;
 
 public class GetCapabilities extends BaseCommandHandler {
+  final Logger logger = LoggerFactory.getLogger(GetCapabilities.class);
+
   public GetCapabilities(CalabashProxy proxy, WebDriverLikeRequest request) {
     super(proxy, request);
 
@@ -35,6 +39,9 @@ public class GetCapabilities extends BaseCommandHandler {
     response.put("sessionId", sessionID);
     response.put("status", 0);
     response.put("value", caps.toString());
+    if (logger.isDebugEnabled()) {
+      logger.debug("Session Capabilities for session: " + sessionID + " - ", response);
+    }
     return new WebDriverLikeResponse(response);
   }
 }
