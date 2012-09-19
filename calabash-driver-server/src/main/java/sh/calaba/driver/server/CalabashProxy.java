@@ -22,9 +22,13 @@ import java.util.UUID;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.CalabashCapabilities;
+import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.server.connector.CalabashAndroidConnector;
+import sh.calaba.driver.server.connector.CalabashConnecterException;
 import sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl;
 import sh.calaba.driver.utils.CalabashAdbCmdRunner;
 
@@ -35,6 +39,7 @@ import sh.calaba.driver.utils.CalabashAdbCmdRunner;
  * 
  */
 public class CalabashProxy {
+  final Logger logger = LoggerFactory.getLogger(CalabashProxy.class);
   private Map<String, CalabashAndroidConnector> sessionConnectors =
       new HashMap<String, CalabashAndroidConnector>();
   private Map<String, Thread> sessionInstrumentationThreads = new HashMap<String, Thread>();
@@ -43,29 +48,31 @@ public class CalabashProxy {
   private final List<CalabashCapabilities> availableCapabilities =
       new ArrayList<CalabashCapabilities>();
   private boolean cleanSavedUserData = true;
+  private CalabashAdbCmdRunner calabashAdbCmdRunner = new CalabashAdbCmdRunner();
 
   /**
-   * Default constructor that {@link #initializeMobileDevices(CalabashNodeConfiguration)}.
+   * Default constructor that {@link #doIinitializeMobileDevices(CalabashNodeConfiguration)}.
    * 
-   * @param nodeConfig The node config to use.
+   * @param nodeConfig The node configuration to use.
    */
-  public CalabashProxy(CalabashNodeConfiguration nodeConfig) {
-    initializeMobileDevices(nodeConfig);
+  public void initializeMobileDevices(CalabashNodeConfiguration nodeConfig) {
+    doIinitializeMobileDevices(nodeConfig);
   }
 
   /**
-   * Constructor that {@link #initializeMobileDevices(CalabashNodeConfiguration)} and is notifying
-   * afterwards the provided listener {@link ProxyInitializationListener#afterProxyInitialization()}
-   * about the completed initialization.
+   * Constructor that {@link #doIinitializeMobileDevices(CalabashNodeConfiguration)} and is
+   * notifying afterwards the provided listener
+   * {@link ProxyInitializationListener#afterProxyInitialization()} about the completed
+   * initialization.
    * 
    * @param listener
    * @param nodeConfig
    */
-  public CalabashProxy(final List<ProxyInitializationListener> listeners,
+  public void initializeMobileDevices(final List<ProxyInitializationListener> listeners,
       final CalabashNodeConfiguration nodeConfig) {
     new Thread(new Runnable() {
       public void run() {
-        initializeMobileDevices(nodeConfig);
+        doIinitializeMobileDevices(nodeConfig);
         if (listeners != null && !listeners.isEmpty()) {
           for (ProxyInitializationListener listener : listeners)
             listener.afterProxyInitialization();
@@ -76,8 +83,8 @@ public class CalabashProxy {
 
   /**
    * Initializes a new test session for provided {@link CalabashCapabilities}. This means the
-   * calabash-server on the device is started by starting the Android instrumentation and if the
-   * test server in the device is successfully started, a connected to this server is established.
+   * calabash-server on the device is started by running the Android instrumentation and if the test
+   * server on the device is successfully started, a connection to this server is established.
    * 
    * @see #startCalabashServerAndStartConnector(String, CalabashCapabilities)
    * 
@@ -95,7 +102,7 @@ public class CalabashProxy {
 
       return sessionId;
     } else {
-      throw new RuntimeException("Driver does not support requested capability: "
+      throw new CalabashException("Driver does not support requested capability: "
           + calabashCapabilities);
     }
   }
@@ -128,13 +135,13 @@ public class CalabashProxy {
    * 
    * @param capabilities the capabilities to initialize
    */
-  protected void initializeMobileDevices(CalabashNodeConfiguration nodeConfig) {
+  private void doIinitializeMobileDevices(CalabashNodeConfiguration nodeConfig) {
     this.cleanSavedUserData = nodeConfig.isCleanSavedUserDataEnabled();
     for (CalabashCapabilities capability : nodeConfig.getCapabilities()) {
       if (nodeConfig.isInstallApksEnabled()) {
-        CalabashAdbCmdRunner
+        calabashAdbCmdRunner
             .installAPKFile(nodeConfig.getMobileAppPath(), capability.getDeviceId());
-        CalabashAdbCmdRunner.installAPKFile(nodeConfig.getMobileTestAppPath(),
+        calabashAdbCmdRunner.installAPKFile(nodeConfig.getMobileTestAppPath(),
             capability.getDeviceId());
       }
       availableCapabilities.add(capability);
@@ -155,26 +162,30 @@ public class CalabashProxy {
     if (cleanSavedUserData) {
       String basePackage = capability.getAppBasePackage();
       String device = capability.getDeviceId();
-      CalabashAdbCmdRunner.deleteSavedAppData(basePackage, device);
+      calabashAdbCmdRunner.deleteSavedAppData(basePackage, device);
     }
     List<String> adbCommands = capability.getAdditionalAdbCommands();
     if (adbCommands != null && !adbCommands.isEmpty()) {
       for (String adbCommandParameter : adbCommands) {
-        System.out.println("executing adb with parameter: " + adbCommandParameter);
-        CalabashAdbCmdRunner.executeAdbCommand(capability.getDeviceId(), adbCommandParameter);
+        if (logger.isDebugEnabled()) {
+          logger.debug("executing adb with parameter: " + adbCommandParameter);
+        }
+        calabashAdbCmdRunner.executeAdbCommand(capability.getDeviceId(), adbCommandParameter);
       }
     }
 
     Thread instThread =
-        CalabashAdbCmdRunner.startCalabashServer(capability.getDeviceId(),
+        calabashAdbCmdRunner.startCalabashServer(capability.getDeviceId(),
             capability.getAppBasePackage());
     sessionInstrumentationThreads.put(sessionId, instThread);
 
     Integer portNumber = getNextPortNumber();
-    CalabashAdbCmdRunner.activatePortForwarding(portNumber,
+    calabashAdbCmdRunner.activatePortForwarding(portNumber,
         CalabashAdbCmdRunner.CALABASH_INTERNAL_PORT, capability.getDeviceId());
-    System.out.println("Capability initialized: " + capability.getDeviceName() + " on local port: "
-        + portNumber);
+    if (logger.isDebugEnabled()) {
+      logger.debug("Capability initialized: " + capability.getDeviceName() + " on local port: "
+          + portNumber);
+    }
     return portNumber;
   }
 
@@ -218,12 +229,13 @@ public class CalabashProxy {
     if (sessionConnectors.containsKey(sessionId)) {
       sessionConnectors.get(sessionId).quit();
     } else {
-      throw new RuntimeException("Session not found to stop Calabash Connector: " + sessionId);
+      throw new CalabashConnecterException("Session not found to stop Calabash Connector: "
+          + sessionId);
     }
     if (sessionInstrumentationThreads.containsKey(sessionId)) {
       sessionInstrumentationThreads.get(sessionId).interrupt();
     } else {
-      throw new RuntimeException(
+      throw new CalabashConnecterException(
           "Session not found to kill calabash istrumentation process/thread: " + sessionId);
     }
     sessionConnectors.remove(sessionId);
@@ -232,15 +244,18 @@ public class CalabashProxy {
 
   /**
    * Redirects the given calabash <code>command</code> to the calabash server of the corresponding
-   * session.
+   * session. The command handling of taking screenshots is different from the other calabash
+   * command because another URI is used.
    * 
    * @param command The command to redirect and execute.
    * @param sessionId The test session id.
    * @return The response of the calabash server running on the device.
    */
   public JSONObject redirectMessageToCalabashServer(JSONObject command, String sessionId) {
-    System.out.println("received command: " + command.toString());
-    System.out.println("received sessionId: " + sessionId);
+    if (logger.isDebugEnabled()) {
+      logger.debug("received command: " + command.toString());
+      logger.debug("received sessionId: " + sessionId);
+    }
     if (sessionConnectors.containsKey(sessionId)) {
       JSONObject result = null;
       try {
@@ -250,14 +265,25 @@ public class CalabashProxy {
           result = sessionConnectors.get(sessionId).execute(command);
         }
       } catch (JSONException e) {
-        e.printStackTrace();
+        logger.error("Exception occured: ", e);
+        throw new CalabashConnecterException(
+            "Json exception occured while executing calabash commands: ", e);
       } catch (IOException e) {
-        e.printStackTrace();
+        logger.error("Exception occured: ", e);
+        throw new CalabashConnecterException(
+            "IOException exception occured while executing calabash commands: ", e);
       }
 
       return result;
     } else {
-      throw new RuntimeException("Calabash Connector for Session not found: " + sessionId);
+      throw new CalabashConnecterException("Calabash Connector for Session not found: " + sessionId);
     }
+  }
+
+  /**
+   * @param calabashAdbCmdRunner the calabashAdbCmdRunner to set
+   */
+  public void setCalabashAdbCmdRunner(CalabashAdbCmdRunner calabashAdbCmdRunner) {
+    this.calabashAdbCmdRunner = calabashAdbCmdRunner;
   }
 }
