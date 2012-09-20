@@ -54,6 +54,7 @@ public class CalabashAndroidServer {
 
     CalabashAndroidServer server = new CalabashAndroidServer();
 
+
     try {
       server.start(CalabashNodeConfiguration.readConfig(driverConfigurationFile));
     } catch (Exception e) {
@@ -93,7 +94,9 @@ public class CalabashAndroidServer {
         }
       });
     }
-
+    if (proxy == null) {
+      setProxy(new CalabashProxy());
+    }
     proxy.initializeMobileDevices(listeners, config);
     servletContextHandler.setAttribute(SCRIPT_KEY, proxy);
 
