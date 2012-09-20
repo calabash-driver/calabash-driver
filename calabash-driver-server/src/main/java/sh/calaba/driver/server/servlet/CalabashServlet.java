@@ -33,7 +33,7 @@ import sh.calaba.driver.server.Handler;
 import sh.calaba.driver.server.command.CommandMapping;
 
 public class CalabashServlet extends CalabashProxyBasedServlet {
-  final Logger logger = LoggerFactory.getLogger(CalabashProxyBasedServlet.class);
+  final static Logger logger = LoggerFactory.getLogger(CalabashServlet.class);
   private static final long serialVersionUID = -8544875030463578977L;
 
   @Override
@@ -42,7 +42,7 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
     try {
       process(request, response);
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error("Error occured while handling get request: ", e);
     }
   }
 
@@ -52,7 +52,7 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
     try {
       process(request, response);
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error("Error occured while handling get request: ", e);
     }
   }
 
@@ -62,7 +62,7 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
     try {
       process(request, response);
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error("Error occured while handling get request: ", e);
     }
   }
 
@@ -133,7 +133,7 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
       Handler h = CommandMapping.get(wdlc).createHandler(getCalabashProxy(), request);
       return h.handle();
     } catch (Exception e) {
-      logger.error("Error occured: " + request.getPath() + " Error: " + e);
+      logger.error("Error occured: " + request.getPath() + " Error: ", e);
       logger.error(request.toString());
 
       return new FailedWebDriverLikeResponse(request.getVariableValue(":sessionId"), e);

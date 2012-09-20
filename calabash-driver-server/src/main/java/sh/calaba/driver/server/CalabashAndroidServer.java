@@ -31,7 +31,7 @@ import sh.calaba.driver.server.servlet.CalabashServlet;
  * 
  */
 public class CalabashAndroidServer {
-  final Logger logger = LoggerFactory.getLogger(CalabashAndroidServer.class);
+  final static Logger logger = LoggerFactory.getLogger(CalabashAndroidServer.class);
   public static final String COMMAND_LNE_PARAMETER = "-driverConfig";
 
   public static final String SCRIPT_KEY = CalabashProxy.class.getName();

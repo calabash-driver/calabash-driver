@@ -23,7 +23,7 @@ import sh.calaba.driver.server.CalabashProxy;
 import sh.calaba.driver.server.command.BaseCommandHandler;
 
 public class GetCapabilities extends BaseCommandHandler {
-  final Logger logger = LoggerFactory.getLogger(GetCapabilities.class);
+  final static Logger logger = LoggerFactory.getLogger(GetCapabilities.class);
 
   public GetCapabilities(CalabashProxy proxy, WebDriverLikeRequest request) {
     super(proxy, request);

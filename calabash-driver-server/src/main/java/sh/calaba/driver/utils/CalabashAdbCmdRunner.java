@@ -25,6 +25,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.utils.AdbConection;
 import sh.calaba.utils.DefaultAdbConnection;
 
@@ -35,7 +36,7 @@ import sh.calaba.utils.DefaultAdbConnection;
  * 
  */
 public class CalabashAdbCmdRunner {
-  final Logger logger = LoggerFactory.getLogger(CalabashAdbCmdRunner.class);
+  final static Logger logger = LoggerFactory.getLogger(CalabashAdbCmdRunner.class);
   private AdbConection adbConnection = null;
   public static final String CALABASH_DRIVER_APPS = "CALABASH_DRIVER_APPS";
   private static String pathToDriverApps = null;
@@ -57,7 +58,7 @@ public class CalabashAdbCmdRunner {
       pathToDriverApps = System.getenv(CALABASH_DRIVER_APPS);
       if (pathToDriverApps == null) {
         logger.error("Environment variable " + CALABASH_DRIVER_APPS + " is not configured.");
-        throw new RuntimeException("The environment variable '" + CALABASH_DRIVER_APPS
+        throw new CalabashException("The environment variable '" + CALABASH_DRIVER_APPS
             + "' seems not to be configured. "
             + "Please make sure this is properly configured on your machine.");
       }

@@ -17,6 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import sh.calaba.driver.exceptions.CalabashException;
+
 public class FailedWebDriverLikeResponse extends WebDriverLikeResponse {
 
   public FailedWebDriverLikeResponse(JSONObject content) throws JSONException {
@@ -39,7 +41,7 @@ public class FailedWebDriverLikeResponse extends WebDriverLikeResponse {
       value.put("stacktrace", stacktace);
       setValue(value);
     } catch (JSONException e1) {
-      throw new RuntimeException("Error creating JSONObject.", e1);
+      throw new CalabashException("Error creating JSONObject.", e1);
     }
   }
 

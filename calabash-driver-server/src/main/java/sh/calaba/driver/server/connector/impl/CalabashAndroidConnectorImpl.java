@@ -46,7 +46,7 @@ import sh.calaba.driver.server.connector.CalabashConnecterException;
  * @author ddary
  */
 public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
-  final Logger logger = LoggerFactory.getLogger(CalabashAndroidConnectorImpl.class);
+  final static Logger logger = LoggerFactory.getLogger(CalabashAndroidConnectorImpl.class);
   private DefaultHttpClient httpClient;
   private String hostname;
   private int port;
@@ -114,6 +114,7 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
   private HttpResponse execute(String path, JSONObject action) {
     HttpResponse response = null;
     try {
+      System.out.println("hostname: "+hostname);
       HttpPost postRequest = new HttpPost("http://" + hostname + ":" + port + path);
       postRequest.addHeader("Content-Type", "application/json;charset=utf-8");
       if (action != null) {
@@ -129,7 +130,7 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
       throw new CalabashConnecterException(e);
     }
     if (response.getStatusLine().getStatusCode() != 200) {
-      throw new RuntimeException("Failed : HTTP error code : "
+      throw new CalabashConnecterException("Failed : HTTP error code : "
           + response.getStatusLine().getStatusCode());
     }
     return response;

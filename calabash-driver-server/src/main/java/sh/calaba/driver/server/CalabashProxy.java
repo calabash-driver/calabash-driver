@@ -39,7 +39,7 @@ import sh.calaba.driver.utils.CalabashAdbCmdRunner;
  * 
  */
 public class CalabashProxy {
-  final Logger logger = LoggerFactory.getLogger(CalabashProxy.class);
+  final static Logger logger = LoggerFactory.getLogger(CalabashProxy.class);
   private Map<String, CalabashAndroidConnector> sessionConnectors =
       new HashMap<String, CalabashAndroidConnector>();
   private Map<String, Thread> sessionInstrumentationThreads = new HashMap<String, Thread>();
@@ -219,7 +219,7 @@ public class CalabashProxy {
    */
   protected CalabashAndroidConnector initCalabashConnector(Integer portNumber,
       CalabashCapabilities capa) {
-    return new CalabashAndroidConnectorImpl("127.0.0.1", portNumber, capa);
+    return new CalabashAndroidConnectorImpl("localhost", portNumber, capa);
   }
 
   /**

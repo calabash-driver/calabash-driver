@@ -24,7 +24,7 @@ import sh.calaba.driver.server.command.BaseCommandHandler;
 import sh.calaba.driver.server.connector.CalabashConnecterException;
 
 public class StopSession extends BaseCommandHandler {
-  final Logger logger = LoggerFactory.getLogger(StopSession.class);
+  final static Logger logger = LoggerFactory.getLogger(StopSession.class);
 
   public StopSession(CalabashProxy proxy, WebDriverLikeRequest request) {
     super(proxy, request);

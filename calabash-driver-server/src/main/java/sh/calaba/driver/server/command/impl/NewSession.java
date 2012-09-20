@@ -29,7 +29,7 @@ import sh.calaba.driver.server.command.BaseCommandHandler;
  * @author ddary
  */
 public class NewSession extends BaseCommandHandler {
-  final Logger logger = LoggerFactory.getLogger(NewSession.class);
+  final static Logger logger = LoggerFactory.getLogger(NewSession.class);
 
   public NewSession(CalabashProxy proxy, WebDriverLikeRequest request) {
     super(proxy, request);

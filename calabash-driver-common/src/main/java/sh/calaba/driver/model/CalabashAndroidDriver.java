@@ -52,7 +52,7 @@ public abstract class CalabashAndroidDriver {
     } catch (Exception e) {
       e.printStackTrace();
 
-      throw new RuntimeException(e);
+      throw new CalabashException(e);
     }
   }
 

@@ -21,6 +21,9 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import sh.calaba.driver.exceptions.CalabashException;
+import sh.calaba.driver.server.exceptions.CalabashConfigurationException;
+
 /**
  * Default {@link AdbConection} implementation to use the Android sdkHandles the execution of ADB
  * commands.
@@ -28,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * @author ddary
  */
 public class DefaultAdbConnection implements AdbConection {
-  final Logger logger = LoggerFactory.getLogger(DefaultAdbConnection.class);
+  final static Logger logger = LoggerFactory.getLogger(DefaultAdbConnection.class);
   public static final String ANDROID_SDK_PATH_KEY = "ANDROID_HOME";
   private String pathToAdb = null;
 
@@ -43,7 +46,7 @@ public class DefaultAdbConnection implements AdbConection {
     String androidHome = System.getenv(ANDROID_SDK_PATH_KEY);
 
     if (androidHome == null) {
-      throw new RuntimeException("Environment variable '" + ANDROID_SDK_PATH_KEY
+      throw new CalabashException("Environment variable '" + ANDROID_SDK_PATH_KEY
           + "' was not found!");
     }
     boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("win") >= 0;

@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.CalabashCapabilities;
+import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.net.HttpClientFactory;
 
 /**
@@ -35,7 +36,7 @@ import sh.calaba.driver.net.HttpClientFactory;
  * @author ddary
  */
 public class DriverRegistrationHandler {
-  final Logger logger = LoggerFactory.getLogger(DriverRegistrationHandler.class);
+  final static Logger logger = LoggerFactory.getLogger(DriverRegistrationHandler.class);
   private CalabashNodeConfiguration config;
 
   public DriverRegistrationHandler(CalabashNodeConfiguration config) {
@@ -64,7 +65,7 @@ public class DriverRegistrationHandler {
     HttpHost host = new HttpHost(registration.getHost(), registration.getPort());
     HttpResponse response = client.execute(host, r);
     if (response.getStatusLine().getStatusCode() != 200) {
-      throw new RuntimeException("Error sending the registration request.");
+      throw new CalabashException("Error sending the registration request.");
     }
   }
 
@@ -79,7 +80,7 @@ public class DriverRegistrationHandler {
       }
       res.put("capabilities", caps);
     } catch (JSONException e) {
-      throw new RuntimeException("Error encoding to JSON " + e.getMessage(), e);
+      throw new CalabashException("Error encoding to JSON " + e.getMessage(), e);
     }
 
     return res;
