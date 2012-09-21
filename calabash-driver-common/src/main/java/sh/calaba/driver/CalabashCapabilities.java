@@ -235,7 +235,7 @@ public class CalabashCapabilities {
    */
   @Override
   public String toString() {
-    return "CalabashCapabilities [raw=" + raw + ", getLocale()=" + getLocale()
+    return "Calabash Capabilities [raw=" + raw + ", getLocale()=" + getLocale()
         + ", getSDKVersion()=" + getSDKVersion() + ", getDeviceName()=" + getDeviceName()
         + ", getAppBasePackage()=" + getAppBasePackage() + ", getDeviceId()=" + getDeviceId() + "]";
   }
