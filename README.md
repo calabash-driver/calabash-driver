@@ -3,8 +3,6 @@
 The *calabash-driver* offers a java api to write end-to-end tests for Android using the [calabash-android project](http://github.com/calabash/calabash-android).
 The [Selenium Grid](http://code.google.com/p/selenium/wiki/Grid2) can be used for scaling and parallel testing.
 
-For details about how to get started please have a look at the [wiki](http://github.com/calabash-driver/calabash-driver/wiki/)
-
 # Architecture
 
 The mobile devices specifics like the locale, the SDK version or the application under test (aut) are described by capabilities. 
@@ -18,3 +16,7 @@ are used to send them through the different components to execute in the end the
 ![The Architecture of Calabash-Driver](https://docs.google.com/drawings/pub?id=1Xs6yEaqXnPXa5wgrYGulpkRQBqdPCc9OltF4op3oY48&w=952&h=583)
 
 *Calabash-Driver* is using a [forked version](https://github.com/calabash-driver/calabash-android) of *calabash-android* that contains additions like L10n support, which basically enables you to interact with UI elements based on the l10n key in the resource bundle of the app.
+
+# How to get started
+
+For details about how to get started please have a look at the [wiki](http://github.com/calabash-driver/calabash-driver/wiki/).
