@@ -46,7 +46,7 @@ public class EndToEndTests {
     server.setProxy(proxy);
     server.start(conf);
   }
-
+  
   public void sessionIsInitializedAndCommand() {
     RemoteCalabashAndroidDriver driver = null;
     try {
