@@ -8,7 +8,7 @@ For details about how to get started please have a look at the [wiki](http://git
 
 The driver is build primarily to integrated it into the *Selenium Grid* to test Android mobile apps in parallel on emulators or devices.
 
-![The Architecture of Calabash-Driver][https://docs.google.com/drawings/pub?id=1Xs6yEaqXnPXa5wgrYGulpkRQBqdPCc9OltF4op3oY48&w=952&h=583]
+![The Architecture of Calabash-Driver](https://docs.google.com/drawings/pub?id=1Xs6yEaqXnPXa5wgrYGulpkRQBqdPCc9OltF4op3oY48&w=952&h=583)
 
 The mobile devices specifics like the locale, the SDK version or the application under test (aut) are described by capabilities. 
 This capabilities are used to register the driver instance into the *Selenium Grid*. When starting the *calabash-driver client*, the desired capabilities must be specified. Later on they are used during creation of the test session to find the right *calabash-driver server* instance.
