@@ -48,7 +48,11 @@ import sh.calaba.driver.model.WebViewSupport;
  *
  * The main idea of interacting with the different kind of elements is by different locators (called
  * {@link By}) and by different UI elements types.
- *
+ * 
+ * Important:
+ * Currently not all available calabash-android commands are implemented. The reason for this is that
+ * that we have only the commands implemented that we need for our testing. Adding the other commands
+ * is easy and will be propably be done in the near future.
  * @author ddary
  *
  */
