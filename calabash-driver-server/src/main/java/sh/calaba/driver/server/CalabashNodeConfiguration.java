@@ -15,14 +15,22 @@ package sh.calaba.driver.server;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.server.exceptions.CalabashConfigurationException;
@@ -34,6 +42,7 @@ import sh.calaba.driver.server.exceptions.CalabashConfigurationException;
  * 
  */
 public class CalabashNodeConfiguration {
+  final static Logger logger = LoggerFactory.getLogger(CalabashNodeConfiguration.class);
   public static final String CAPABILITIES = "capabilities";
   public static final String CONFIGURATION = "configuration";
   protected List<CalabashCapabilities> capabilities = new ArrayList<CalabashCapabilities>();
@@ -58,15 +67,15 @@ public class CalabashNodeConfiguration {
    * @throws CalabashConfigurationException On IO and Parsing errors.
    * @throws InvalidParameterException if parameter is null or empty
    */
-  public static CalabashNodeConfiguration readConfig(String driverConfigurationFile)
+  public static CalabashNodeConfiguration readFromFile(File driverConfigurationFile)
       throws CalabashConfigurationException {
-    if (driverConfigurationFile == null || driverConfigurationFile.isEmpty()) {
+    if (driverConfigurationFile == null) {
       throw new InvalidParameterException(
           "Calabash-Driver Configuration-File is missing. Pls specifiy name like: calabashNode.json");
     }
     String driverConfiguration;
     try {
-      driverConfiguration = FileUtils.readFileToString(new File(driverConfigurationFile));
+      driverConfiguration = FileUtils.readFileToString(driverConfigurationFile);
     } catch (IOException e1) {
       throw new CalabashConfigurationException(
           "Error reading file content. Did you have specified the right file name and path?", e1);
@@ -77,6 +86,45 @@ public class CalabashNodeConfiguration {
     } catch (JSONException e) {
       throw new CalabashConfigurationException("Error occured during parsing json file: '"
           + driverConfigurationFile + "'. Pls make sure you are using a valid JSON file!", e);
+    }
+  }
+
+  /**
+   * Reads the the driver configuration from the specified URI. The file is expected to be in JSON
+   * format.
+   * 
+   * @param driverConfigFileURI The file name of the driver configuration file URI.
+   * @return The Calabash node configuration.
+   * @throws CalabashConfigurationException On IO and Parsing errors.
+   * @throws InvalidParameterException if parameter is null or empty
+   */
+  public static CalabashNodeConfiguration readFromURI(URI driverConfigFileURI)
+      throws CalabashConfigurationException {
+    if (driverConfigFileURI == null) {
+      throw new InvalidParameterException("Calabash-Driver Configuration-URI is missing.");
+    }
+    if (driverConfigFileURI.getHost() == null || driverConfigFileURI.getPath() == null) {
+      throw new InvalidParameterException("Calabash-Driver Configuration-URI is invalid.");
+    }
+    String driverConfiguration;
+    try {
+      HttpClient client = new DefaultHttpClient();
+      HttpGet request = new HttpGet(driverConfigFileURI);
+      HttpResponse response = client.execute(request);
+
+      driverConfiguration = IOUtils.toString(response.getEntity().getContent());
+    } catch (IOException e1) {
+      logger.error("Error occured while reading config from URI:", e1);
+      throw new CalabashConfigurationException(
+          "Error reading file content. Did you have specified the right URI?", e1);
+    }
+
+    try {
+      return new CalabashNodeConfiguration(new JSONObject(driverConfiguration));
+    } catch (JSONException e) {
+      logger.error("Error occured while parsing config file: ", e);
+      throw new CalabashConfigurationException("Error occured during parsing json file from URI: '"
+          + driverConfigFileURI + "'. Pls make sure you are using a valid JSON file!", e);
     }
   }
 
@@ -201,7 +249,7 @@ public class CalabashNodeConfiguration {
     mobileAppPath = configuration.getString("autApk");
     mobileTestAppPath = configuration.getString("autTestApk");
     installApksEnabled = configuration.getBoolean("installApks");
-    cleanSavedUserDataEnabled=configuration.getBoolean("cleanSavedUserData");
+    cleanSavedUserDataEnabled = configuration.getBoolean("cleanSavedUserData");
     proxy =
         configuration.isNull("proxy")
             ? "org.openqa.grid.selenium.proxy.DefaultRemoteProxy"

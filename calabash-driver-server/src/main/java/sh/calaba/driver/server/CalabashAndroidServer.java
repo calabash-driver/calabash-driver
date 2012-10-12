@@ -13,6 +13,8 @@
  */
 package sh.calaba.driver.server;
 
+import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,8 @@ import sh.calaba.driver.server.servlet.CalabashServlet;
  */
 public class CalabashAndroidServer {
   final static Logger logger = LoggerFactory.getLogger(CalabashAndroidServer.class);
-  public static final String COMMAND_LNE_PARAMETER = "-driverConfig";
+  public static final String COMMAND_LINE_CONFIG_FILE_PATH = "-driverConfig";
+  public static final String COMMAND_LINE_CONFIG_FILE_URI = "-driverConfigURI";
 
   public static final String SCRIPT_KEY = CalabashProxy.class.getName();
   private Server server;
@@ -42,21 +45,31 @@ public class CalabashAndroidServer {
 
   public static void main(String[] args) {
     if ((args == null || args.length <= 1)
-        || (args != null && !args[0].equals(COMMAND_LNE_PARAMETER))) {
+        || (args != null && (!(args[0].equals(COMMAND_LINE_CONFIG_FILE_PATH) || args[0]
+            .equals(COMMAND_LINE_CONFIG_FILE_URI))))) {
       System.out.println("#### Calabash Driver #####");
       System.out.println("ERROR: command line parameter missing!");
       System.out.println("   Please use:");
-      System.out.println("     " + COMMAND_LNE_PARAMETER
+      System.out.println("     " + COMMAND_LINE_CONFIG_FILE_PATH
           + " filename.json    --> where 'filename.json' is your configuration file");
+      System.out.println("   or use:");
+      System.out
+          .println("     "
+              + COMMAND_LINE_CONFIG_FILE_URI
+              + " filename.json    --> where 'http://yourhost/your/path/filename.json' is your configuration file");
+
       System.exit(0);
     }
-    String driverConfigurationFile = args[1];
 
     CalabashAndroidServer server = new CalabashAndroidServer();
-
-
     try {
-      server.start(CalabashNodeConfiguration.readConfig(driverConfigurationFile));
+      CalabashNodeConfiguration nodeConfiguration = null;
+      if (COMMAND_LINE_CONFIG_FILE_PATH.equals(args[0])) {
+        nodeConfiguration = CalabashNodeConfiguration.readFromFile(new File(args[1]));
+      } else if (COMMAND_LINE_CONFIG_FILE_URI.equals(args[0])) {
+        nodeConfiguration = CalabashNodeConfiguration.readFromURI(new URI(args[1]));
+      }
+      server.start(nodeConfiguration);
     } catch (Exception e) {
       System.out.println("An error occured starting the CalabashDriver:");
       System.out.println(e.getMessage());
