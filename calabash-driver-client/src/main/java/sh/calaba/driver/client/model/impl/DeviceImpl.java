@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
 import sh.calaba.driver.exceptions.CalabashException;
-import sh.calaba.driver.model.By.ContentDescription;
+import sh.calaba.driver.model.By.Text;
 import sh.calaba.driver.model.DeviceSupport;
 
 /**
@@ -71,7 +71,7 @@ public class DeviceImpl extends RemoteObject implements DeviceSupport {
   }
 
   @Override
-  public void pressContextMenuItem(ContentDescription text) {
+  public void pressContextMenuItem(Text text) {
     executeCalabashCommand(CalabashCommands.PRESS_LONG_ON_TEXT, text.getIdentifier());
   }
 }

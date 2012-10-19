@@ -35,7 +35,7 @@ public class TextFieldImpl extends RemoteObject implements TextFieldSupport {
   public void clear() {
     if (by instanceof By.Index) {
       executeCalabashCommand(CalabashCommands.CLEAR_NUMBERED_FIELD, by.getIdentifier());
-    } else if (by instanceof By.ContentDescription) {
+    } else if (by instanceof By.Text) {
       executeCalabashCommand(CalabashCommands.CLEAR_NAMED_FIELD, by.getIdentifier());
     } else {
       throw new IllegalArgumentException("By not available.");
@@ -48,7 +48,7 @@ public class TextFieldImpl extends RemoteObject implements TextFieldSupport {
     if (by instanceof By.Index) {
       executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_NUMBERED_FIELD, text,
           by.getIdentifier());
-    } else if (by instanceof By.ContentDescription) {
+    } else if (by instanceof By.Text) {
       executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_NAMED_FIELD, text,
           by.getIdentifier());
     } else if (by instanceof By.Id) {

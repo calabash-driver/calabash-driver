@@ -40,7 +40,7 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 
   public void click() {
     assertIdNotNull();
-    executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_NAME, id.getIdentifier());
+    executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID, id.getIdentifier());
   }
 
   private void assertIdNotNull() {
@@ -51,8 +51,8 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
 
   public String getText() {
     JSONObject result =
-        executeCalabashCommand(CalabashCommands.GET_ELEMENT_TEXT_BY_NAME, id.getIdentifier());
-    return result.optString("elementText");
+        executeCalabashCommand(CalabashCommands.GET_TEXT_BY_ID, id.getIdentifier());
+    return result.optString("message");
   }
 
   @Override
@@ -60,13 +60,5 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
     JSONObject result =
         executeCalabashCommand(CalabashCommands.VIEW_ENABLED_STATUS_BY_NAME, id.getIdentifier());
     return result.optBoolean("viewEnabledStatus");
-  }
-
-  public String getText(ElementType type, Integer number) {
-    JSONObject result =
-        executeCalabashCommand(CalabashCommands.GET_ELEMENT_TEXT_BY_TYPE, type.name(),
-            String.valueOf(number));
-
-    return result.optString("elementText");
   }
 }

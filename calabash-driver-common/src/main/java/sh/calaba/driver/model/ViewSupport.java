@@ -34,19 +34,4 @@ public interface ViewSupport {
    * @return True, if the element is enabled otherwise false.
    */
   public Boolean isEnabled();
-
-  /**
-   * Get the visible text of the given <code>type</code> and the element with given index
-   * <code>number</code>. This method meant to be used on dialogs where e.g. 10 TextFields are
-   * displayed without having a unique id/name.
-   * The example code is returning the visible text of the 6th TextField:
-   * <code>
-   * getText(ElementType.TextField, 6);
-   * </code>
-   * 
-   * @param type The type of element to search for.
-   * @param number The number of element to use
-   * @return Get the visible text of this element
-   */
-  public String getText(ElementType type, Integer number);
 }

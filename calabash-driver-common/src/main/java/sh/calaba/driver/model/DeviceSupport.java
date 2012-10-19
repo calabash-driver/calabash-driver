@@ -42,5 +42,5 @@ public interface DeviceSupport {
    * Allows to press the context menu item.
    * @param text The text to press on.
    */
-  public void pressContextMenuItem(By.ContentDescription text);
+  public void pressContextMenuItem(By.Text text);
 }

@@ -171,11 +171,11 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver {
   /**
    * Waits until the UI element given is found.
    *
-   * @param name The Android native name/ id of the element.
+   * @param id The Android native name/ id of the element.
    * @return The {@link ViewSupport} for element interactions.
    */
-  public ViewSupport waitForViewIsPresent(String name) {
-    By.Id by = By.id(name);
+  public ViewSupport waitForViewIsPresent(String id) {
+    By.Id by = By.id(id);
     new WaitingSupportImpl(this).waitFor(by);
     return new ViewImpl(this, by);
   }

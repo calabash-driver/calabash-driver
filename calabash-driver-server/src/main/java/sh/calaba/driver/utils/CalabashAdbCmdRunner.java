@@ -137,10 +137,13 @@ public class CalabashAdbCmdRunner {
    * Allows to start the calabash server on the given device.
    * 
    * @param deviceId The device id to use to start the server.
-   * @param appBasePackageName The base package name of the app e.g. com.ebay.mobile.
+   * @param appBasePackageName The base package name of the app e.g.: sh.calabash.demoproject
+   * @param mainActivity The android app main activity, e.g.:
+   *        sh.calabash.demoproject.HelloAndroidActivity
    * @return The thread that has started the Android instrumentation.
    */
-  public Thread startCalabashServer(final String deviceId, final String appBasePackageName) {
+  public Thread startCalabashServer(final String deviceId, final String appBasePackageName,
+      final String mainActivity) {
     Thread instrumentationThread = new Thread(new Runnable() {
 
       @Override
@@ -154,12 +157,20 @@ public class CalabashAdbCmdRunner {
 
         commandLineFwd.add("am");
         commandLineFwd.add("instrument");
+       // commandLineFwd.add("-e target_package "+appBasePackageName);
+        commandLineFwd.add("-e");
+          commandLineFwd.add("target_package");
+        commandLineFwd.add(appBasePackageName);
+        //commandLineFwd.add("-e main_activity "+mainActivity);
+        commandLineFwd.add("-e");
+        commandLineFwd.add("main_activity");
+        commandLineFwd.add(mainActivity);
         commandLineFwd.add("-e class");
         commandLineFwd.add("sh.calaba.instrumentationbackend.InstrumentationBackend");
-        commandLineFwd.add("-w");
-        commandLineFwd.add(appBasePackageName
-            + ".test/sh.calaba.instrumentationbackend.CalabashInstrumentationTestRunner");
-
+       
+        commandLineFwd
+            .add("sh.calaba.android.test/sh.calaba.instrumentationbackend.CalabashInstrumentationTestRunner");
+        System.out.println("Command: " + commandLineFwd.toString());
         adbConnection.runProcess(commandLineFwd, "about to start CalabashServer", false);
 
       }

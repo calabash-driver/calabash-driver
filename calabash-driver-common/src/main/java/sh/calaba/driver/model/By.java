@@ -103,8 +103,8 @@ public class By {
    * @author ddary
    *
    */
-  public class ContentDescription extends By {
-    public ContentDescription(String text) {
+  public class Text extends By {
+    public Text(String text) {
       super(text);
     }
   }
@@ -132,8 +132,8 @@ public class By {
    * @param text The text of the element.
    * @return a By which locates elements via text.
    */
-  public static By.ContentDescription text(String text) {
-    return new By().new ContentDescription(text);
+  public static By.Text text(String text) {
+    return new By().new Text(text);
   }
 
   /**

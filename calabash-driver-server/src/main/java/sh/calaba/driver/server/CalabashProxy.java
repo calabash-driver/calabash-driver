@@ -178,7 +178,7 @@ public class CalabashProxy {
 
     Thread instThread =
         calabashAdbCmdRunner.startCalabashServer(capability.getDeviceId(),
-            capability.getAppBasePackage());
+            capability.getAppBasePackage(),capability.getAppMainActivity());
     sessionInstrumentationThreads.put(sessionId, instThread);
 
     Integer portNumber = getNextPortNumber();

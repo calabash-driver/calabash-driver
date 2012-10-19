@@ -7,6 +7,6 @@ public class CapabilityFactory {
 
   public static CalabashCapabilities anAndroidCapability() {
     return CalabashCapabilities.android(ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE,
-        ANY_VALUE);
+        ANY_VALUE, ANY_VALUE);
   }
 }

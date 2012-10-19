@@ -38,9 +38,10 @@ public class CalabashCapabilities {
   public static final String SDK_VERSION = "sdkVersion";
   public static final String ADDITIONAL_ADB_COMMANDS = "additionalAdbCommands";
   public static final String APP_BASE_PACKAGE = "appBasePackage";
+  public static final String APP_MAIN_ACTIVITY = "appMainActivity";
 
   public static CalabashCapabilities android(String app, String sdkVersion, String locale,
-      String deviceId, String deviceName, String appBasePackage) {
+      String deviceId, String deviceName, String appBasePackage, String appMainActivity) {
     CalabashCapabilities res = new CalabashCapabilities();
     res.setCapability(NAME, "calabash-android");
     res.setCapability(LOCALE, locale);
@@ -50,6 +51,7 @@ public class CalabashCapabilities {
     res.setCapability(DEVICE_ID, deviceId);
     res.setCapability(DEVICE_NAME, deviceName);
     res.setCapability(APP_BASE_PACKAGE, appBasePackage);
+    res.setCapability(APP_MAIN_ACTIVITY, appMainActivity);
     return res;
   }
 
@@ -64,7 +66,7 @@ public class CalabashCapabilities {
     calabashCapability.setSDKVersion(capa.getString(CalabashCapabilities.SDK_VERSION));
     calabashCapability.setAut(capa.getString(CalabashCapabilities.AUT));
     calabashCapability.setAppBasePackage(capa.getString(CalabashCapabilities.APP_BASE_PACKAGE));
-
+    calabashCapability.setAppMainActivity(capa.getString(CalabashCapabilities.APP_MAIN_ACTIVITY));
 
     if (capa.has(CalabashCapabilities.ADDITIONAL_ADB_COMMANDS)) {
       JSONArray commands = capa.getJSONArray(CalabashCapabilities.ADDITIONAL_ADB_COMMANDS);
@@ -117,6 +119,11 @@ public class CalabashCapabilities {
     return ((String) o);
   }
 
+  public String getAppMainActivity() {
+    Object o = raw.get(APP_MAIN_ACTIVITY);
+    return ((String) o);
+  }
+
   public Map<String, Object> getRawCapabilities() {
     return raw;
   }
@@ -136,6 +143,10 @@ public class CalabashCapabilities {
 
   public void setAppBasePackage(String appBasePackage) {
     raw.put(APP_BASE_PACKAGE, appBasePackage);
+  }
+
+  public void setAppMainActivity(String appMainActivity) {
+    raw.put(APP_MAIN_ACTIVITY, appMainActivity);
   }
 
   public void setMaxInstances(Integer maxInstances) {
@@ -237,6 +248,7 @@ public class CalabashCapabilities {
   public String toString() {
     return "Calabash Capabilities [raw=" + raw + ", getLocale()=" + getLocale()
         + ", getSDKVersion()=" + getSDKVersion() + ", getDeviceName()=" + getDeviceName()
-        + ", getAppBasePackage()=" + getAppBasePackage() + ", getDeviceId()=" + getDeviceId() + "]";
+        + ", getAppMainActivity()=" + getAppMainActivity() + ", getAppBasePackage()="
+        + getAppBasePackage() + ", getDeviceId()=" + getDeviceId() + "]";
   }
 }

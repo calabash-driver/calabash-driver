@@ -35,7 +35,7 @@ public class ButtonImpl extends RemoteObject implements ButtonSupport {
   public void press() {
     if (by instanceof By.Index) {
       executeCalabashCommand(CalabashCommands.PRESS_BUTTON_NUMBER, by.getIdentifier());
-    } else if (by instanceof By.ContentDescription) {
+    } else if (by instanceof By.Text) {
       executeCalabashCommand(CalabashCommands.PRESS, by.getIdentifier());
     } else if (by instanceof By.Id) {
       executeCalabashCommand(CalabashCommands.PRESS, by.getIdentifier());
