@@ -8,7 +8,8 @@
         "deviceId":"emulator-5556",
         "sdkVersion":"4.0.3",
         "aut":"DriverTest:1",
-		"appBasePackage":"sh.calabash.demoproject"
+		"appBasePackage":"sh.calabash.demoproject",
+		"appMainActivity":"sh.calabash.demoproject.HelloAndroidActivity"
     },
     {
         "deviceName":"emulator",
@@ -18,7 +19,8 @@
         "deviceId":"emulator-5554",
         "sdkVersion":"4.0.3",
         "aut":"DriverTest:1",
-		"appBasePackage":"sh.calabash.demoproject"
+		"appBasePackage":"sh.calabash.demoproject",
+		"appMainActivity":"sh.calabash.demoproject.HelloAndroidActivity"
     }],
     "configuration":{
         "register":true,
