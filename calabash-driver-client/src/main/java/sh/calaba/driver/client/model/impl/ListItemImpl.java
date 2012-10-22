@@ -37,7 +37,7 @@ public class ListItemImpl extends RemoteObject implements ListItemSupport {
     if (by instanceof By.Index) {
       executeCalabashCommand(CalabashCommands.PRESS_LIST_ITEM, by.getIdentifier(), "0");
     } else if (by instanceof By.Text) {
-      executeCalabashCommand(CalabashCommands.PRESS_LIST_ITEM_TEXT, by.getIdentifier());
+      executeCalabashCommand(CalabashCommands.CLICK_ON_TEXT, by.getIdentifier());
     } else if (by instanceof By.Id) {
       executeCalabashCommand(CalabashCommands.PRESS, by.getIdentifier());
     } else {

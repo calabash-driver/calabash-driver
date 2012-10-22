@@ -23,7 +23,7 @@ import sh.calaba.driver.net.WebDriverLikeCommand;
 public enum CalabashCommands {
   PRESS_LIST_ITEM("press_list_item", "", WebDriverLikeCommand.LIST_ITEM),
   LONG_PRESS_LIST_ITEM("long_press_list_item", "", WebDriverLikeCommand.LIST_ITEM),
-  PRESS_LIST_ITEM_TEXT("press_list_item_text", "", WebDriverLikeCommand.LIST_ITEM),
+  
   PRESS_BUTTON_NUMBER("press_button_number", "", WebDriverLikeCommand.BUTTON),
   PRESS_BUTTON_WITH_TEXT("press_button_with_text", "", WebDriverLikeCommand.BUTTON),
   ENTER_TEXT_INTO_NUMBERED_FIELD("enter_text_into_numbered_field", "",
