@@ -17,6 +17,7 @@ import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
 import sh.calaba.driver.model.By;
 import sh.calaba.driver.model.NativeSearchSupport;
+
 /**
  * Default {@link NativeSearchSupport} implementation.
  * 
@@ -32,6 +33,7 @@ public class NativeSearchImpl extends RemoteObject implements NativeSearchSuppor
 
   @Override
   public void text(String searchTerm) {
-    executeCalabashCommand(CalabashCommands.SEARCH_FOR, by.getIdentifier(), searchTerm);
+    executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID, by.getIdentifier());
+    executeCalabashCommand(CalabashCommands.ENTER_QUERY_INTO_NUMBERED_FIELD, searchTerm, "1");
   }
 }

@@ -16,7 +16,7 @@ package sh.calaba.driver.model;
 import java.io.File;
 
 /**
- *  Interface representing basic device interaction operations.
+ * Interface representing basic device interaction operations.
  * 
  * @author ddary
  */
@@ -33,6 +33,7 @@ public interface DeviceSupport {
 
   /**
    * Capture the screenshot and store it in the specified path.
+   * 
    * @param path The path to safe the screenshot to.
    * @return The file name of the created screenshot.
    */
@@ -40,7 +41,18 @@ public interface DeviceSupport {
 
   /**
    * Allows to press the context menu item.
+   * 
    * @param text The text to press on.
    */
   public void pressContextMenuItem(By.Text text);
+
+  public void pressEnterButton();
+
+  public void swipeLeft();
+
+  public void swipeRight();
+
+  public void pressBackButton();
+
+
 }

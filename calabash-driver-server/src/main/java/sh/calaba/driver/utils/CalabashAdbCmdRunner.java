@@ -170,9 +170,8 @@ public class CalabashAdbCmdRunner {
        
         commandLineFwd
             .add("sh.calaba.android.test/sh.calaba.instrumentationbackend.CalabashInstrumentationTestRunner");
-        System.out.println("Command: " + commandLineFwd.toString());
+        
         adbConnection.runProcess(commandLineFwd, "about to start CalabashServer", false);
-
       }
     });
     instrumentationThread.start();

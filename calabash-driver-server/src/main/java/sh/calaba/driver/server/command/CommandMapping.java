@@ -40,8 +40,10 @@ public enum CommandMapping {
   SCREENSHOT_WITH_NAME(CalabashCommandHandler.class),
   SEARCH(CalabashCommandHandler.class),
   SPINNER(CalabashCommandHandler.class),
+  DEVICE(CalabashCommandHandler.class),
   LIST_ITEM(CalabashCommandHandler.class),
   WEB_VIEW(CalabashCommandHandler.class);
+  
 
   private WebDriverLikeCommand command;
   private final Class<? extends Handler> handlerClass;

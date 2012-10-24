@@ -31,5 +31,5 @@ public interface L10nSupport {
   /**
    * Allows to wait for an {@link L10nElement}.
    */
-  public void waitFor();
+  public L10nSupport waitFor();
 }

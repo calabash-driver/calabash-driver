@@ -42,7 +42,8 @@ public class L10nElementImpl extends RemoteObject implements L10nSupport {
   }
 
   @Override
-  public void waitFor() {
+  public L10nSupport waitFor() {
     executeCalabashCommand(CalabashCommands.WAIT_FOR_L10N_ELEMENT, id.getIdentifier());
+    return this;
   }
 }

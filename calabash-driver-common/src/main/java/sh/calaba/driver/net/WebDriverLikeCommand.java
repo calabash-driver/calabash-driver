@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.model.ButtonSupport;
+import sh.calaba.driver.model.DeviceSupport;
 import sh.calaba.driver.model.L10nSupport;
 import sh.calaba.driver.model.ListItemSupport;
 import sh.calaba.driver.model.NativeSearchSupport;
@@ -35,6 +36,7 @@ public enum WebDriverLikeCommand {
   TEXT_FIELD("POST", "/session/:sessionId/textField", TextFieldSupport.class),
   SPINNER("POST", "/session/:sessionId/spinner", SpinnerSupport.class),
   VIEW("GET", "/session/:sessionId/view", ViewSupport.class),
+  DEVICE("POST", "/session/:sessionId/view", DeviceSupport.class),
   L10N_SUPPORT("GET", "/session/:sessionId/l10nSupport", L10nSupport.class),
   WAIT("POST", "/session/:sessionId/wait", WaitingSupport.class),
   SCREENSHOT_WITH_NAME("POST", "/session/:sessionId/screenshotWithName", ViewSupport.class),

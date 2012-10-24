@@ -74,4 +74,25 @@ public class DeviceImpl extends RemoteObject implements DeviceSupport {
   public void pressContextMenuItem(Text text) {
     executeCalabashCommand(CalabashCommands.PRESS_LONG_ON_TEXT, text.getIdentifier());
   }
+
+  @Override
+  public void pressEnterButton() {
+    executeCalabashCommand(CalabashCommands.SEND_KEY_ENTER);
+  }
+
+  @Override
+  public void swipeLeft() {
+    executeCalabashCommand(CalabashCommands.SWIPE,"left");
+    
+  }
+
+  @Override
+  public void swipeRight() {
+    executeCalabashCommand(CalabashCommands.SWIPE,"right");
+  }
+
+  @Override
+  public void pressBackButton() {
+    executeCalabashCommand(CalabashCommands.GO_BACK);
+  }
 }

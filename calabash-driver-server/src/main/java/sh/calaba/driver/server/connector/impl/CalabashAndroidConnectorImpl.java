@@ -114,7 +114,6 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
   private HttpResponse execute(String path, JSONObject action) {
     HttpResponse response = null;
     try {
-      System.out.println("hostname: "+hostname);
       HttpPost postRequest = new HttpPost("http://" + hostname + ":" + port + path);
       postRequest.addHeader("Content-Type", "application/json;charset=utf-8");
       if (action != null) {

@@ -52,7 +52,7 @@ public class TextFieldImpl extends RemoteObject implements TextFieldSupport {
       executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_NAMED_FIELD, text,
           by.getIdentifier());
     } else if (by instanceof By.Id) {
-      executeCalabashCommand(CalabashCommands.ENTER_TEXT_BY_NAME, text, by.getIdentifier());
+      executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_ID_FIELD, text, by.getIdentifier());
     } else {
       throw new IllegalArgumentException("By not available.");
     }
