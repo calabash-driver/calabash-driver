@@ -34,7 +34,8 @@ public class SpinnerImpl extends RemoteObject implements SpinnerSupport {
   @Override
   public void selectSpinnerItem(String text) {
     if (by instanceof By.Id) {
-      executeCalabashCommand(CalabashCommands.SELECT_ITEM_BY_NAME, by.getIdentifier(), text);
+      executeCalabashCommand(CalabashCommands.CLICK_ON_VIEW_BY_ID, by.getIdentifier());
+      executeCalabashCommand(CalabashCommands.CLICK_ON_TEXT, text);
     } else if (by instanceof By.Text) {
       executeCalabashCommand(CalabashCommands.SELECT_ITEM_FROM_NAMED_SPINNER, by.getIdentifier(),
           text);
