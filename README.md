@@ -7,7 +7,7 @@ The [Selenium Grid](http://code.google.com/p/selenium/wiki/Grid2) can be used fo
 
 For details about how to get started please have a look at the [wiki](http://github.com/calabash-driver/calabash-driver/wiki/).
 
-A practical example, that we have shown at the GDG DevFest in Zürich, you can find [here](https://github.com/DominikDary/gdg-devfest-zrh) and a getting started blog post [here](dary.de/2012/10/gdg-devfest-in-zurich/).
+A practical example, that we have shown at the GDG DevFest in Zürich, you can find [here](https://github.com/DominikDary/gdg-devfest-zrh) and a getting started blog post [here](http://dary.de/2012/10/gdg-devfest-in-zurich/).
 
 # Architecture
 
