@@ -10,7 +10,7 @@ For details about how to get started please have a look at the [wiki](http://git
 A practical example, that we have shown at the GDG DevFest in Zürich, you can find [here](https://github.com/DominikDary/gdg-devfest-zrh) and a getting started blog post [here](http://dary.de/2012/10/gdg-devfest-in-zurich/).
 
 The session was recorded and is now available at YouTube:
-<iframe width="560" height="315" src="http://www.youtube.com/embed/BExAKDslV9I" frameborder="0" allowfullscreen></iframe>
+http://www.youtube.com/embed/BExAKDslV9I
 
 # Architecture
 
