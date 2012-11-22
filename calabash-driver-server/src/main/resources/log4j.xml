@@ -22,7 +22,8 @@
 	</appender>
 
 	<logger name="sh.calaba">
-		<level value="warn" />
+		<level value="debug" />
+		<appender-ref ref="stdout" />
 	</logger>
 
 	<root>

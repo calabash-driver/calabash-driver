@@ -27,9 +27,12 @@ import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.exceptions.CalabashException;
+import sh.calaba.driver.exceptions.SessionNotCreatedException;
 import sh.calaba.driver.server.connector.CalabashAndroidConnector;
 import sh.calaba.driver.server.connector.CalabashConnecterException;
 import sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl;
+import sh.calaba.driver.server.internal.CapabilityMatcher;
+import sh.calaba.driver.server.internal.impl.CalabashCapabilityMatcher;
 import sh.calaba.driver.utils.CalabashAdbCmdRunner;
 
 /**
@@ -43,12 +46,13 @@ public class CalabashProxy {
   private Map<String, CalabashAndroidConnector> sessionConnectors =
       new HashMap<String, CalabashAndroidConnector>();
   private Map<String, Thread> sessionInstrumentationThreads = new HashMap<String, Thread>();
-  public static final int DEFAULT_CALABASH_ANDROID_LOCAL_PORT = 34777;
+  public static final int DEFAULT_CALABASH_ANDROID_LOCAL_PORT = 34666;
   private Integer localCalabashSocketPort = null;
   private final List<CalabashCapabilities> availableCapabilities =
       new ArrayList<CalabashCapabilities>();
   private boolean cleanSavedUserData = true;
   private CalabashAdbCmdRunner calabashAdbCmdRunner = new CalabashAdbCmdRunner();
+  private CapabilityMatcher capabilityMatcher = new CalabashCapabilityMatcher();
 
   /**
    * Default constructor that {@link #doIinitializeMobileDevices(CalabashNodeConfiguration)}.
@@ -88,25 +92,32 @@ public class CalabashProxy {
    * 
    * @see #startCalabashServerAndStartConnector(String, CalabashCapabilities)
    * 
-   * @param calabashCapabilities The {@link CalabashCapabilities} to use to start the test session.
+   * @param desiredCapabilities The {@link CalabashCapabilities} to use to start the test session.
    * @return The session ID of the new created session.
    */
-  public String initializeSessionForCapabilities(CalabashCapabilities calabashCapabilities) {
+  public String initializeSessionForCapabilities(CalabashCapabilities desiredCapabilities) {
     if (logger.isDebugEnabled()) {
-      logger.debug("reqqested capa: " + calabashCapabilities);
+      logger.debug("reqqested capa: " + desiredCapabilities);
     }
-    if (availableCapabilities.contains(calabashCapabilities)) {
-      // is available and can be used
-      String sessionId = UUID.randomUUID().toString();
 
-      // start the connector in an own thread
-      startCalabashServerAndStartConnector(sessionId, calabashCapabilities);
-
-      return sessionId;
-    } else {
-      throw new CalabashException("Driver does not support requested capability: "
-          + calabashCapabilities);
+    CalabashCapabilities matchingNodeCapa = null;
+    for (CalabashCapabilities nodeCapa : availableCapabilities) {
+      if (capabilityMatcher.matches(nodeCapa.getRawCapabilities(),
+          desiredCapabilities.getRawCapabilities())) {
+        matchingNodeCapa = nodeCapa;
+      }
     }
+    if (matchingNodeCapa == null) {
+      throw new SessionNotCreatedException("Driver does not support desired capability: "
+          + desiredCapabilities);
+    }
+    // is available and can be used
+    String sessionId = UUID.randomUUID().toString();
+
+    // start the connector in an own thread
+    startCalabashServerAndStartConnector(sessionId, matchingNodeCapa);
+
+    return sessionId;
   }
 
   /**
@@ -178,7 +189,7 @@ public class CalabashProxy {
 
     Thread instThread =
         calabashAdbCmdRunner.startCalabashServer(capability.getDeviceId(),
-            capability.getAppBasePackage(),capability.getAppMainActivity());
+            capability.getAppBasePackage(), capability.getAppMainActivity());
     sessionInstrumentationThreads.put(sessionId, instThread);
 
     Integer portNumber = getNextPortNumber();

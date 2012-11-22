@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.CalabashCapabilities;
+import sh.calaba.driver.exceptions.SessionNotCreatedException;
+import sh.calaba.driver.net.FailedWebDriverLikeResponse;
 import sh.calaba.driver.net.WebDriverLikeRequest;
 import sh.calaba.driver.net.WebDriverLikeResponse;
 import sh.calaba.driver.server.CalabashProxy;
@@ -42,11 +44,17 @@ public class NewSession extends BaseCommandHandler {
 
     CalabashCapabilities capabilities = CalabashCapabilities.fromJSON(desiredCapabilities);
 
-    JSONObject json = new JSONObject();
-    String sessionID = getCalabashProxy().initializeSessionForCapabilities(capabilities);
+
+    String sessionID = null;
+    try {
+      sessionID = getCalabashProxy().initializeSessionForCapabilities(capabilities);
+    } catch (SessionNotCreatedException e) {
+      return new FailedWebDriverLikeResponse("", e, 33);
+    }
     if (logger.isDebugEnabled()) {
       logger.debug("New Session Class; session iD: " + sessionID);
     }
+    JSONObject json = new JSONObject();
     json.put("sessionId", sessionID);
     json.put("status", 0);
     json.put("value", new JSONObject());

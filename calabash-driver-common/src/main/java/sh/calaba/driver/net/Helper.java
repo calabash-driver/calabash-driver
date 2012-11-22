@@ -32,6 +32,9 @@ public class Helper {
     }
     rd.close();
     String str = s.toString();
+    if (str == null || str.isEmpty()) {
+      return null;
+    }
     return new JSONObject(str);
   }
 }

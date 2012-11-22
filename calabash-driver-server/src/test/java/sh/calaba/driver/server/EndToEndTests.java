@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import sh.calaba.driver.CalabashCapabilities;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
+import sh.calaba.driver.exceptions.SessionNotCreatedException;
 import sh.calaba.driver.model.By;
 import sh.calaba.driver.server.support.AdbConnectionStub;
 import sh.calaba.driver.server.support.CalabashInstrumentationServerStub;
@@ -22,7 +23,7 @@ public class EndToEndTests {
   private CalabashAndroidServer server;
   private CalabashInstrumentationServerStub instrumentationServer;
   private String host = "localhost";
-  private int port = 4444;
+  private int port = 4567;
 
   @BeforeClass
   public void startServer() throws Exception {
@@ -46,7 +47,8 @@ public class EndToEndTests {
     server.setProxy(proxy);
     server.start(conf);
   }
-  
+
+  @Test
   public void sessionIsInitializedAndCommand() {
     RemoteCalabashAndroidDriver driver = null;
     try {
@@ -63,6 +65,27 @@ public class EndToEndTests {
       driver.findTextField(By.text("username")).enterText("ddary_mobile");
       driver.findTextField(By.text("password")).enterText("password");
       driver.findButton(By.text("Sign In")).press();
+
+    } finally {
+      if (driver != null) {
+        driver.quit();
+      }
+    }
+  }
+
+  @Test(expectedExceptions = {SessionNotCreatedException.class}, expectedExceptionsMessageRegExp = ".*Driver does not support desired capability.*")
+  public void sessionIsNotInitCausedByFromCapa() {
+    RemoteCalabashAndroidDriver driver = null;
+    try {
+      CalabashCapabilities capa = new CalabashCapabilities();
+      capa.setAut(CapabilityFactory.ANY_VALUE);
+      capa.setLocale(CapabilityFactory.ANY_VALUE + "Hello");
+      driver =
+          new RemoteCalabashAndroidDriver("http://" + host + ":" + port + "/wd/hub",
+              capa.getRawCapabilities());
+
+      Assert.assertTrue(driver.getSession().getSessionId() != null,
+          "Expectation is that a new session ID is created.");
 
     } finally {
       if (driver != null) {

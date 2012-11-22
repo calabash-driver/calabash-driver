@@ -129,14 +129,13 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
   private WebDriverLikeResponse getResponse(WebDriverLikeRequest request) {
     WebDriverLikeCommand wdlc = request.getGenericCommand();
     try {
-
       Handler h = CommandMapping.get(wdlc).createHandler(getCalabashProxy(), request);
       return h.handle();
     } catch (Exception e) {
       logger.error("Error occured: " + request.getPath() + " Error: ", e);
       logger.error(request.toString());
-
-      return new FailedWebDriverLikeResponse(request.getVariableValue(":sessionId"), e);
+      String sessionId = request.getVariableValue(":sessionId");
+      return new FailedWebDriverLikeResponse(sessionId, e);
     }
   }
 }

@@ -24,6 +24,7 @@ import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 import org.json.JSONObject;
 
 import sh.calaba.driver.exceptions.CalabashException;
+import sh.calaba.driver.exceptions.SessionNotCreatedException;
 import sh.calaba.driver.net.Helper;
 import sh.calaba.driver.net.HttpClientFactory;
 import sh.calaba.driver.net.Session;
@@ -50,6 +51,9 @@ public abstract class CalabashAndroidDriver {
       host = url.getHost();
       session = start();
     } catch (Exception e) {
+      if(e instanceof CalabashException){
+        throw (CalabashException)e;
+      }
       e.printStackTrace();
 
       throw new CalabashException(e);
@@ -62,6 +66,14 @@ public abstract class CalabashAndroidDriver {
 
     WebDriverLikeRequest request = new WebDriverLikeRequest("POST", "/session", payload);
     WebDriverLikeResponse response = execute(request);
+    if (response.getStatus() != 0) {
+      JSONObject responseValue = (JSONObject) response.getValue();
+      if (response.getStatus() == 33) {
+        throw new SessionNotCreatedException(responseValue.getString("message"));
+      } else {
+        throw new CalabashException(responseValue.getString("message"));
+      }
+    }
     String sessionId = response.getSessionId();
 
     Session session = new Session(sessionId);

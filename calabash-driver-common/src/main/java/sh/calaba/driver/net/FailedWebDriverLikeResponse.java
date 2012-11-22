@@ -25,10 +25,19 @@ public class FailedWebDriverLikeResponse extends WebDriverLikeResponse {
     super(content);
   }
 
+  public FailedWebDriverLikeResponse(String sessionId, Exception e, int statusCode) {
+    super(sessionId, statusCode, null);
+    writeExceptionResponse(e, "");
+  }
+
   public FailedWebDriverLikeResponse(String sessionId, Exception e, String extraMessage) {
     // Webdriver Status 13 for UnknownError
     super(sessionId, 13, null);
 
+    writeExceptionResponse(e, extraMessage);
+  }
+
+  private void writeExceptionResponse(Exception e, String extraMessage) {
     try {
       JSONObject value = new JSONObject();
       value.put("message", extraMessage + " , " + e.getMessage());

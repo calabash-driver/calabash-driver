@@ -57,16 +57,29 @@ public class CalabashCapabilities {
 
   public static CalabashCapabilities fromJSON(JSONObject capa) throws JSONException {
     CalabashCapabilities calabashCapability = new CalabashCapabilities();
-    calabashCapability.setDeviceName(capa.getString(CalabashCapabilities.DEVICE_NAME));
-    calabashCapability.setName(capa.getString(CalabashCapabilities.NAME));
-    calabashCapability.setMaxInstances(capa.getInt(CalabashCapabilities.MAX_INSTANCES));
     calabashCapability.setLocale(capa.getString(CalabashCapabilities.LOCALE));
-
-    calabashCapability.setDeviceId(capa.getString(CalabashCapabilities.DEVICE_ID));
-    calabashCapability.setSDKVersion(capa.getString(CalabashCapabilities.SDK_VERSION));
     calabashCapability.setAut(capa.getString(CalabashCapabilities.AUT));
-    calabashCapability.setAppBasePackage(capa.getString(CalabashCapabilities.APP_BASE_PACKAGE));
-    calabashCapability.setAppMainActivity(capa.getString(CalabashCapabilities.APP_MAIN_ACTIVITY));
+    if (capa.has(CalabashCapabilities.DEVICE_NAME)) {
+      calabashCapability.setDeviceName(capa.getString(CalabashCapabilities.DEVICE_NAME));
+    }
+    if (capa.has(CalabashCapabilities.NAME)) {
+      calabashCapability.setName(capa.getString(CalabashCapabilities.NAME));
+    }
+    if (capa.has(CalabashCapabilities.MAX_INSTANCES)) {
+      calabashCapability.setMaxInstances(capa.getInt(CalabashCapabilities.MAX_INSTANCES));
+    }
+    if (capa.has(CalabashCapabilities.DEVICE_ID)) {
+      calabashCapability.setDeviceId(capa.getString(CalabashCapabilities.DEVICE_ID));
+    }
+    if (capa.has(CalabashCapabilities.SDK_VERSION)) {
+      calabashCapability.setSDKVersion(capa.getString(CalabashCapabilities.SDK_VERSION));
+    }
+    if (capa.has(CalabashCapabilities.APP_BASE_PACKAGE)) {
+      calabashCapability.setAppBasePackage(capa.getString(CalabashCapabilities.APP_BASE_PACKAGE));
+    }
+    if (capa.has(CalabashCapabilities.APP_MAIN_ACTIVITY)) {
+      calabashCapability.setAppMainActivity(capa.getString(CalabashCapabilities.APP_MAIN_ACTIVITY));
+    }
 
     if (capa.has(CalabashCapabilities.ADDITIONAL_ADB_COMMANDS)) {
       JSONArray commands = capa.getJSONArray(CalabashCapabilities.ADDITIONAL_ADB_COMMANDS);
