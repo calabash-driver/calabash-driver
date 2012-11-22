@@ -55,6 +55,17 @@ public class CalabashCapabilities {
     return res;
   }
 
+  /**
+   * Merges the extra capabilities provided into this DesiredCapabilities instance. If capabilities
+   * with the same name exist in this instance, they will be overridden by the values from the
+   * extraCapabilities object.
+   * 
+   * @param extraCapabilities Additional capabilities to be added.
+   */
+  public void merge(CalabashCapabilities extraCapabilities) {
+    raw.putAll(extraCapabilities.getRawCapabilities());
+  }
+
   public static CalabashCapabilities fromJSON(JSONObject capa) throws JSONException {
     CalabashCapabilities calabashCapability = new CalabashCapabilities();
     calabashCapability.setLocale(capa.getString(CalabashCapabilities.LOCALE));

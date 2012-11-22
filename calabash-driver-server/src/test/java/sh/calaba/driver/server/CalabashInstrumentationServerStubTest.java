@@ -1,6 +1,5 @@
 package sh.calaba.driver.server;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Properties;
 
@@ -14,7 +13,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import sh.calaba.driver.server.connector.CalabashConnecterException;
 import sh.calaba.driver.server.support.CalabashInstrumentationServerStub;
 import sh.calaba.driver.server.support.NanoHTTPD.Response;
 

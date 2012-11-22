@@ -46,7 +46,7 @@ public class CalabashProxy {
   private Map<String, CalabashAndroidConnector> sessionConnectors =
       new HashMap<String, CalabashAndroidConnector>();
   private Map<String, Thread> sessionInstrumentationThreads = new HashMap<String, Thread>();
-  public static final int DEFAULT_CALABASH_ANDROID_LOCAL_PORT = 34666;
+  public static final int DEFAULT_CALABASH_ANDROID_LOCAL_PORT = 34777;
   private Integer localCalabashSocketPort = null;
   private final List<CalabashCapabilities> availableCapabilities =
       new ArrayList<CalabashCapabilities>();
@@ -111,11 +111,12 @@ public class CalabashProxy {
       throw new SessionNotCreatedException("Driver does not support desired capability: "
           + desiredCapabilities);
     }
+    desiredCapabilities.merge(matchingNodeCapa);
     // is available and can be used
     String sessionId = UUID.randomUUID().toString();
 
     // start the connector in an own thread
-    startCalabashServerAndStartConnector(sessionId, matchingNodeCapa);
+    startCalabashServerAndStartConnector(sessionId, desiredCapabilities);
 
     return sessionId;
   }
