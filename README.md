@@ -7,7 +7,10 @@ The [Selenium Grid](http://code.google.com/p/selenium/wiki/Grid2) can be used fo
 
 For details about how to get started please have a look at the [wiki](http://github.com/calabash-driver/calabash-driver/wiki/).
 
-A practical example, that we have shown at the GDG DevFest in Zürich, you can find [here](https://github.com/DominikDary/gdg-devfest-zrh) and a getting started blog post [here](dary.de/2012/10/gdg-devfest-in-zurich/).
+A practical example, that we have shown at the GDG DevFest in Zürich, you can find [here](https://github.com/DominikDary/gdg-devfest-zrh) and a getting started blog post [here](http://dary.de/2012/10/gdg-devfest-in-zurich/).
+
+The session was recorded and is now available at YouTube:
+http://www.youtube.com/embed/BExAKDslV9I
 
 # Architecture
 
@@ -22,7 +25,7 @@ are used to send them through the different components to execute in the end the
 ## Architectural overiew about the different components
 ![The Architecture of Calabash-Driver](https://docs.google.com/drawings/pub?id=1Xs6yEaqXnPXa5wgrYGulpkRQBqdPCc9OltF4op3oY48&w=952&h=583)
 
-*Calabash-Driver* is using a [forked version](https://github.com/calabash-driver/calabash-android) of *calabash-android* that contains additions like L10n support, which basically enables you to interact with UI elements based on the l10n key in the resource bundle of the app.
+*Calabash-Driver* is using the [default version](https://github.com/calabash/calabash-android) of *calabash-android*.
 
 ## Dynamic View of Calabash-Driver's Architecture
 ![Dynamic View of Calabash-Driver's Architecture ](http://calabash-driver.github.com/calabashDriverDynamicView.png)
