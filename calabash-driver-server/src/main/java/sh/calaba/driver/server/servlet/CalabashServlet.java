@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eclipse.jetty.util.log.Log;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,10 +69,15 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
 
   private void process(HttpServletRequest request, HttpServletResponse response) throws Exception {
     WebDriverLikeRequest req = getRequest(request);
+    if (logger.isDebugEnabled()) {
+      logger.debug("Got called with Reuqest URI: " + request.getRequestURI());
+      logger.debug("Got generic command reuqest: " + req.getGenericCommand());
+    }
     WebDriverLikeResponse resp = getResponse(req);
 
     response.setContentType("application/json;charset=UTF-8");
     response.setCharacterEncoding("UTF-8");
+
 
     if (req.getGenericCommand() == WebDriverLikeCommand.NEW_SESSION) {
       String session = resp.getSessionId();

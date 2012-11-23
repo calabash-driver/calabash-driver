@@ -13,6 +13,7 @@
  */
 package sh.calaba.driver.server.command.impl;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,25 +23,26 @@ import sh.calaba.driver.net.WebDriverLikeResponse;
 import sh.calaba.driver.server.CalabashProxy;
 import sh.calaba.driver.server.command.BaseCommandHandler;
 
-public class GetCapabilities extends BaseCommandHandler {
-  final static Logger logger = LoggerFactory.getLogger(GetCapabilities.class);
+public class GetSessions extends BaseCommandHandler {
+  final static Logger logger = LoggerFactory.getLogger(GetSessions.class);
 
-  public GetCapabilities(CalabashProxy proxy, WebDriverLikeRequest request) {
+  public GetSessions(CalabashProxy proxy, WebDriverLikeRequest request) {
     super(proxy, request);
 
   }
 
   public WebDriverLikeResponse handle() throws Exception {
-    String sessionID = getSessionId();
-
-    JSONObject caps = new JSONObject(getCalabashProxy().getSessionCapabilities(sessionID));
+    JSONArray sessions = getCalabashProxy().getAllSessionDetails();
+    if (logger.isDebugEnabled()) {
+      logger.debug("Session Capabilities for all sessions: ", sessions);
+    }
 
     JSONObject response = new JSONObject();
-    response.put("sessionId", sessionID);
+    response.put("sessionId", JSONObject.NULL);
     response.put("status", 0);
-    response.put("value", caps.toString());
+    response.put("value", sessions);
     if (logger.isDebugEnabled()) {
-      logger.debug("Session Capabilities for session: " + sessionID + " - ", response);
+      logger.debug("Session Capabilities for sessions: ", response);
     }
     return new WebDriverLikeResponse(response);
   }

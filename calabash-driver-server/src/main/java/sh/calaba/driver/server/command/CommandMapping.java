@@ -20,14 +20,16 @@ import sh.calaba.driver.net.WebDriverLikeCommand;
 import sh.calaba.driver.net.WebDriverLikeRequest;
 import sh.calaba.driver.server.CalabashProxy;
 import sh.calaba.driver.server.Handler;
-import sh.calaba.driver.server.command.impl.GetCapabilities;
+import sh.calaba.driver.server.command.impl.GetSessionCapabilities;
+import sh.calaba.driver.server.command.impl.GetSessions;
 import sh.calaba.driver.server.command.impl.GetStatus;
 import sh.calaba.driver.server.command.impl.NewSession;
 import sh.calaba.driver.server.command.impl.StopSession;
 
 public enum CommandMapping {
   NEW_SESSION(NewSession.class),
-  GET_SESSION(GetCapabilities.class),
+  GET_SESSION(GetSessionCapabilities.class),
+  GET_SESSIONS(GetSessions.class),
   DELETE_SESSION(StopSession.class),
   GET_STATUS(GetStatus.class),
 

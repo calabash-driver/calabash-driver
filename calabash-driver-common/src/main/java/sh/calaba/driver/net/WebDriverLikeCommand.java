@@ -13,6 +13,7 @@
  */
 package sh.calaba.driver.net;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import sh.calaba.driver.exceptions.CalabashException;
@@ -30,6 +31,7 @@ import sh.calaba.driver.model.WebViewSupport;
 public enum WebDriverLikeCommand {
   NEW_SESSION("POST", "/session", String.class),
   GET_SESSION("GET", "/session/:sessionId", JSONObject.class),
+  GET_SESSIONS("GET", "/sessions", JSONArray.class),
   DELETE_SESSION("DELETE", "/session/:sessionId", null),
   GET_STATUS("GET", "/status", JSONObject.class),
   BUTTON("GET", "/session/:sessionId/button", ButtonSupport.class),

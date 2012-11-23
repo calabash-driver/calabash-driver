@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -299,5 +300,24 @@ public class CalabashProxy {
    */
   public void setCalabashAdbCmdRunner(CalabashAdbCmdRunner calabashAdbCmdRunner) {
     this.calabashAdbCmdRunner = calabashAdbCmdRunner;
+  }
+
+  public JSONArray getAllSessionDetails() {
+    JSONArray sessions = new JSONArray();
+    if (!sessionConnectors.isEmpty()) {
+      for (Map.Entry<String, CalabashAndroidConnector> entry : sessionConnectors.entrySet()) {
+        JSONObject jsonEntry = new JSONObject();
+        try {
+          jsonEntry.put("id", entry.getKey());
+          jsonEntry.put("capabilities", new JSONObject(entry.getValue().getSessionCapabilities()
+              .getRawCapabilities()));
+          sessions.put(jsonEntry);
+        } catch (JSONException e) {
+          throw new CalabashException("Error occured while JSON handling: ", e);
+        }
+      }
+    }
+
+    return sessions;
   }
 }
