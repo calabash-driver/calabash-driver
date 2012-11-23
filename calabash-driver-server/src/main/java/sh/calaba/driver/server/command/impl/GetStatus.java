@@ -30,7 +30,7 @@ public class GetStatus extends BaseCommandHandler {
 
   public WebDriverLikeResponse handle() throws Exception {
     JSONObject build = new JSONObject();
-    build.put("version", "1.0-snapshot");
+    build.put("version", "1.1-snapshot");
     build.put("revision", "01");
     build.put("time", new Date().getTime());
 
@@ -42,10 +42,7 @@ public class GetStatus extends BaseCommandHandler {
     JSONObject json = new JSONObject();
     json.put("build", build);
     json.put("os", os);
+    return new WebDriverLikeResponse(null, 200, json);
 
-    // TODO ddary find a solution for non existing session
-    WebDriverLikeResponse r = new WebDriverLikeResponse("0815", 200, json);
-
-    return r;
   }
 }

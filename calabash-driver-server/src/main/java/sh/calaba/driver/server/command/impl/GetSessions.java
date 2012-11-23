@@ -14,7 +14,6 @@
 package sh.calaba.driver.server.command.impl;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,14 +35,6 @@ public class GetSessions extends BaseCommandHandler {
     if (logger.isDebugEnabled()) {
       logger.debug("Session Capabilities for all sessions: ", sessions);
     }
-
-    JSONObject response = new JSONObject();
-    response.put("sessionId", JSONObject.NULL);
-    response.put("status", 0);
-    response.put("value", sessions);
-    if (logger.isDebugEnabled()) {
-      logger.debug("Session Capabilities for sessions: ", response);
-    }
-    return new WebDriverLikeResponse(response);
+    return new WebDriverLikeResponse(null, 0, sessions);
   }
 }

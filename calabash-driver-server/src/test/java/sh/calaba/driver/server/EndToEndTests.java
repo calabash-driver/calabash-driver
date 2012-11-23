@@ -117,7 +117,7 @@ public class EndToEndTests {
       HttpResponse response = client.execute(getCapa);
       String responseText = IOUtils.toString(response.getEntity().getContent());
       JSONObject jsonResponse = new JSONObject(responseText);
-      // Assert.assertEquals(jsonResponse.get("sessionId"), JSONObject.NULL);
+      Assert.assertEquals(jsonResponse.has("sessionId"), false);
       Assert.assertEquals(jsonResponse.get("status"), 0);
 
       JSONArray jsonSessions = jsonResponse.getJSONArray("value");
