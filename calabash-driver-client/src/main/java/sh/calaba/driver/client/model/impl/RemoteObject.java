@@ -42,11 +42,11 @@ public class RemoteObject {
       Object res = get(calabashCommand.getWebDriverLikeCommand(), payload);
       JSONObject result = ((JSONObject) res);
 
-      Boolean status = (Boolean) result.get("success");
-      if (result == null || !status) {
+      if (result == null || !result.optBoolean("success")) {
         throw new CalabashException("Calabash command '" + calabashCommand.getCommand()
             + "' was not successful: " + result);
       }
+
       return result;
     } catch (JSONException e) {
       e.printStackTrace();
