@@ -17,14 +17,26 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.security.InvalidParameterException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,7 +120,7 @@ public class CalabashNodeConfiguration {
     }
     String driverConfiguration;
     try {
-      HttpClient client = new DefaultHttpClient();
+      HttpClient client = getDefaultHttpClient();
       HttpGet request = new HttpGet(driverConfigFileURI);
       HttpResponse response = client.execute(request);
 
@@ -117,6 +129,12 @@ public class CalabashNodeConfiguration {
       logger.error("Error occured while reading config from URI:", e1);
       throw new CalabashConfigurationException(
           "Error reading file content. Did you have specified the right URI?", e1);
+    } catch (KeyManagementException e) {
+      logger.error("Error occured while creating httpclient:", e);
+      throw new CalabashConfigurationException("Error occured while creating httpclient", e);
+    } catch (NoSuchAlgorithmException e) {
+      logger.error("Error occured while creating httpclient:", e);
+      throw new CalabashConfigurationException("Error occured while creating httpclient", e);
     }
 
     try {
@@ -254,5 +272,31 @@ public class CalabashNodeConfiguration {
         configuration.isNull("proxy")
             ? "org.openqa.grid.selenium.proxy.DefaultRemoteProxy"
             : configuration.getString("proxy");
+  }
+
+  protected static HttpClient getDefaultHttpClient() throws KeyManagementException,
+      NoSuchAlgorithmException {
+    HttpClient base = new DefaultHttpClient();
+
+    SSLContext ctx = SSLContext.getInstance("TLS");
+    X509TrustManager tm = new X509TrustManager() {
+
+      public void checkClientTrusted(X509Certificate[] xcs, String string)
+          throws CertificateException {}
+
+      public void checkServerTrusted(X509Certificate[] xcs, String string)
+          throws CertificateException {}
+
+      public X509Certificate[] getAcceptedIssuers() {
+        return null;
+      }
+    };
+    ctx.init(null, new TrustManager[] {tm}, null);
+    SSLSocketFactory ssf = new SSLSocketFactory(ctx);
+    ssf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+    ClientConnectionManager ccm = base.getConnectionManager();
+    SchemeRegistry sr = ccm.getSchemeRegistry();
+    sr.register(new Scheme("https", ssf, 443));
+    return new DefaultHttpClient(ccm, base.getParams());
   }
 }
