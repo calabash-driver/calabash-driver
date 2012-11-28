@@ -112,12 +112,12 @@ public class CalabashProxy {
       throw new SessionNotCreatedException("Driver does not support desired capability: "
           + desiredCapabilities);
     }
-    desiredCapabilities.merge(matchingNodeCapa);
+    matchingNodeCapa.merge(desiredCapabilities);
     // is available and can be used
     String sessionId = UUID.randomUUID().toString();
 
     // start the connector in an own thread
-    startCalabashServerAndStartConnector(sessionId, desiredCapabilities);
+    startCalabashServerAndStartConnector(sessionId, matchingNodeCapa);
 
     return sessionId;
   }

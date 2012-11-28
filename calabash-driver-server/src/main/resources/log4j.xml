@@ -12,7 +12,7 @@
 	</appender>
 
 	<appender name="APPLOGFILE" class="org.apache.log4j.RollingFileAppender">
-		<!-- <param name="File" value="c:/euqe.log" /> -->
+		<param name="File" value="calabash-driver.log" /> 
 		<param name="Append" value="true" />
 		<param name="MaxFileSize" value="3000KB" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -23,7 +23,7 @@
 
 	<logger name="sh.calaba">
 		<level value="debug" />
-		<appender-ref ref="stdout" />
+		<appender-ref ref="APPLOGFILE" />
 	</logger>
 
 	<root>
