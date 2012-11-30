@@ -31,9 +31,9 @@ public class WebDriverLikeResponse {
   }
 
   public WebDriverLikeResponse(JSONObject content) throws JSONException {
-    this.sessionId = content.getString("sessionId");
-    this.status = content.getInt("status");
-    this.value = content.get("value");
+    this.sessionId = content.optString("sessionId");
+    this.status = content.optInt("status");
+    this.value = content.optJSONObject("value");
   }
 
   public String getSessionId() {

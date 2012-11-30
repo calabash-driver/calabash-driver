@@ -16,6 +16,8 @@ package sh.calaba.driver.model;
 import java.net.URL;
 import java.util.Map;
 
+import javax.security.auth.login.FailedLoginException;
+
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -25,6 +27,7 @@ import org.json.JSONObject;
 
 import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.exceptions.SessionNotCreatedException;
+import sh.calaba.driver.net.FailedWebDriverLikeResponse;
 import sh.calaba.driver.net.Helper;
 import sh.calaba.driver.net.HttpClientFactory;
 import sh.calaba.driver.net.Session;
@@ -51,8 +54,8 @@ public abstract class CalabashAndroidDriver {
       host = url.getHost();
       session = start();
     } catch (Exception e) {
-      if(e instanceof CalabashException){
-        throw (CalabashException)e;
+      if (e instanceof CalabashException) {
+        throw (CalabashException) e;
       }
       e.printStackTrace();
 
@@ -100,7 +103,10 @@ public abstract class CalabashAndroidDriver {
     }
 
     JSONObject o = Helper.extractObject(response);
-
+    if (o == null) {
+      return new FailedWebDriverLikeResponse(null, new SessionNotCreatedException(
+          "An error occured while creating a new session"));
+    }
     return new WebDriverLikeResponse(o);
   }
 

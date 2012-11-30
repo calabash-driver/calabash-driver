@@ -140,7 +140,11 @@ public class CalabashServlet extends CalabashProxyBasedServlet {
     } catch (Exception e) {
       logger.error("Error occured: " + request.getPath() + " Error: ", e);
       logger.error(request.toString());
-      String sessionId = request.getVariableValue(":sessionId");
+      String sessionId = null;
+      if (!WebDriverLikeCommand.NEW_SESSION.equals(request.getGenericCommand())) {
+        sessionId = request.getVariableValue(":sessionId");
+      }
+
       return new FailedWebDriverLikeResponse(sessionId, e);
     }
   }
