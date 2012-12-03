@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>sh.calaba</groupId>
 	<artifactId>calabash-driver</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Calabash Driver</name>
 	<modules>
@@ -25,5 +25,10 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
-
+	<distributionManagement>
+		<repository>
+			<id>gh-pages</id>
+			<url>file:///${basedir}/../../calabash-driver.github.com/repository/</url>
+		</repository>
+	</distributionManagement>
 </project>
