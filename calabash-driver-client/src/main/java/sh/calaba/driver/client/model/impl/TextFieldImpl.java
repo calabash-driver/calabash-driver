@@ -16,6 +16,7 @@ package sh.calaba.driver.client.model.impl;
 import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
 import sh.calaba.driver.model.By;
+import sh.calaba.driver.model.By.Id;
 import sh.calaba.driver.model.TextFieldSupport;
 
 /**
@@ -37,6 +38,8 @@ public class TextFieldImpl extends RemoteObject implements TextFieldSupport {
       executeCalabashCommand(CalabashCommands.CLEAR_NUMBERED_FIELD, by.getIdentifier());
     } else if (by instanceof By.Text) {
       executeCalabashCommand(CalabashCommands.CLEAR_NAMED_FIELD, by.getIdentifier());
+    } else if (by instanceof By.Id) {
+      executeCalabashCommand(CalabashCommands.CLEAR_ID_FIELD, by.getIdentifier());
     } else {
       throw new IllegalArgumentException("By not available.");
     }
@@ -49,8 +52,7 @@ public class TextFieldImpl extends RemoteObject implements TextFieldSupport {
       executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_NUMBERED_FIELD, text,
           by.getIdentifier());
     } else if (by instanceof By.Text) {
-      executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_NAMED_FIELD, text,
-          by.getIdentifier());
+      executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_NAMED_FIELD, text, by.getIdentifier());
     } else if (by instanceof By.Id) {
       executeCalabashCommand(CalabashCommands.ENTER_TEXT_INTO_ID_FIELD, text, by.getIdentifier());
     } else {

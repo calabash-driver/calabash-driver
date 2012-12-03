@@ -16,8 +16,6 @@ package sh.calaba.driver.model;
 import java.net.URL;
 import java.util.Map;
 
-import javax.security.auth.login.FailedLoginException;
-
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

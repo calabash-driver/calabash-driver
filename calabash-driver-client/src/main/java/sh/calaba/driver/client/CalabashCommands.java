@@ -25,6 +25,7 @@ public enum CalabashCommands {
     CLEAR_NUMBERED_FIELD("clear_numbered_field", "", WebDriverLikeCommand.TEXT_FIELD),
   CLICK_ON_TEXT("click_on_text", "", WebDriverLikeCommand.VIEW),
   CLICK_ON_VIEW_BY_ID("click_on_view_by_id", "", WebDriverLikeCommand.VIEW),
+  CLEAR_ID_FIELD("clear_id_field","",WebDriverLikeCommand.TEXT_FIELD),
   ENTER_QUERY_INTO_NUMBERED_FIELD("enter_query_into_numbered_field", "", WebDriverLikeCommand.TEXT_FIELD),
   ENTER_TEXT_INTO_ID_FIELD("enter_text_into_id_field", "", WebDriverLikeCommand.TEXT_FIELD),
   ENTER_TEXT_INTO_NAMED_FIELD("enter_text_into_named_field", "", WebDriverLikeCommand.TEXT_FIELD),
