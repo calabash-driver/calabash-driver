@@ -48,7 +48,7 @@ public class CalabashProxy {
       new HashMap<String, CalabashAndroidConnector>();
   private Map<String, Thread> sessionInstrumentationThreads = new HashMap<String, Thread>();
   public static final int DEFAULT_CALABASH_ANDROID_LOCAL_PORT = 34777;
-  private Integer localCalabashSocketPort = null;
+  protected Integer localCalabashSocketPort = null;
   private final List<CalabashCapabilities> availableCapabilities =
       new ArrayList<CalabashCapabilities>();
   private boolean cleanSavedUserData = true;

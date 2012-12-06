@@ -1,0 +1,1536 @@
+ - 13:25:47 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:25:48 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:25:48 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:25:48 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:25:48 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.NoHttpResponseException: The target server failed to respond
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.NoHttpResponseException: The target server failed to respond
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:95)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:62)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:254)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:289)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:252)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.receiveResponseHeader(ManagedClientConnectionImpl.java:191)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:300)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:127)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:712)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:517)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+ - 13:25:48 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:25:48 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:25:48 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:25:48 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:25:48 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:25:48 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:25:48 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:25:48 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34779
+ - 13:25:48 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:25:48 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:25:48 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:25:48 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:25:48 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:26:26 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:26:27 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:26:27 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:26:27 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:26:27 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: e42fadcb-b035-4780-9424-170217cc07ca
+ - 13:26:27 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: e42fadcb-b035-4780-9424-170217cc07ca
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: e42fadcb-b035-4780-9424-170217cc07ca
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:26:27 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/e42fadcb-b035-4780-9424-170217cc07ca
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:26:27 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:26:27 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:26:27 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:26:27 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:26:27 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:26:27 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:26:27 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:26:27 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34779
+ - 13:26:27 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:26:27 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:26:27 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:26:27 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:26:27 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:27:31 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:27:33 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:27:33 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:27:33 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:27:33 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: aafc074e-1398-47b2-a561-d72eadf3f480
+ - 13:27:33 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: aafc074e-1398-47b2-a561-d72eadf3f480
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: aafc074e-1398-47b2-a561-d72eadf3f480
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:27:33 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/aafc074e-1398-47b2-a561-d72eadf3f480
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:27:33 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:27:33 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:27:33 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:27:33 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:27:33 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:27:33 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:27:33 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:27:33 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34779
+ - 13:27:33 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:27:33 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:27:33 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:27:33 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:27:33 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:30:55 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:30:55 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:30:55 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:30:55 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:30:55 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: c4d560c3-1891-4ed9-9dba-712172a43ba6
+ - 13:30:55 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: c4d560c3-1891-4ed9-9dba-712172a43ba6
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: c4d560c3-1891-4ed9-9dba-712172a43ba6
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:30:55 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/c4d560c3-1891-4ed9-9dba-712172a43ba6
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:30:55 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:30:55 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:30:55 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:30:55 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:30:55 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:30:55 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:30:55 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:30:55 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34779
+ - 13:30:55 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:30:55 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:30:55 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:30:55 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:30:55 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:31:29 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:31:29 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:31:29 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:31:29 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:31:29 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: 13b01e18-0049-4c42-87e0-5f3ae405fb6a
+ - 13:31:29 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: 13b01e18-0049-4c42-87e0-5f3ae405fb6a
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 13b01e18-0049-4c42-87e0-5f3ae405fb6a
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:31:29 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/13b01e18-0049-4c42-87e0-5f3ae405fb6a
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:31:29 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:31:29 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:31:29 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:31:29 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:31:29 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:31:29 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:31:29 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:31:29 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34779
+ - 13:31:29 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:31:29 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34779 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:31:29 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:31:29 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:31:29 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:31:42 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:31:42 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: e884df09-8d11-4c74-a67a-69356c8fdb32
+ - 13:31:42 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: e884df09-8d11-4c74-a67a-69356c8fdb32
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: e884df09-8d11-4c74-a67a-69356c8fdb32
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/e884df09-8d11-4c74-a67a-69356c8fdb32/listItem
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: LIST_ITEM
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["5","0"],"command":"press_list_item"}
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: e884df09-8d11-4c74-a67a-69356c8fdb32
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/e884df09-8d11-4c74-a67a-69356c8fdb32/textField
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: TEXT_FIELD
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["ddary_mobile","username"],"command":"enter_text_into_named_field"}
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: e884df09-8d11-4c74-a67a-69356c8fdb32
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/e884df09-8d11-4c74-a67a-69356c8fdb32/textField
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: TEXT_FIELD
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["password","password"],"command":"enter_text_into_named_field"}
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: e884df09-8d11-4c74-a67a-69356c8fdb32
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/e884df09-8d11-4c74-a67a-69356c8fdb32/view
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: VIEW
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["Sign In"],"command":"press"}
+ - 13:31:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: e884df09-8d11-4c74-a67a-69356c8fdb32
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/e884df09-8d11-4c74-a67a-69356c8fdb32
+ - 13:31:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:31:42 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:37:49 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:37:49 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:37:49 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:37:49 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:37:49 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: 1feddaa9-aeca-4066-bd41-fc868c8d4904
+ - 13:37:49 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: 1feddaa9-aeca-4066-bd41-fc868c8d4904
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 1feddaa9-aeca-4066-bd41-fc868c8d4904
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:37:49 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/1feddaa9-aeca-4066-bd41-fc868c8d4904
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:37:49 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:37:49 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:37:49 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:37:49 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:37:49 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:37:49 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:37:49 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:37:49 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:38:05 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:38:05 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:38:05 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:38:05 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:38:05 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:38:05 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:38:05 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: 211a30c5-cb73-41fc-87ed-3e67cb5c2479
+ - 13:38:05 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: 211a30c5-cb73-41fc-87ed-3e67cb5c2479
+ - 13:38:05 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 211a30c5-cb73-41fc-87ed-3e67cb5c2479
+ - 13:38:05 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/211a30c5-cb73-41fc-87ed-3e67cb5c2479/listItem
+ - 13:38:05 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: LIST_ITEM
+ - 13:38:05 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["5","0"],"command":"press_list_item"}
+ - 13:38:05 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: 211a30c5-cb73-41fc-87ed-3e67cb5c2479
+ - 13:38:06 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/211a30c5-cb73-41fc-87ed-3e67cb5c2479/textField
+ - 13:38:06 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: TEXT_FIELD
+ - 13:38:06 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["ddary_mobile","username"],"command":"enter_text_into_named_field"}
+ - 13:38:06 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: 211a30c5-cb73-41fc-87ed-3e67cb5c2479
+ - 13:38:06 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/211a30c5-cb73-41fc-87ed-3e67cb5c2479/textField
+ - 13:38:06 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: TEXT_FIELD
+ - 13:38:06 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["password","password"],"command":"enter_text_into_named_field"}
+ - 13:38:06 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: 211a30c5-cb73-41fc-87ed-3e67cb5c2479
+ - 13:38:06 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/211a30c5-cb73-41fc-87ed-3e67cb5c2479/view
+ - 13:38:06 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: VIEW
+ - 13:38:06 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["Sign In"],"command":"press"}
+ - 13:38:06 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: 211a30c5-cb73-41fc-87ed-3e67cb5c2479
+ - 13:38:06 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/211a30c5-cb73-41fc-87ed-3e67cb5c2479
+ - 13:38:06 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:38:06 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:38:20 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:38:20 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:38:20 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:38:20 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:38:20 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: 73159cb4-fb78-4974-af95-7d4185961d94
+ - 13:38:20 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: 73159cb4-fb78-4974-af95-7d4185961d94
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 73159cb4-fb78-4974-af95-7d4185961d94
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:38:20 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/73159cb4-fb78-4974-af95-7d4185961d94
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:38:20 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:38:20 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:38:20 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:38:20 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:38:20 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:38:20 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:38:20 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:38:20 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:39:24 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:39:25 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:39:25 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:39:25 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:39:25 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: d0d9ad73-0909-48b3-a602-4031506dae28
+ - 13:39:25 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: d0d9ad73-0909-48b3-a602-4031506dae28
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: d0d9ad73-0909-48b3-a602-4031506dae28
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:39:25 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/d0d9ad73-0909-48b3-a602-4031506dae28
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:39:25 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:39:25 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:39:25 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:39:25 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:39:25 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:39:25 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:39:25 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:39:25 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:41:02 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:41:03 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:41:03 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:41:03 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:41:03 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:41:03 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:41:03 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: 1205acfd-5ca7-4d01-adcb-b10e8c663278
+ - 13:41:03 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: 1205acfd-5ca7-4d01-adcb-b10e8c663278
+ - 13:41:03 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 1205acfd-5ca7-4d01-adcb-b10e8c663278
+ - 13:41:03 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/1205acfd-5ca7-4d01-adcb-b10e8c663278
+ - 13:41:03 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSION
+ - 13:41:03 DEBUG sh.calaba.driver.server.command.impl.GetSessionCapabilities (line:38) - Session Capabilities for session: 1205acfd-5ca7-4d01-adcb-b10e8c663278 - 
+ - 13:41:03 DEBUG sh.calaba.driver.server.command.impl.GetSessionCapabilities (line:47) - Session Capabilities for session: 1205acfd-5ca7-4d01-adcb-b10e8c663278 - 
+ - 13:41:03 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/1205acfd-5ca7-4d01-adcb-b10e8c663278
+ - 13:41:03 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:41:03 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:42:28 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:42:28 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:42:28 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:42:28 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:42:28 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: 1f5274de-f28e-4096-8c5c-a5c519ff755f
+ - 13:42:28 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: 1f5274de-f28e-4096-8c5c-a5c519ff755f
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 1f5274de-f28e-4096-8c5c-a5c519ff755f
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:42:28 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/1f5274de-f28e-4096-8c5c-a5c519ff755f
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:42:28 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:42:28 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:42:28 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:42:28 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:42:28 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:42:28 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:42:28 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:42:28 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:42:39 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:42:39 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: ae990b20-89c9-41e5-9011-f51ca4b9327c
+ - 13:42:39 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: ae990b20-89c9-41e5-9011-f51ca4b9327c
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: ae990b20-89c9-41e5-9011-f51ca4b9327c
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/ae990b20-89c9-41e5-9011-f51ca4b9327c/listItem
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: LIST_ITEM
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["5","0"],"command":"press_list_item"}
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: ae990b20-89c9-41e5-9011-f51ca4b9327c
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/ae990b20-89c9-41e5-9011-f51ca4b9327c/textField
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: TEXT_FIELD
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["ddary_mobile","username"],"command":"enter_text_into_named_field"}
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: ae990b20-89c9-41e5-9011-f51ca4b9327c
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/ae990b20-89c9-41e5-9011-f51ca4b9327c/textField
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: TEXT_FIELD
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["password","password"],"command":"enter_text_into_named_field"}
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: ae990b20-89c9-41e5-9011-f51ca4b9327c
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/ae990b20-89c9-41e5-9011-f51ca4b9327c/view
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: VIEW
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:271) - received command: {"arguments":["Sign In"],"command":"press"}
+ - 13:42:39 DEBUG sh.calaba.driver.server.CalabashProxy (line:272) - received sessionId: ae990b20-89c9-41e5-9011-f51ca4b9327c
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/ae990b20-89c9-41e5-9011-f51ca4b9327c
+ - 13:42:39 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:42:39 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:45:37 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:45:37 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:45:37 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:45:37 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:45:37 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:45:37 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: 0c859b04-2db8-4973-9fe7-96ddd4a7d69d
+ - 13:45:37 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: 0c859b04-2db8-4973-9fe7-96ddd4a7d69d
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 0c859b04-2db8-4973-9fe7-96ddd4a7d69d
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:45:37 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/0c859b04-2db8-4973-9fe7-96ddd4a7d69d
+ - 13:45:37 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:45:37 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:45:38 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:45:38 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:45:38 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:45:38 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:45:38 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:45:38 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:45:38 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:45:38 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:47:14 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:49:41 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:49:41 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:49:41 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:49:41 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:49:41 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:49:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:49:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:49:42 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:49:42 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: 863d9267-cf1d-4abe-a808-942c07e3b6aa
+ - 13:49:42 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: 863d9267-cf1d-4abe-a808-942c07e3b6aa
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 863d9267-cf1d-4abe-a808-942c07e3b6aa
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:49:42 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/863d9267-cf1d-4abe-a808-942c07e3b6aa
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:49:42 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:49:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:49:42 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:49:42 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:49:42 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$000(CalabashAndroidConnectorImpl.java:48)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:49:42 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:49:42 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:52:57 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:52:57 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={locale=ANY_VALUEHello, aut=ANY_VALUE}, getLocale()=ANY_VALUEHello, getSDKVersion()=null, getDeviceName()=null, getAppMainActivity()=null, getAppBasePackage()=null, getDeviceId()=null]
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:52:57 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:52:57 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34777
+ - 13:52:57 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:52:57 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:55) - New Session Class; session iD: 4ce052cf-ba88-47dc-8055-be2873bb7d28
+ - 13:52:57 DEBUG sh.calaba.driver.server.command.impl.NewSession (line:64) - Created session ID in response: 4ce052cf-ba88-47dc-8055-be2873bb7d28
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: 4ce052cf-ba88-47dc-8055-be2873bb7d28
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/sessions/
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: GET_SESSIONS
+ - 13:52:57 DEBUG sh.calaba.driver.server.command.impl.GetSessions (line:36) - Session Capabilities for all sessions: 
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session/4ce052cf-ba88-47dc-8055-be2873bb7d28
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: DELETE_SESSION
+ - 13:52:57 DEBUG sh.calaba.driver.server.command.impl.StopSession (line:48) - 
+
+
+---------Session STOP ---------------
+
+
+
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:73) - Got called with Reuqest URI: /wd/hub/session
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:74) - Got generic command reuqest: NEW_SESSION
+ - 13:52:57 DEBUG sh.calaba.driver.server.CalabashProxy (line:101) - reqqested capa: Calabash Capabilities [raw={appBasePackage=ANY_VALUE, deviceName=ANY_VALUE, browserName=calabash-android, maxInstances=1, locale=ANY_VALUE, appMainActivity=ANY_VALUE, deviceId=ANY_VALUE, sdkVersion=ANY_VALUE, aut=ANY_VALUE}, getLocale()=ANY_VALUE, getSDKVersion()=ANY_VALUE, getDeviceName()=ANY_VALUE, getAppMainActivity()=ANY_VALUE, getAppBasePackage()=ANY_VALUE, getDeviceId()=ANY_VALUE]
+ - 13:52:57 DEBUG sh.calaba.driver.server.CalabashProxy (line:201) - Capability initialized: ANY_VALUE on local port: 34778
+ - 13:52:57 DEBUG sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl (line:182) - Starting Calabash HTTP Connector
+ - 13:52:57 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:141) - Error occured: /session Error: 
+sh.calaba.driver.server.connector.CalabashConnecterException: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:129)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.access$0(CalabashAndroidConnectorImpl.java:114)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.isPortBound(CalabashAndroidConnectorImpl.java:193)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl$CalabashHttpServerWaiter.run(CalabashAndroidConnectorImpl.java:206)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.start(CalabashAndroidConnectorImpl.java:185)
+	at sh.calaba.driver.server.CalabashProxy.startCalabashServerAndStartConnector(CalabashProxy.java:220)
+	at sh.calaba.driver.server.CalabashProxy.initializeSessionForCapabilities(CalabashProxy.java:120)
+	at sh.calaba.driver.server.command.impl.NewSession.handle(NewSession.java:50)
+	at sh.calaba.driver.server.servlet.CalabashServlet.getResponse(CalabashServlet.java:139)
+	at sh.calaba.driver.server.servlet.CalabashServlet.process(CalabashServlet.java:76)
+	at sh.calaba.driver.server.servlet.CalabashServlet.doPost(CalabashServlet.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:533)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:475)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:920)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:403)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:184)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:856)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:114)
+	at org.eclipse.jetty.server.Server.handle(Server.java:352)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:596)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1066)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:805)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:218)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:426)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:510)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.access$000(SelectChannelEndPoint.java:34)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:450)
+	at java.lang.Thread.run(Thread.java:680)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connection to http://localhost:34778 refused
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:190)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:294)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:640)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:479)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:805)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:784)
+	at sh.calaba.driver.server.connector.impl.CalabashAndroidConnectorImpl.execute(CalabashAndroidConnectorImpl.java:123)
+	... 32 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:351)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:213)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:200)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:432)
+	at java.net.Socket.connect(Socket.java:529)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:127)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	... 39 more
+ - 13:52:57 ERROR sh.calaba.driver.server.servlet.CalabashServlet (line:142) - POST:/session
+body:{"desiredCapabilities":{"appBasePackage":"ANY_VALUE","deviceName":"ANY_VALUE","browserName":"calabash-android","maxInstances":1,"locale":"ANY_VALUE","appMainActivity":"ANY_VALUE","deviceId":"ANY_VALUE","aut":"ANY_VALUE","sdkVersion":"ANY_VALUE"}}
+ - 13:52:57 DEBUG sh.calaba.driver.server.servlet.CalabashServlet (line:85) - CalabashServlet: new session: null
+ - 13:54:12 DEBUG sh.calaba.driver.server.CalabashAndroidServer (line:96) - The CalabashAndroidServer is initialized.

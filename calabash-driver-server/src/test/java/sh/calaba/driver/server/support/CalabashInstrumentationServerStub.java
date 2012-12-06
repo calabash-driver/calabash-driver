@@ -25,10 +25,10 @@ import sh.calaba.driver.server.CalabashProxy;
 public class CalabashInstrumentationServerStub extends NanoHTTPD {
   private CalabashTestSessionListener testSessionListener;
 
-  public CalabashInstrumentationServerStub() throws IOException {
-    super(CalabashProxy.DEFAULT_CALABASH_ANDROID_LOCAL_PORT, new File("."));
+  public CalabashInstrumentationServerStub(int port) throws IOException {
+    super(port, new File("."));
     System.out.println("CalabashInstrumentationServerStub is started on the following port: "
-        + CalabashProxy.DEFAULT_CALABASH_ANDROID_LOCAL_PORT);
+        + port);
 
   }
 
@@ -45,7 +45,7 @@ public class CalabashInstrumentationServerStub extends NanoHTTPD {
 
   public Response serve(String uri, String method, Properties header, Properties params,
       Properties files) {
-    //System.out.println("Hello world: " + uri);
+    // System.out.println("Hello world: " + uri);
     if (this.testSessionListener == null) {
       throw new IllegalStateException("Server must have one test session listener registered.");
     }

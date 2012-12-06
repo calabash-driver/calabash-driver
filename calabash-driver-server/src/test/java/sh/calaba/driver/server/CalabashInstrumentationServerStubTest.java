@@ -18,12 +18,13 @@ import sh.calaba.driver.server.support.NanoHTTPD.Response;
 
 public class CalabashInstrumentationServerStubTest {
   public static final String hostname = "localhost";
+  private int port = 5678;
 
   private CalabashInstrumentationServerStub instrumentationServer = null;
 
   @BeforeClass
   public void startServer() throws Exception {
-    instrumentationServer = new CalabashInstrumentationServerStub();
+    instrumentationServer = new CalabashInstrumentationServerStub(port);
     instrumentationServer
         .registerTestSessionListener(instrumentationServer.new CalabashTestSessionListener() {
 
@@ -41,7 +42,7 @@ public class CalabashInstrumentationServerStubTest {
   public void runServer() throws Exception {
     String path = "/ready";
     HttpPost postRequest =
-        new HttpPost("http://" + hostname + ":" + CalabashProxy.DEFAULT_CALABASH_ANDROID_LOCAL_PORT
+        new HttpPost("http://" + hostname + ":" + port
             + path);
 
 

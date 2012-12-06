@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.exceptions.CalabashException;
-import sh.calaba.driver.server.exceptions.CalabashConfigurationException;
 
 /**
  * Default {@link AdbConection} implementation to use the Android sdkHandles the execution of ADB
@@ -64,13 +63,17 @@ public class DefaultAdbConnection implements AdbConection {
   public String runProcess(List<String> adbParameter, String name, boolean confirmExitValue)
       throws AdbConnetionException {
     adbParameter.add(0, this.pathToAdb);
-    ProcessBuilder processBuilder = new ProcessBuilder(adbParameter);
-    processBuilder.redirectErrorStream(true);
+    Runtime runtime = Runtime.getRuntime();
+
+    String command = "";
+    for (String s : adbParameter) {
+      command += s + "\t";
+    }
     if (logger.isDebugEnabled()) {
-      logger.debug("Process '" + name + "' is about to start: " + processBuilder.command());
+      logger.debug("Process '" + name + "' is about to start: " + command);
     }
     try {
-      Process process = processBuilder.start();
+      Process process = runtime.exec(command);
 
       if (confirmExitValue) {
         confirmExitValueIs(0, process);
