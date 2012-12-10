@@ -11,7 +11,7 @@ import sh.calaba.driver.server.exceptions.CalabashConfigurationException;
 import sh.calaba.driver.server.support.CalabashWebNodeConfigStub;
 
 public class CalabashNodeConfigurationTest {
-  private static final String CONFIG_FILE_URL = "http://localhost:8080/config.json";
+  private static final String CONFIG_FILE_URL = "http://localhost:8081/config.json";
   private static final String CONFIG_FILE = "src/test/resources/nodeconfig/config.json";
 
   @Test

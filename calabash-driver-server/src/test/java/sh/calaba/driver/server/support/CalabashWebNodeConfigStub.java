@@ -5,7 +5,7 @@ import java.io.File;
 public class CalabashWebNodeConfigStub extends NanoHTTPD{
 
   public CalabashWebNodeConfigStub() {
-    super(8080, new File("src/test/resources/nodeconfig"));
+    super(8081, new File("src/test/resources/nodeconfig"));
   }
 
 }
