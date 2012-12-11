@@ -179,6 +179,13 @@ public class CalabashAdbCmdRunner {
 
     // needed because the process will not end, but wait is needed
     waitForCalabashServerOnDevice(deviceId);
+    // TODO Intermediate experiment
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     return instrumentationThread;
   }
 
