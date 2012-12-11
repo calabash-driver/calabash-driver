@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sh.calaba.driver.exceptions.CalabashException;
+import sh.calaba.driver.exceptions.TimeoutException;
 import sh.calaba.utils.AdbConection;
 import sh.calaba.utils.DefaultAdbConnection;
 
@@ -157,20 +158,20 @@ public class CalabashAdbCmdRunner {
 
         commandLineFwd.add("am");
         commandLineFwd.add("instrument");
-       // commandLineFwd.add("-e target_package "+appBasePackageName);
+        // commandLineFwd.add("-e target_package "+appBasePackageName);
         commandLineFwd.add("-e");
-          commandLineFwd.add("target_package");
+        commandLineFwd.add("target_package");
         commandLineFwd.add(appBasePackageName);
-        //commandLineFwd.add("-e main_activity "+mainActivity);
+        // commandLineFwd.add("-e main_activity "+mainActivity);
         commandLineFwd.add("-e");
         commandLineFwd.add("main_activity");
         commandLineFwd.add(mainActivity);
         commandLineFwd.add("-e class");
         commandLineFwd.add("sh.calaba.instrumentationbackend.InstrumentationBackend");
-       
+
         commandLineFwd
             .add("sh.calaba.android.test/sh.calaba.instrumentationbackend.CalabashInstrumentationTestRunner");
-        
+
         adbConnection.runProcess(commandLineFwd, "about to start CalabashServer", false);
       }
     });
@@ -220,6 +221,7 @@ public class CalabashAdbCmdRunner {
     private Condition cv = lock.newCondition();
     private AdbConection adbConnection;
     private String deviceId;
+    static final long TIMEOUT = 65000;
 
     CalabashServerWaiter(AdbConection con, String deviceId) {
       this.adbConnection = con;
@@ -250,9 +252,13 @@ public class CalabashAdbCmdRunner {
     @Override
     public void run() {
       lock.lock();
-
+      long end = System.currentTimeMillis() + TIMEOUT;
       try {
         while (!isPortBound()) {
+          if (System.currentTimeMillis() > end) {
+            throw new TimeoutException("The calabash server did not come up after "
+                + (TIMEOUT / 1000) + " seconds.");
+          }
           cv.await(2, TimeUnit.SECONDS);
         }
       } catch (InterruptedException e) {
