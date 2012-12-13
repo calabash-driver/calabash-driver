@@ -40,8 +40,8 @@ public abstract class CalabashAndroidDriver {
   private final String remoteURL;
   private final Map<String, Object> requestedCapabilities;
   private final Session session;
-  private static String host;
-  private static int port;
+  private String host;
+  private int port;
 
   public CalabashAndroidDriver(String remoteURL, Map<String, Object> capabilities) {
     this.remoteURL = remoteURL;
@@ -72,6 +72,7 @@ public abstract class CalabashAndroidDriver {
       if (response.getStatus() == 33) {
         throw new SessionNotCreatedException(responseValue.getString("message"));
       } else {
+        System.out.println("resonse: " + response.getValue());
         throw new CalabashException(responseValue.getString("message"));
       }
     }

@@ -228,7 +228,7 @@ public class CalabashAdbCmdRunner {
     private Condition cv = lock.newCondition();
     private AdbConection adbConnection;
     private String deviceId;
-    static final long TIMEOUT = 65000;
+    static final long TIMEOUT = 100000;
 
     CalabashServerWaiter(AdbConection con, String deviceId) {
       this.adbConnection = con;

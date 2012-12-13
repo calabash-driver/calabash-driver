@@ -113,8 +113,9 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
 
   private HttpResponse execute(String path, JSONObject action) {
     HttpResponse response = null;
+    HttpPost postRequest = null;
     try {
-      HttpPost postRequest = new HttpPost("http://" + hostname + ":" + port + path);
+      postRequest = new HttpPost("http://" + hostname + ":" + port + path);
       postRequest.addHeader("Content-Type", "application/json;charset=utf-8");
       if (action != null) {
         postRequest.setEntity(new StringEntity(action.toString(), "UTF-8"));
@@ -126,7 +127,24 @@ public class CalabashAndroidConnectorImpl implements CalabashAndroidConnector {
     } catch (ClientProtocolException e) {
       throw new CalabashConnecterException(e);
     } catch (IOException e) {
-      throw new CalabashConnecterException(e);
+      try {
+        try {
+          Thread.sleep(2500);
+        } catch (InterruptedException e1) {
+          // TODO Auto-generated catch block
+          e1.printStackTrace();
+        }
+        response = httpClient.execute(postRequest);
+      } catch (ClientProtocolException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+        throw new CalabashConnecterException(e1);
+      } catch (IOException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+        throw new CalabashConnecterException(e1);
+      }
+
     }
     if (response.getStatusLine().getStatusCode() != 200) {
       throw new CalabashConnecterException("Failed : HTTP error code : "
