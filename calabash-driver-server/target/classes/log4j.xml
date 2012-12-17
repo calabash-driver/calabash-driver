@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+	<!-- an appender is an output destination, such as e.g. the console or a 
+		file; names of appenders are arbitrarily chosen -->
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%X{testCaseName} - %d{HH:mm:ss} %5p %c (line:%L) - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="APPLOGFILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="calabash-driver.log" /> 
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="3000KB" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%X{testCaseName} - %d{HH:mm:ss} %5p %c (line:%L) - %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="sh.calaba">
+		<level value="debug" />
+		<appender-ref ref="APPLOGFILE" />
+	</logger>
+
+	<root>
+		<level value="error" />
+		<appender-ref ref="stdout" />
+	</root>
+</log4j:configuration>

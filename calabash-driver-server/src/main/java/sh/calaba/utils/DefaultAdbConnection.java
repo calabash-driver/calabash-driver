@@ -63,13 +63,18 @@ public class DefaultAdbConnection implements AdbConection {
   public String runProcess(List<String> adbParameter, String name, boolean confirmExitValue)
       throws AdbConnetionException {
     adbParameter.add(0, this.pathToAdb);
-    ProcessBuilder processBuilder = new ProcessBuilder(adbParameter);
-    processBuilder.redirectErrorStream(true);
+    // ProcessBuilder processBuilder = new ProcessBuilder(adbParameter);
+    // processBuilder.redirectErrorStream(true);
     if (logger.isDebugEnabled()) {
-      logger.debug("Process '" + name + "' is about to start: " + processBuilder.command());
+      // logger.debug("Process '" + name + "' is about to start: " + processBuilder.command());
     }
     try {
-      Process process = processBuilder.start();
+      // Process process = processBuilder.start();
+      StringBuilder command = new StringBuilder();
+      for (String adb : adbParameter) {
+        command.append(adb + " ");
+      }
+      Process process = Runtime.getRuntime().exec(command.toString());
 
       if (confirmExitValue) {
         confirmExitValueIs(0, process);

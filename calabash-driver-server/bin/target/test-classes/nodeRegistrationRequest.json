@@ -1,0 +1,35 @@
+{
+    "class":"org.openqa.grid.common.RegistrationRequest",
+    "capabilities":[
+        {
+            "platform":"MAC",
+            "seleniumProtocol":"WebDriver",
+            "browserName":"calabash-android",
+            "version":"2.3",
+            "locale":"de_DE",
+            "maxInstances":1
+        },
+        {
+            "platform":"MAC",
+            "seleniumProtocol":"WebDriver",
+            "browserName":"calabash-android",
+            "version":"2.3",
+            "locale":"en_UK",
+            "maxInstances":1
+        }
+    ],
+    "configuration":{
+        "port":5555,
+        "register":true,
+        "host":"10.243.80.84",
+        "proxy":"org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+        "maxSession":5,
+        "hubHost":"localhost",
+        "role":"node",
+        "registerCycle":5000,
+        "hub":"http://localhost:4444/grid/register",
+        "hubPort":4444,
+        "url":"http://10.243.80.84:5555",
+        "remoteHost":"http://10.243.80.84:5555"
+    }
+}

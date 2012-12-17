@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="7.903" errors="0" skipped="0" tests="12" name="TestSuite">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib"/>
+    <property name="java.vm.version" value="23.5-b02"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server"/>
+    <property name="java.runtime.version" value="1.7.0_09-b05"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="basedir" value="/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="surefire.real.class.path" value="/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server/target/surefire/surefirebooter3141208858959953754.jar"/>
+    <property name="java.io.tmpdir" value="/var/folders/hk/yjn0gy1j5h378h6yrkh8rz1w38y103/T/"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/ddary/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="surefire.test.class.path" value="/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server/target/test-classes:/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server/target/classes:/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-common/target/calabash-driver-common-1.2-SNAPSHOT.jar:/Users/ddary/.m2/repository/org/apache/httpcomponents/httpclient/4.2.1/httpclient-4.2.1.jar:/Users/ddary/.m2/repository/org/apache/httpcomponents/httpcore/4.2.1/httpcore-4.2.1.jar:/Users/ddary/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/Users/ddary/.m2/repository/commons-codec/commons-codec/1.6/commons-codec-1.6.jar:/Users/ddary/.m2/repository/org/json/json/20090211/json-20090211.jar:/Users/ddary/.m2/repository/commons-io/commons-io/2.2/commons-io-2.2.jar:/Users/ddary/.m2/repository/log4j/log4j/1.2.16/log4j-1.2.16.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-server/7.2.0.v20101020/jetty-server-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-continuation/7.2.0.v20101020/jetty-continuation-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-http/7.2.0.v20101020/jetty-http-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-io/7.2.0.v20101020/jetty-io-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-util/7.2.0.v20101020/jetty-util-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-servlet/7.2.0.v20101020/jetty-servlet-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-security/7.2.0.v20101020/jetty-security-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/testng/testng/6.2.1/testng-6.2.1.jar:/Users/ddary/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/Users/ddary/.m2/repository/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar:/Users/ddary/.m2/repository/com/beust/jcommander/1.12/jcommander-1.12.jar:/Users/ddary/.m2/repository/org/yaml/snakeyaml/1.6/snakeyaml-1.6.jar:/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-client/target/calabash-driver-client-1.2-SNAPSHOT.jar:/Users/ddary/.m2/repository/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar:/Users/ddary/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.7.5"/>
+    <property name="user.home" value="/Users/ddary"/>
+    <property name="user.timezone" value="Europe/Berlin"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="ddary"/>
+    <property name="java.class.path" value="/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server/target/test-classes:/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server/target/classes:/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-common/target/calabash-driver-common-1.2-SNAPSHOT.jar:/Users/ddary/.m2/repository/org/apache/httpcomponents/httpclient/4.2.1/httpclient-4.2.1.jar:/Users/ddary/.m2/repository/org/apache/httpcomponents/httpcore/4.2.1/httpcore-4.2.1.jar:/Users/ddary/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/Users/ddary/.m2/repository/commons-codec/commons-codec/1.6/commons-codec-1.6.jar:/Users/ddary/.m2/repository/org/json/json/20090211/json-20090211.jar:/Users/ddary/.m2/repository/commons-io/commons-io/2.2/commons-io-2.2.jar:/Users/ddary/.m2/repository/log4j/log4j/1.2.16/log4j-1.2.16.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-server/7.2.0.v20101020/jetty-server-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-continuation/7.2.0.v20101020/jetty-continuation-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-http/7.2.0.v20101020/jetty-http-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-io/7.2.0.v20101020/jetty-io-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-util/7.2.0.v20101020/jetty-util-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-servlet/7.2.0.v20101020/jetty-servlet-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/eclipse/jetty/jetty-security/7.2.0.v20101020/jetty-security-7.2.0.v20101020.jar:/Users/ddary/.m2/repository/org/testng/testng/6.2.1/testng-6.2.1.jar:/Users/ddary/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/Users/ddary/.m2/repository/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar:/Users/ddary/.m2/repository/com/beust/jcommander/1.12/jcommander-1.12.jar:/Users/ddary/.m2/repository/org/yaml/snakeyaml/1.6/snakeyaml-1.6.jar:/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-client/target/calabash-driver-client-1.2-SNAPSHOT.jar:/Users/ddary/.m2/repository/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar:/Users/ddary/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre"/>
+    <property name="sun.java.command" value="/Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server/target/surefire/surefirebooter3141208858959953754.jar /Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server/target/surefire/surefire1554215945929132898tmp /Users/ddary/workspaces/calabash-driver/calabash-driver/calabash-driver-server/target/surefire/surefire5248221212988796322tmp"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.7.0_09"/>
+    <property name="java.ext.dirs" value="/Users/ddary/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/lib/JObjC.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/jre/classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="localRepository" value="/Users/ddary/.m2/repository"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="0.002" classname="sh.calaba.driver.server.internal.impl.CalabashCapabilityMatcherTest" name="doesntMatchConsideredCapa"/>
+  <testcase time="0" classname="sh.calaba.driver.server.internal.impl.CalabashCapabilityMatcherTest" name="doesntMatchMinimumCapa"/>
+  <testcase time="0" classname="sh.calaba.driver.server.internal.impl.CalabashCapabilityMatcherTest" name="matchConsideredCapa"/>
+  <testcase time="0" classname="sh.calaba.driver.server.internal.impl.CalabashCapabilityMatcherTest" name="matchMinimumCapa"/>
+  <testcase time="0" classname="sh.calaba.driver.server.internal.impl.CalabashCapabilityMatcherTest" name="onlyDefaultCapabilitiesAreConsidered"/>
+  <testcase time="0.411" classname="sh.calaba.driver.server.CalabashInstrumentationServerStubTest" name="runServer"/>
+  <testcase time="0.024" classname="sh.calaba.driver.server.CalabashNodeConfigurationTest" name="testReadConfigByFile"/>
+  <testcase time="0" classname="sh.calaba.driver.server.CalabashNodeConfigurationTest" name="testReadConfigByFileInvalidFilePath"/>
+  <testcase time="0" classname="sh.calaba.driver.server.CalabashNodeConfigurationTest" name="testReadConfigByFileNullInput"/>
+  <testcase time="3.015" classname="sh.calaba.driver.server.CalabashNodeConfigurationTest" name="testReadConfigByURI"/>
+  <testcase time="0" classname="sh.calaba.driver.server.CalabashNodeConfigurationTest" name="testReadConfigByURIInvalidURI"/>
+  <testcase time="0" classname="sh.calaba.driver.server.CalabashNodeConfigurationTest" name="testReadConfigByURINullInput"/>
+</testsuite>
