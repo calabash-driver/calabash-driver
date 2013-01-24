@@ -56,6 +56,13 @@ public class CalabashProxy {
   private CapabilityMatcher capabilityMatcher = new CalabashCapabilityMatcher();
 
   /**
+   * @param capabilityMatcher the capabilityMatcher to set
+   */
+  public void setCapabilityMatcher(CapabilityMatcher capabilityMatcher) {
+    this.capabilityMatcher = capabilityMatcher;
+  }
+
+  /**
    * Default constructor that {@link #doIinitializeMobileDevices(CalabashNodeConfiguration)}.
    * 
    * @param nodeConfig The node configuration to use.

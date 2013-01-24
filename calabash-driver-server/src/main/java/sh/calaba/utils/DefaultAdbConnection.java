@@ -77,7 +77,7 @@ public class DefaultAdbConnection implements AdbConection {
       Process process = Runtime.getRuntime().exec(command.toString());
 
       if (confirmExitValue) {
-        confirmExitValueIs(0, process);
+        confirmExitValueIs(0, process, command.toString());
       }
       String out = IOUtils.toString(process.getInputStream());
       return out;
@@ -93,7 +93,7 @@ public class DefaultAdbConnection implements AdbConection {
    * @see sh.calaba.utils.AdbConection#confirmExitValueIs(int, java.lang.Process)
    */
   @Override
-  public void confirmExitValueIs(int expected, Process process) {
+  public void confirmExitValueIs(int expected, Process process, String command) {
     while (true) {
       try {
         process.waitFor();
@@ -109,8 +109,14 @@ public class DefaultAdbConnection implements AdbConection {
       logger.debug(" process exit value: " + process.exitValue());
     }
     if (expected != process.exitValue()) {
-      throw new AdbConnetionException("Exit value of process was " + process.exitValue()
-          + " but expected " + expected);
+      StringBuffer message = new StringBuffer();
+      message.append("Error occured while executing process: ");
+      if (command != null) {
+        message.append(command);
+      }
+      message.append("Exit value of process was " + process.exitValue() + " but expected "
+          + expected);
+      throw new AdbConnetionException(message.toString());
     }
   }
 }

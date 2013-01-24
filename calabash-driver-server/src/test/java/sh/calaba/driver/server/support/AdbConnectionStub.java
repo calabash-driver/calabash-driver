@@ -20,7 +20,7 @@ public class AdbConnectionStub implements AdbConection {
   }
 
   @Override
-  public void confirmExitValueIs(int expected, Process process) {
+  public void confirmExitValueIs(int expected, Process process, String command) {
     // TODO Auto-generated method stub
 
   }

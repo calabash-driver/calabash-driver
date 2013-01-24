@@ -42,8 +42,9 @@ public interface AdbConection {
    * 
    * @param expected the expected exit value, usually {@code 0}
    * @param process the process whose exit value will be confirmed
+   * @param command The command that was executed. Is used for logging purposes in case of errors.
    * @throws AdbException if the exit value was not equal to {@code expected}
    */
-  public abstract void confirmExitValueIs(int expected, Process process);
+  public abstract void confirmExitValueIs(int expected, Process process, String command);
 
 }

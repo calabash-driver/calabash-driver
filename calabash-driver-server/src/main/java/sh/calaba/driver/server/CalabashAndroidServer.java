@@ -36,6 +36,8 @@ public class CalabashAndroidServer {
   final static Logger logger = LoggerFactory.getLogger(CalabashAndroidServer.class);
   public static final String COMMAND_LINE_CONFIG_FILE_PATH = "-driverConfig";
   public static final String COMMAND_LINE_CONFIG_FILE_URI = "-driverConfigURI";
+  /** This basically means the grid controls fully this driver and knows what he does */
+  public static final String COMMAND_LINE_GRID_CONFIG = "-gridConfig";
 
   public static final String SCRIPT_KEY = CalabashProxy.class.getName();
   private Server server;
@@ -45,8 +47,9 @@ public class CalabashAndroidServer {
 
   public static void main(String[] args) {
     if ((args == null || args.length <= 1)
-        || (args != null && (!(args[0].equals(COMMAND_LINE_CONFIG_FILE_PATH) || args[0]
-            .equals(COMMAND_LINE_CONFIG_FILE_URI))))) {
+        || (args != null && (!(args[0].equals(COMMAND_LINE_CONFIG_FILE_PATH)
+            || args[0].equals(COMMAND_LINE_CONFIG_FILE_URI) || args[0]
+              .equals(COMMAND_LINE_GRID_CONFIG))))) {
       System.out.println("#### Calabash Driver #####");
       System.out.println("ERROR: command line parameter missing!");
       System.out.println("   Please use:");
@@ -57,6 +60,11 @@ public class CalabashAndroidServer {
           .println("     "
               + COMMAND_LINE_CONFIG_FILE_URI
               + " filename.json    --> where 'http://yourhost/your/path/filename.json' is your configuration file");
+      System.out.println("   or use:");
+      System.out
+          .println("     "
+              + COMMAND_LINE_GRID_CONFIG
+              + " Which basically means the grid controls fully this driver and knows what he does.");
 
       System.exit(0);
     }
@@ -67,6 +75,8 @@ public class CalabashAndroidServer {
       if (COMMAND_LINE_CONFIG_FILE_PATH.equals(args[0])) {
         nodeConfiguration = CalabashNodeConfiguration.readFromFile(new File(args[1]));
       } else if (COMMAND_LINE_CONFIG_FILE_URI.equals(args[0])) {
+        nodeConfiguration = CalabashNodeConfiguration.readFromURI(new URI(args[1]));
+      }else if (COMMAND_LINE_GRID_CONFIG.equals(args[0])) {
         nodeConfiguration = CalabashNodeConfiguration.readFromURI(new URI(args[1]));
       }
       server.start(nodeConfiguration);
