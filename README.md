@@ -30,3 +30,7 @@ are used to send them through the different components to execute in the end the
 ## Dynamic View of Calabash-Driver's Architecture
 ![Dynamic View of Calabash-Driver's Architecture ](http://calabash-driver.github.com/calabashDriverDynamicView.png)
 
+
+# Contributing to the project
+
+There is a [wiki page](https://github.com/calabash-driver/calabash-driver/wiki/How-to-contribute) that describes all the details about how to contribute to the project.
