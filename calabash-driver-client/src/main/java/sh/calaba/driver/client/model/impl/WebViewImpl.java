@@ -48,7 +48,7 @@ public class WebViewImpl extends RemoteObject implements WebViewSupport {
   @Override
   public String getPageSource() {
     JSONObject response=executeCalabashCommand(CalabashCommands.GET_WEBVIEW_PAGE_SOURCE);
-    return response.optString("message");
+    return response.optString("bonusInformation");
   }
 
   @Override
