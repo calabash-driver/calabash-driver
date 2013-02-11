@@ -31,16 +31,4 @@ public interface WebViewSupport {
    * Allows to click an element inside a web view.
    */
   public void click();
-
-  /**
-   * @return The source of the current page that is loaded in the web view.
-   */
-  public String getPageSource();
-
-  /**
-   * Get a string representing the current URL that the web view is looking at.
-   * 
-   * @return The URL of the page currently loaded in the web view.
-   */
-  public String getCurrentUrl();
 }

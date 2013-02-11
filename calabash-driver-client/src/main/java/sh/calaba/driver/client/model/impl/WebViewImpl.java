@@ -13,11 +13,14 @@
  */
 package sh.calaba.driver.client.model.impl;
 
+
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
+import sh.calaba.driver.exceptions.CalabashException;
 import sh.calaba.driver.model.By;
 import sh.calaba.driver.model.WebViewSupport;
 
@@ -35,25 +38,39 @@ public class WebViewImpl extends RemoteObject implements WebViewSupport {
     this.css = css;
   }
 
+  public WebViewImpl(RemoteCalabashAndroidDriver driver) {
+    super(driver);
+  }
+
+
   @Override
   public void enterText(String text) {
+    if (css == null) {
+      throw new CalabashException("css selector is null.");
+    }
     executeCalabashCommand(CalabashCommands.SET_SET, CSS, css.getIdentifier(), text);
   }
 
   @Override
   public void click() {
+    if (css == null) {
+      throw new CalabashException("css selector is null.");
+    }
     executeCalabashCommand(CalabashCommands.TOUCH, CSS, css.getIdentifier());
   }
 
-  @Override
   public String getPageSource() {
-    JSONObject response=executeCalabashCommand(CalabashCommands.GET_WEBVIEW_PAGE_SOURCE);
-    return response.optString("bonusInformation");
+    JSONObject response = executeCalabashCommand(CalabashCommands.GET_WEBVIEW_PAGE_SOURCE);
+    try {
+      return response.getJSONArray("bonusInformation").optString(0);
+    } catch (JSONException e) {
+
+      return null;
+    }
   }
 
-  @Override
   public String getCurrentUrl() {
-    JSONObject response=executeCalabashCommand(CalabashCommands.GET_WEBVIEW_URL);
+    JSONObject response = executeCalabashCommand(CalabashCommands.GET_WEBVIEW_URL);
     return response.optString("message");
   }
 }

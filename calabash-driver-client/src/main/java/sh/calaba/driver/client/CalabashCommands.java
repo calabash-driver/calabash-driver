@@ -46,7 +46,7 @@ public enum CalabashCommands {
   SET_SET("set_text",  WebDriverLikeCommand.WEB_VIEW),
   SWIPE("swipe",WebDriverLikeCommand.DEVICE),
   TAKE_SCREENSHOT("take_screenshot_embed",  WebDriverLikeCommand.DEVICE),
-  TOUCH("touch",WebDriverLikeCommand.WEB_VIEW),
+  TOUCH("click_by_selector",WebDriverLikeCommand.WEB_VIEW),
   WAIT("wait",  WebDriverLikeCommand.VIEW),
   WAIT_FOR_DIALOG_TO_CLOSE("wait_for_dialog_to_close", WebDriverLikeCommand.WAIT),
   WAIT_FOR_L10N_ELEMENT("wait_for_l10n_element", WebDriverLikeCommand.VIEW),

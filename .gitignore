@@ -1,0 +1,3 @@
+*.log
+buildNDeploy.sh
+*.DS_Store
