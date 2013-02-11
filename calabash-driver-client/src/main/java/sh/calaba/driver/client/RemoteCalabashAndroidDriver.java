@@ -96,7 +96,7 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver
    */
   @Deprecated
   public WebViewSupport webview(By.CSS css) {
-    return findWebElementBy(css);
+    return findWebElement(css);
   }
 
   /**
@@ -175,7 +175,7 @@ public class RemoteCalabashAndroidDriver extends CalabashAndroidDriver
   }
 
   @Override
-  public WebViewSupport findWebElementBy(CSS css) {
+  public WebViewSupport findWebElement(CSS css) {
     return new WebViewImpl(this, css);
   }
 

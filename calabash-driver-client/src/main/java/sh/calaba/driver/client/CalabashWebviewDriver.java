@@ -51,7 +51,7 @@ public interface CalabashWebviewDriver {
    * @param css The locating mechanism to use.
    * @return The {@link WebViewSupport} for element interactions.
    */
-  public WebViewSupport findWebElementBy(By.CSS css);
+  public WebViewSupport findWebElement(By.CSS css);
 
   /**
    * @return The source of the current page that is loaded in the web view.
