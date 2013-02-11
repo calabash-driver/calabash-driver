@@ -13,6 +13,9 @@
  */
 package sh.calaba.driver.client.model.impl;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import sh.calaba.driver.client.CalabashCommands;
 import sh.calaba.driver.client.RemoteCalabashAndroidDriver;
 import sh.calaba.driver.model.By;
@@ -40,5 +43,17 @@ public class WebViewImpl extends RemoteObject implements WebViewSupport {
   @Override
   public void click() {
     executeCalabashCommand(CalabashCommands.TOUCH, CSS, css.getIdentifier());
+  }
+
+  @Override
+  public String getPageSource() {
+    JSONObject response=executeCalabashCommand(CalabashCommands.GET_WEBVIEW_PAGE_SOURCE);
+    return response.optString("message");
+  }
+
+  @Override
+  public String getCurrentUrl() {
+    JSONObject response=executeCalabashCommand(CalabashCommands.GET_WEBVIEW_URL);
+    return response.optString("message");
   }
 }
