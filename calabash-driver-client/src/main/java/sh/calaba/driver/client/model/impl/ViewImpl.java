@@ -60,4 +60,10 @@ public class ViewImpl extends RemoteObject implements ViewSupport {
         executeCalabashCommand(CalabashCommands.GET_VIEW_PROPERTY, id.getIdentifier(), "enabled");
     return result.optBoolean("message");
   }
+
+  @Override
+  public void longClick() {
+    assertIdNotNull();
+    executeCalabashCommand(CalabashCommands.LONG_PRESS_ON_VIEW_BY_ID, id.getIdentifier());
+  }
 }

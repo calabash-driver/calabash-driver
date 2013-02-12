@@ -55,6 +55,7 @@ public enum CalabashCommands {
   WAIT_FOR_VIEW_BY_ID("wait_for_view_by_id",  WebDriverLikeCommand.VIEW),
   GET_WEBVIEW_PAGE_SOURCE("dump_html",  WebDriverLikeCommand.WEB_VIEW),
   GET_WEBVIEW_URL("get_url",  WebDriverLikeCommand.WEB_VIEW),
+  LONG_PRESS_ON_VIEW_BY_ID("long_press_on_view_by_id",WebDriverLikeCommand.VIEW),
   ;
 
   String name;

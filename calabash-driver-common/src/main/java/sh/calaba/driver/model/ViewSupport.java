@@ -26,6 +26,11 @@ public interface ViewSupport {
   public void click();
 
   /**
+   * Allows to long click on an element.
+   */
+  public void longClick();
+  
+  /**
    * @return Get the visible text of this element
    */
   public String getText();
