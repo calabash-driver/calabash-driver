@@ -8,9 +8,7 @@
 		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>calabash-driver-server</artifactId>
-
 	<name>calabash-driver-server</name>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
